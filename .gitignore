@@ -35,3 +35,8 @@ lerna-debug.log*
 # AI / Local Knowledge Graph
 .agents/
 graphify-out/
+
+# wrangler files
+.wrangler
+.dev.vars*
+!.dev.vars.example
