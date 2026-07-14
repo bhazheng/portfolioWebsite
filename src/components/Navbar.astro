@@ -1,0 +1,135 @@
+---
+export interface Props {
+  currentPath?: string;
+}
+
+const { currentPath = '/' } = Astro.props;
+
+const navItems = [
+  { name: 'home', path: '/' },
+  { name: 'experience', path: '/experience' },
+  { name: 'education', path: '/education' },
+  { name: 'projects', path: '/projects' },
+  { name: 'skills', path: '/skills' },
+  { name: 'contact', path: '/contact' },
+];
+
+const isActive = (targetPath: string) => {
+  return targetPath === '/'
+    ? (currentPath === '/' || currentPath === '/index.html')
+    : currentPath.startsWith(targetPath);
+};
+---
+
+<!-- ponytail: premium full-width sticky glass header model -->
+<header class="fixed top-0 left-0 w-full z-[100] bg-ink/65 backdrop-blur-md border-b border-line-dark">
+  <div class="max-w-[960px] mx-auto px-6 h-14 flex items-center justify-between gap-6 relative">
+    
+    <!-- Brand Logo -->
+    <a href="/" class="font-display font-extrabold text-[13px] tracking-widest text-paper hover:text-brass-soft transition-colors duration-150">
+      AL<span class="text-brass-soft">B</span>
+    </a>
+
+    <!-- Desktop Nav Links -->
+    <nav class="flex items-center gap-1.5 max-[768px]:hidden" id="navLinks">
+      {navItems.map((item) => {
+        const active = isActive(item.path);
+        return (
+          <a
+            href={item.path}
+            class={`font-mono text-[10px] uppercase tracking-wider px-3 py-1 rounded-md transition-all duration-150 border ${
+              active
+                ? 'font-semibold text-brass-soft bg-brass/10 border-brass/25 shadow-glass-inner'
+                : 'font-medium text-text-secondary border-transparent hover:text-paper hover:bg-glass-hover'
+            }`}
+          >
+            {item.name}
+          </a>
+        );
+      })}
+    </nav>
+
+    <!-- Right Side CTA / Menu Toggle -->
+    <div class="flex items-center gap-3">
+      <!-- Let's Talk CTA (Desktop) -->
+      <a
+        href="/contact"
+        class="max-[768px]:hidden font-mono text-[9px] font-semibold uppercase tracking-wider text-brass-soft border border-brass/35 px-3 py-1.5 rounded hover:bg-brass hover:text-ink transition-colors duration-150"
+      >
+        Hire Me
+      </a>
+
+      <!-- Hamburger Menu Button (Mobile) -->
+      <button
+        id="menuToggle"
+        class="hidden max-[768px]:flex w-8 h-8 rounded border border-line-dark bg-glass-ghost items-center justify-center cursor-pointer text-paper hover:border-brass transition-colors duration-150"
+        aria-label="Open navigation menu"
+        aria-expanded="false"
+      >
+        <span class="icon-list flex items-center">
+          <i class="ph ph-list text-base"></i>
+        </span>
+        <span class="icon-close flex items-center" style="display: none;">
+          <i class="ph ph-x text-base"></i>
+        </span>
+      </button>
+    </div>
+
+  </div>
+</header>
+
+<style>
+  /* Mobile dropdown styles */
+  #navLinks.open {
+    display: flex !important;
+    flex-direction: column;
+    position: absolute;
+    top: 3.5rem;
+    left: 1.5rem;
+    right: 1.5rem;
+    background: var(--color-glass-mobile);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+    border: 1px solid var(--color-line-dark);
+    border-radius: 0.75rem;
+    padding: 0.75rem;
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.65);
+    z-index: 101;
+    gap: 0.5rem;
+  }
+  #navLinks.open a {
+    width: 100%;
+    justify-content: flex-start;
+    padding: 0.5rem 0.75rem;
+  }
+</style>
+
+<script>
+  document.addEventListener('astro:page-load', () => {
+    const toggleBtn = document.getElementById('menuToggle');
+    const navLinks = document.getElementById('navLinks');
+    const iconList = toggleBtn?.querySelector('.icon-list') as HTMLElement;
+    const iconClose = toggleBtn?.querySelector('.icon-close') as HTMLElement;
+
+    const setMenuOpen = (open: boolean) => {
+      if (!navLinks || !toggleBtn) return;
+      navLinks.classList.toggle('open', open);
+      toggleBtn.setAttribute('aria-expanded', open ? 'true' : 'false');
+      toggleBtn.setAttribute('aria-label', open ? 'Close navigation menu' : 'Open navigation menu');
+      if (iconList && iconClose) {
+        iconList.style.display = open ? 'none' : 'block';
+        iconClose.style.display = open ? 'block' : 'none';
+      }
+    };
+
+    toggleBtn?.addEventListener('click', () => {
+      const isOpen = navLinks?.classList.contains('open') || false;
+      setMenuOpen(!isOpen);
+    });
+
+    // Close menu when clicking links
+    document.querySelectorAll('#navLinks a').forEach((el) => {
+      el.addEventListener('click', () => setMenuOpen(false));
+    });
+  });
+</script>
