@@ -5,6 +5,7 @@ dist-ssr/
 
 # Dependencies
 node_modules/
+.wrangler
 
 # Environment Variables & Secrets
 .env

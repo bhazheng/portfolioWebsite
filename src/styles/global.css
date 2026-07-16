@@ -9,39 +9,39 @@
 /* ── THEME TOKENS ─────────────────────────────────────────────────── */
 @theme {
   /* ── COLOR FOUNDATIONS ──────────────────────────── */
-  --color-ink:            #14202B;
-  --color-ink-2:          #1C2C39;
-  --color-paper:          #F3EFE4;
-  --color-paper-2:        #E9E2CE;
-  --color-charcoal:       #221F1A;
+  --color-ink:            #1d2021; /* Gruvbox Dark Hard background */
+  --color-ink-2:          #282828; /* Gruvbox Dark Medium background */
+  --color-paper:          #fbf1c7; /* Gruvbox Bright Foreground (cream) */
+  --color-paper-2:        #ebdbb2; /* Gruvbox Neutral Foreground (sand) */
+  --color-charcoal:       #3c3836; /* Gruvbox bg1 elevated surface */
 
-  /* ── ACCENT: BRASS-GOLD ─────────────────────────── */
-  --color-brass:          #B8863E;
-  --color-brass-soft:     #D8B372;
+  /* ── ACCENT: ORANGE / YELLOW ────────────────────── */
+  --color-brass:          #fe8019; /* Primary Gruvbox Orange Accent */
+  --color-brass-soft:     #fabd2f; /* Hover Gruvbox Yellow Accent */
 
-  /* ── ACCENT: TEAL ───────────────────────────────── */
-  --color-teal:           #4CA3AF;
+  /* ── ACCENT: AQUA / TEAL ────────────────────────── */
+  --color-teal:           #8ec07c; /* Data/Success Gruvbox Aqua Accent */
 
   /* ── STRUCTURAL LINES ───────────────────────────── */
-  --color-line:           rgba(243, 239, 228, 0.06);
-  --color-line-dark:      rgba(243, 239, 228, 0.08);
+  --color-line:           rgba(235, 219, 178, 0.05);
+  --color-line-dark:      rgba(235, 219, 178, 0.08);
 
   /* ── TRANSLUCENT SURFACES ───────────────────────── */
-  --color-glass:          rgba(28, 44, 57, 0.55);
-  --color-glass-nav:      rgba(28, 44, 57, 0.78);
-  --color-glass-card:     rgba(28, 44, 57, 0.45);
-  --color-glass-mobile:   rgba(20, 32, 43, 0.96);
-  --color-glass-badge:    rgba(20, 32, 43, 0.88);
-  --color-glass-ghost:    rgba(243, 239, 228, 0.02);
-  --color-glass-hover:    rgba(243, 239, 228, 0.06);
-  --color-glass-active:   rgba(184, 134, 62, 0.12);
+  --color-glass:          rgba(40, 40, 40, 0.65);
+  --color-glass-nav:      rgba(29, 32, 33, 0.82);
+  --color-glass-card:     rgba(40, 40, 40, 0.45);
+  --color-glass-mobile:   rgba(29, 32, 33, 0.98);
+  --color-glass-badge:    rgba(40, 40, 40, 0.88);
+  --color-glass-ghost:    rgba(235, 219, 178, 0.02);
+  --color-glass-hover:    rgba(235, 219, 178, 0.06);
+  --color-glass-active:   rgba(254, 128, 25, 0.12);
 
   /* ── TEXT OPACITY LEVELS ────────────────────────── */
-  --color-text-primary:   #F3EFE4;
-  --color-text-secondary: rgba(243, 239, 228, 0.82);
-  --color-text-tertiary:  rgba(243, 239, 228, 0.65);
-  --color-text-muted:     rgba(243, 239, 228, 0.55);
-  --color-text-faint:     rgba(243, 239, 228, 0.45);
+  --color-text-primary:   #fbf1c7;
+  --color-text-secondary: rgba(251, 241, 199, 0.85);
+  --color-text-tertiary:  rgba(251, 241, 199, 0.68);
+  --color-text-muted:     rgba(251, 241, 199, 0.52);
+  --color-text-faint:     rgba(251, 241, 199, 0.38);
 
   /* ── TYPOGRAPHY ─────────────────────────────────── */
   --font-display:         'Syne', sans-serif;
@@ -53,14 +53,14 @@
   --ease-spring:          cubic-bezier(0.16, 1, 0.3, 1);
 
   /* ── SHADOWS ────────────────────────────────────── */
-  --shadow-glass:         inset 0 1px 1px rgba(243, 239, 228, 0.12), 0 20px 40px rgba(10, 18, 28, 0.45);
-  --shadow-glass-nav:     inset 0 1px 1px rgba(243, 239, 228, 0.12), 0 10px 30px rgba(10, 18, 28, 0.45);
-  --shadow-glass-inner:   inset 0 1px 1px rgba(243, 239, 228, 0.08);
-  --shadow-btn-primary:   inset 0 1px 1px rgba(255, 255, 255, 0.35), 0 4px 22px rgba(184, 134, 62, 0.35);
-  --shadow-btn-hover:     inset 0 1px 1px rgba(255, 255, 255, 0.45), 0 8px 28px rgba(184, 134, 62, 0.45);
-  --shadow-badge:         0 10px 25px rgba(0, 0, 0, 0.45);
-  --shadow-card-hover:    inset 0 1px 1px rgba(243, 239, 228, 0.15), 0 12px 35px rgba(184, 134, 62, 0.15);
-  --shadow-avatar:        inset 0 1px 1.5px rgba(243, 239, 228, 0.15), 0 25px 50px rgba(10, 18, 28, 0.55);
+  --shadow-glass:         inset 0 1px 1px rgba(235, 219, 178, 0.08), 0 20px 40px rgba(17, 19, 20, 0.65);
+  --shadow-glass-nav:     inset 0 1px 1px rgba(235, 219, 178, 0.08), 0 10px 30px rgba(17, 19, 20, 0.6);
+  --shadow-glass-inner:   inset 0 1px 1px rgba(235, 219, 178, 0.05);
+  --shadow-btn-primary:   inset 0 1px 1px rgba(255, 255, 255, 0.25), 0 4px 22px rgba(254, 128, 25, 0.3);
+  --shadow-btn-hover:     inset 0 1px 1px rgba(255, 255, 255, 0.35), 0 8px 28px rgba(254, 128, 25, 0.4);
+  --shadow-badge:         0 10px 25px rgba(17, 19, 20, 0.6);
+  --shadow-card-hover:    inset 0 1px 1px rgba(235, 219, 178, 0.12), 0 12px 35px rgba(254, 128, 25, 0.15);
+  --shadow-avatar:        inset 0 1px 1.5px rgba(235, 219, 178, 0.12), 0 25px 50px rgba(17, 19, 20, 0.7);
 
   /* ── ANIMATIONS ─────────────────────────────────── */
   --animate-bounce-arrow: bounce-arrow 2s infinite;
@@ -126,14 +126,14 @@
     background-color: var(--color-ink);
     background-image:
       /* 1. Subtle small dot grid */
-      radial-gradient(circle at 1px 1px, rgba(243, 239, 228, 0.04) 1px, transparent 0),
+      radial-gradient(circle at 1px 1px, rgba(235, 219, 178, 0.08) 1px, transparent 0),
       /* 2. Large grid box lines */
-      linear-gradient(to right, rgba(243, 239, 228, 0.015) 1px, transparent 1px),
-      linear-gradient(to bottom, rgba(243, 239, 228, 0.015) 1px, transparent 1px),
-      /* 3. Sleek warm glowing center radial gradient */
-      radial-gradient(circle at 50% 30%, rgba(184, 134, 62, 0.12) 0%, transparent 65%),
-      /* 4. Cool teal side glow */
-      radial-gradient(circle at 80% 80%, rgba(51, 99, 106, 0.1) 0%, transparent 50%);
+      linear-gradient(to right, rgba(235, 219, 178, 0.04) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(235, 219, 178, 0.04) 1px, transparent 1px),
+      /* 3. Sleek warm Gruvbox orange center radial gradient */
+      radial-gradient(circle at 50% 30%, rgba(254, 128, 25, 0.09) 0%, transparent 65%),
+      /* 4. Cool Gruvbox aqua side glow */
+      radial-gradient(circle at 80% 80%, rgba(142, 192, 124, 0.08) 0%, transparent 50%);
     background-size: 24px 24px, 120px 120px, 120px 120px, 100% 100%, 100% 100%;
     /* Mask the grid so it fades beautifully at the screen edges for a premium tech look */
     mask-image: radial-gradient(ellipse 90% 90% at 50% 50%, #000 50%, transparent 100%);
@@ -153,7 +153,7 @@
   /* Skip link */
   .skip-link {
     @apply absolute -top-24 left-1/2 -translate-x-1/2
-           bg-brass text-ink font-mono font-bold
+           bg-brass text-paper font-mono font-bold
            px-6 py-3 rounded-full z-[9999]
            shadow-badge;
     transition: top 150ms cubic-bezier(0.16, 1, 0.3, 1);
@@ -166,7 +166,7 @@
   .hero-accent-text {
     @apply font-serif italic font-normal;
     letter-spacing: -0.015em;
-    background: linear-gradient(135deg, #F3EFE4 0%, #D8B372 60%, #B8863E 100%);
+    background: linear-gradient(135deg, #fbf1c7 0%, #fabd2f 50%, #fe8019 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
