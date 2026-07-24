@@ -1,7 +1,7 @@
 <template>
   <div class="flex flex-col gap-0">
     <!-- HERO SECTION WRAPPER -->
-    <div class="snap-start snap-always min-h-dvh flex flex-col justify-center pt-16 pb-6">
+    <div class="snap-start snap-always min-h-dvh flex flex-col justify-center pt-4 md:pt-16 pb-28 md:pb-6">
       <div class="grid grid-cols-[1.1fr_0.9fr] gap-8 items-center py-6 max-[960px]:grid-cols-1 max-[960px]:gap-6" id="hero">
         <div class="flex flex-col gap-4">
           <div class="font-mono text-[11px] font-semibold tracking-[0.16em] text-brass-soft uppercase inline-flex items-center gap-1.5">
@@ -55,7 +55,7 @@
     </div>
 
     <!-- INTERACTIVE CAREER JOURNEY MAP SECTION -->
-    <section id="career-journey" class="snap-start snap-always min-h-dvh flex flex-col justify-center pt-20 pb-8 scroll-mt-[90px]">
+    <section id="career-journey" class="snap-start snap-always min-h-dvh flex flex-col justify-center pt-6 md:pt-20 pb-28 md:pb-8 scroll-mt-6 md:scroll-mt-[90px]">
       <div class="flex items-baseline justify-between border-b border-line pb-2 mb-6">
         <h2 class="font-display font-bold text-[clamp(1.4rem,3vw,1.9rem)] tracking-tight text-paper">
           Interactive Career Map
@@ -138,7 +138,7 @@
     <div id="summary-sections" class="flex flex-col gap-0 scroll-mt-[90px]">
       
       <!-- 1. Recent Experience -->
-      <section id="experience-summary" class="snap-start snap-always min-h-dvh flex flex-col justify-center pt-20 pb-8 scroll-mt-[90px]">
+      <section id="experience-summary" class="snap-start snap-always min-h-dvh flex flex-col justify-center pt-6 md:pt-20 pb-28 md:pb-8 scroll-mt-6 md:scroll-mt-[90px]">
         <div class="grid grid-cols-[1fr_2.2fr] gap-10 max-[1024px]:grid-cols-[1fr_1.8fr] max-[768px]:grid-cols-1 max-[768px]:gap-6 items-start w-full">
           <!-- Left Column -->
           <div class="flex flex-col gap-6 sticky top-24 max-[768px]:relative max-[768px]:top-0">
@@ -219,8 +219,8 @@
         </div>
       </section>
 
-      <!-- 2. Education & Certifications -->
-      <section id="education-summary" class="snap-start snap-always min-h-dvh flex flex-col justify-center pt-20 pb-8 scroll-mt-[90px]">
+      <!-- 2. Education -->
+      <section id="education-summary" class="snap-start snap-always min-h-dvh flex flex-col justify-center pt-6 md:pt-20 pb-28 md:pb-8 scroll-mt-6 md:scroll-mt-[90px]">
         <div class="grid grid-cols-[1fr_2.2fr] gap-10 max-[1024px]:grid-cols-[1fr_1.8fr] max-[768px]:grid-cols-1 max-[768px]:gap-6 items-start w-full">
           <div class="flex flex-col gap-6 sticky top-24 max-[768px]:relative max-[768px]:top-0">
             <div>
@@ -298,8 +298,8 @@
         </div>
       </section>
 
-      <!-- 3. Project Summary -->
-      <section id="projects-summary" class="snap-start snap-always min-h-dvh flex flex-col justify-center pt-20 pb-8 scroll-mt-[90px]">
+      <!-- 3. Featured Projects -->
+      <section id="projects-summary" class="snap-start snap-always min-h-dvh flex flex-col justify-center pt-6 md:pt-20 pb-28 md:pb-8 scroll-mt-6 md:scroll-mt-[90px]">
         <div class="grid grid-cols-[1fr_2.2fr] gap-10 max-[1024px]:grid-cols-[1fr_1.8fr] max-[768px]:grid-cols-1 max-[768px]:gap-6 items-start w-full">
           <div class="flex flex-col gap-6 sticky top-24 max-[768px]:relative max-[768px]:top-0">
             <div>
@@ -370,7 +370,7 @@
       </section>
 
       <!-- 4. Key Skills -->
-      <section id="skills-summary" class="snap-start snap-always min-h-dvh flex flex-col justify-center pt-20 pb-8 scroll-mt-[90px]">
+      <section id="skills-summary" class="snap-start snap-always min-h-dvh flex flex-col justify-center pt-6 md:pt-20 pb-28 md:pb-8 scroll-mt-6 md:scroll-mt-[90px]">
         <div class="grid grid-cols-[1fr_2.2fr] gap-10 max-[1024px]:grid-cols-[1fr_1.8fr] max-[768px]:grid-cols-1 max-[768px]:gap-6 items-start w-full">
           <div class="flex flex-col gap-6 sticky top-24 max-[768px]:relative max-[768px]:top-0">
             <div>
