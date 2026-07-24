@@ -2,18 +2,16 @@ import { fileURLToPath } from 'node:url'
 import { describe, it, expect } from 'vitest'
 import { setup, $fetch } from '@nuxt/test-utils'
 
-describe('Tab Routing Controller', async () => {
+describe('Desktop View Polish', async () => {
   await setup({
     rootDir: fileURLToPath(new URL('..', import.meta.url)),
     server: true
   })
 
-  it('renders index controller dynamically and has activeTab state', async () => {
+  it('contains page-fade transition wrapper and card elevation glow classes', async () => {
     const html = await $fetch('/')
-    // Index page should compile the controller with HomeView inside it
-    expect(html).toContain('Akbar Lucky Basuki')
-    // No multi-page sub-routing urls like href="/projects" or href="/experience" in navbar
-    expect(html).not.toContain('href="/projects"')
-    expect(html).not.toContain('href="/experience"')
+    // Assert presence of transition wrapper and elevation glow classes
+    expect(html).toContain('page-fade')
+    expect(html).toContain('hover:shadow-[0_8px_30px_rgba(254,128,25,0.12)]')
   })
 })

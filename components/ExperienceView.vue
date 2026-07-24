@@ -1,5 +1,5 @@
 <template>
-  <div class="py-6">
+  <div class="py-4 md:py-6">
     <div class="flex items-baseline justify-between border-b border-line pb-2 mb-5">
       <h2 class="font-display font-bold text-[clamp(1.4rem,3vw,1.9rem)] tracking-tight text-paper">
         Work Experience
@@ -10,7 +10,7 @@
     <div class="bg-glass backdrop-blur-md border border-line-dark rounded-2xl p-6 shadow-glass max-[768px]:p-4">
       <div class="flex flex-col gap-5 w-full relative pl-6 before:content-[''] before:absolute before:left-[11px] before:top-4 before:bottom-4 before:w-[1px] before:bg-line-dark">
         <!-- Experience Card 1 -->
-        <div class="relative bg-glass border border-line-dark rounded-2xl p-5 shadow-glass hover:border-brass-soft hover:-translate-y-0.5 transition-all duration-300 ease-spring">
+        <div class="relative bg-glass border border-line-dark rounded-2xl p-5 shadow-glass hover:border-brass-soft hover:-translate-y-1.5 hover:shadow-[0_8px_30px_rgba(254,128,25,0.12)] active:scale-[0.99] transition-all duration-300 ease-spring">
           <span class="absolute -left-[20px] top-[26px] w-2.5 h-2.5 rounded-full bg-brass-soft ring-4 ring-ink shadow-[0_0_10px_var(--color-brass-soft)]"></span>
           <div class="flex justify-between items-start gap-4 flex-wrap max-[480px]:flex-col max-[480px]:gap-1">
             <div>
@@ -35,7 +35,7 @@
         </div>
 
         <!-- Experience Card 2 -->
-        <div class="relative bg-glass border border-line-dark rounded-2xl p-5 shadow-glass hover:border-brass-soft hover:-translate-y-0.5 transition-all duration-300 ease-spring">
+        <div class="relative bg-glass border border-line-dark rounded-2xl p-5 shadow-glass hover:border-brass-soft hover:-translate-y-1.5 hover:shadow-[0_8px_30px_rgba(254,128,25,0.12)] active:scale-[0.99] transition-all duration-300 ease-spring">
           <span class="absolute -left-[20px] top-[26px] w-2.5 h-2.5 rounded-full bg-text-muted ring-4 ring-ink"></span>
           <div class="flex justify-between items-start gap-4 flex-wrap max-[480px]:flex-col max-[480px]:gap-1">
             <div>
@@ -61,7 +61,7 @@
         </div>
 
         <!-- Experience Card 3 -->
-        <div class="relative bg-glass border border-line-dark rounded-2xl p-5 shadow-glass hover:border-brass-soft hover:-translate-y-0.5 transition-all duration-300 ease-spring">
+        <div class="relative bg-glass border border-line-dark rounded-2xl p-5 shadow-glass hover:border-brass-soft hover:-translate-y-1.5 hover:shadow-[0_8px_30px_rgba(254,128,25,0.12)] active:scale-[0.99] transition-all duration-300 ease-spring">
           <span class="absolute -left-[20px] top-[26px] w-2.5 h-2.5 rounded-full bg-text-muted ring-4 ring-ink"></span>
           <div class="flex justify-between items-start gap-4 flex-wrap max-[480px]:flex-col max-[480px]:gap-1">
             <div>

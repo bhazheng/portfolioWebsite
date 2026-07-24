@@ -1,5 +1,5 @@
 <template>
-  <div class="py-6">
+  <div class="py-4 md:py-6">
     <div class="flex items-baseline justify-between border-b border-line pb-2 mb-5">
       <h2 class="font-display font-bold text-[clamp(1.4rem,3vw,1.9rem)] tracking-tight text-paper">
         Featured Projects
@@ -9,7 +9,7 @@
 
     <div class="bg-glass backdrop-blur-md border border-line-dark rounded-2xl p-6 shadow-glass max-[768px]:p-5 w-full">
       <div class="grid grid-cols-2 gap-4 max-[768px]:grid-cols-1">
-        <div class="bg-glass-card border border-line-dark rounded-xl p-5 shadow-glass-inner flex flex-col justify-between hover:-translate-y-1 hover:border-brass hover:shadow-card-hover active:scale-[0.99] transition-all duration-300 ease-spring">
+        <div class="bg-glass-card border border-line-dark rounded-xl p-5 shadow-glass-inner flex flex-col justify-between hover:-translate-y-1.5 hover:border-brass-soft hover:shadow-[0_8px_30px_rgba(254,128,25,0.12)] active:scale-[0.99] transition-all duration-300 ease-spring cursor-pointer">
           <div>
             <div class="font-mono text-[10px] font-semibold tracking-widest text-brass-soft uppercase">Thesis · NLP & Analytics</div>
             <h3 class="font-display font-bold text-base tracking-tight mt-1.5 leading-snug">Sentiment Analysis for Product Improvement (IndoBERT)</h3>
@@ -26,7 +26,7 @@
           <div class="mt-4 font-mono text-xs text-teal border-t border-dashed border-line pt-3 tabular-nums">Applied&nbsp;<b class="font-display font-[800] text-sm tracking-tight text-paper tabular-nums">RCA</b>&nbsp;framework to real feedback</div>
         </div>
         
-        <div class="bg-glass-card border border-line-dark rounded-xl p-5 shadow-glass-inner flex flex-col justify-between hover:-translate-y-1 hover:border-brass hover:shadow-card-hover active:scale-[0.99] transition-all duration-300 ease-spring">
+        <div class="bg-glass-card border border-line-dark rounded-xl p-5 shadow-glass-inner flex flex-col justify-between hover:-translate-y-1.5 hover:border-brass-soft hover:shadow-[0_8px_30px_rgba(254,128,25,0.12)] active:scale-[0.99] transition-all duration-300 ease-spring cursor-pointer">
           <div>
             <div class="font-mono text-[10px] font-semibold tracking-widest text-brass-soft uppercase">Capstone · Computer Vision</div>
             <h3 class="font-display font-bold text-base tracking-tight mt-1.5 leading-snug">Semar — Wayang Image Classification</h3>

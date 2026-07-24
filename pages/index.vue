@@ -1,13 +1,15 @@
 <template>
   <div class="flex-1 flex flex-col w-full">
-    <HomeView v-if="activeTab === 'home'" />
-    <ExperienceView v-else-if="activeTab === 'experience'" />
-    <EducationView v-else-if="activeTab === 'education'" />
-    <ProjectsView v-else-if="activeTab === 'projects'" />
-    <SkillsView v-else-if="activeTab === 'skills'" />
-    <ContactView v-else-if="activeTab === 'contact'" />
-    <PrivacyView v-else-if="activeTab === 'privacy'" />
-    <TermsView v-else-if="activeTab === 'terms'" />
+    <transition name="page-fade" mode="out-in">
+      <HomeView v-if="activeTab === 'home'" key="home" />
+      <ExperienceView v-else-if="activeTab === 'experience'" key="experience" />
+      <EducationView v-else-if="activeTab === 'education'" key="education" />
+      <ProjectsView v-else-if="activeTab === 'projects'" key="projects" />
+      <SkillsView v-else-if="activeTab === 'skills'" key="skills" />
+      <ContactView v-else-if="activeTab === 'contact'" key="contact" />
+      <PrivacyView v-else-if="activeTab === 'privacy'" key="privacy" />
+      <TermsView v-else-if="activeTab === 'terms'" key="terms" />
+    </transition>
   </div>
 </template>
 

@@ -1,5 +1,5 @@
 <template>
-  <div class="py-6">
+  <div class="py-4 md:py-6">
     <!-- Header -->
     <div class="flex items-baseline justify-between border-b border-line pb-2 mb-5">
       <h2 class="font-display font-bold text-[clamp(1.4rem,3vw,1.9rem)] tracking-tight text-paper">
@@ -13,7 +13,7 @@
       <div
         v-for="cat in SKILL_CATEGORIES"
         :key="cat.id"
-        class="bg-glass border border-line-dark rounded-2xl p-6 max-[768px]:p-5 shadow-glass hover:border-brass-soft transition-all duration-300 ease-spring"
+        class="bg-glass border border-line-dark rounded-2xl p-6 max-[768px]:p-5 shadow-glass hover:-translate-y-1.5 hover:border-brass-soft hover:shadow-[0_8px_30px_rgba(254,128,25,0.12)] active:scale-[0.99] transition-all duration-300 ease-spring"
       >
         <h4 class="font-display font-bold text-xs tracking-wider text-brass-soft uppercase border-b border-line pb-2.5 mb-4 flex items-center gap-2">
           <i :class="[cat.icon, 'text-sm text-teal']"></i> {{ cat.title }}
