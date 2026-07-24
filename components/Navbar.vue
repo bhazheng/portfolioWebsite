@@ -7,33 +7,32 @@
     <div class="bg-glass-nav backdrop-blur-xl border border-line-dark rounded-full h-12 flex items-center justify-between px-4 md:px-5 shadow-glass-nav">
       
       <!-- Brand Logo -->
-      <NuxtLink to="/" class="font-display font-bold text-xs tracking-widest text-paper hover:text-brass-soft transition-colors duration-200 uppercase flex items-center gap-1.5 active:scale-95">
+      <button @click="activeTab = 'home'" class="font-display font-bold text-xs tracking-widest text-paper hover:text-brass-soft transition-colors duration-200 uppercase flex items-center gap-1.5 active:scale-95 cursor-pointer">
         AL<span class="text-brass-soft">B</span>
         <span class="w-1 h-1 rounded-full bg-brass-soft shadow-[0_0_8px_var(--color-brass-soft)]"></span>
-      </NuxtLink>
+      </button>
  
       <!-- Desktop Nav Links -->
       <nav class="flex items-center gap-1">
-        <NuxtLink
+        <button
           v-for="item in navItems"
-          :key="item.path"
-          :to="item.path"
-          class="font-mono text-[9px] font-semibold uppercase tracking-wider px-3.5 py-1.5 rounded-full transition-all duration-200 ease-out active:scale-90 active:translate-y-0 relative"
-          active-class="text-brass-soft bg-brass/10 border border-brass/20 shadow-glass-inner"
-          :class="route.path === item.path ? 'text-brass-soft bg-brass/10 border border-brass/20 shadow-glass-inner' : 'text-text-secondary border border-transparent hover:text-paper hover:bg-glass-hover'"
+          :key="item.name"
+          @click="activeTab = item.name"
+          class="font-mono text-[9px] font-semibold uppercase tracking-wider px-3.5 py-1.5 rounded-full transition-all duration-200 ease-out active:scale-90 active:translate-y-0 relative cursor-pointer"
+          :class="activeTab === item.name ? 'text-brass-soft bg-brass/10 border border-brass/20 shadow-glass-inner' : 'text-text-secondary border border-transparent hover:text-paper hover:bg-glass-hover'"
         >
           {{ item.name }}
-        </NuxtLink>
+        </button>
       </nav>
  
       <!-- Right Side CTA -->
       <div class="flex items-center gap-2">
-        <NuxtLink
-          to="/contact"
-          class="flex items-center gap-1.5 font-mono text-[9px] font-bold uppercase tracking-wider text-ink bg-brass px-4 py-1.5 rounded-full hover:bg-brass-soft hover:-translate-y-0.5 transition-all duration-200 active:scale-95 shadow-btn-primary"
+        <button
+          @click="activeTab = 'contact'"
+          class="flex items-center gap-1.5 font-mono text-[9px] font-bold uppercase tracking-wider text-ink bg-brass px-4 py-1.5 rounded-full hover:bg-brass-soft hover:-translate-y-0.5 transition-all duration-200 active:scale-95 shadow-btn-primary cursor-pointer"
         >
           Hire Me
-        </NuxtLink>
+        </button>
       </div>
     </div>
   </header>
@@ -44,14 +43,14 @@
     :class="isDockMinimized ? 'w-14 px-0 cursor-pointer' : 'w-[92%] max-w-[420px] px-4'"
     @click="isDockMinimized ? isDockMinimized = false : null"
   >
-    <NuxtLink
+    <button
       v-for="item in navItems"
-      :key="item.path"
-      :to="item.path"
-      class="group relative flex items-center justify-center transition-all duration-200 ease-out"
+      :key="item.name"
+      @click.stop="activeTab = item.name"
+      class="group relative flex items-center justify-center transition-all duration-200 ease-out cursor-pointer"
       :class="[
-        route.path === item.path ? 'text-brass-soft bg-brass/10 border border-brass/20 shadow-glass-inner w-10 h-10 rounded-full' : 'text-text-secondary border border-transparent w-10 h-10 rounded-full hover:text-paper hover:bg-glass-hover',
-        route.path === item.path ? 'flex' : (isDockMinimized ? 'hidden' : 'flex')
+        activeTab === item.name ? 'text-brass-soft bg-brass/10 border border-brass/20 shadow-glass-inner w-10 h-10 rounded-full' : 'text-text-secondary border border-transparent w-10 h-10 rounded-full hover:text-paper hover:bg-glass-hover',
+        activeTab === item.name ? 'flex' : (isDockMinimized ? 'hidden' : 'flex')
       ]"
     >
       <!-- Floating Tooltip -->
@@ -64,14 +63,14 @@
 
       <!-- Icon -->
       <i :class="[item.icon, 'text-lg transition-transform duration-200 group-hover:scale-125 group-hover:-translate-y-1']"></i>
-    </NuxtLink>
+    </button>
   </nav>
 </template>
  
 <script setup lang="ts">
 import { ref, onMounted, onUnmounted } from 'vue';
 
-const route = useRoute();
+const activeTab = useState('activeTab', () => 'home');
 const isNavbarVisible = ref(true);
 const isDockMinimized = ref(false);
 let lastScrollY = 0;
@@ -105,11 +104,11 @@ onUnmounted(() => {
 });
  
 const navItems = [
-  { name: 'home', path: '/', icon: 'ph ph-house' },
-  { name: 'experience', path: '/experience', icon: 'ph ph-briefcase' },
-  { name: 'education', path: '/education', icon: 'ph ph-graduation-cap' },
-  { name: 'projects', path: '/projects', icon: 'ph ph-code' },
-  { name: 'skills', path: '/skills', icon: 'ph ph-wrench' },
-  { name: 'contact', path: '/contact', icon: 'ph ph-paper-plane-tilt' }
+  { name: 'home', icon: 'ph ph-house' },
+  { name: 'experience', icon: 'ph ph-briefcase' },
+  { name: 'education', icon: 'ph ph-graduation-cap' },
+  { name: 'projects', icon: 'ph ph-code' },
+  { name: 'skills', icon: 'ph ph-wrench' },
+  { name: 'contact', icon: 'ph ph-paper-plane-tilt' }
 ];
 </script>
