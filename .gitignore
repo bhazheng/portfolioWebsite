@@ -1,5 +1,6 @@
-# Astro
-.astro/
+# Nuxt 3 build/output
+.nuxt/
+.output/
 dist/
 dist-ssr/
 
