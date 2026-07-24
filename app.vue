@@ -32,7 +32,7 @@
     <div class="relative z-10 flex flex-col min-h-dvh">
       <Navbar />
 
-      <main id="main-content" class="max-w-[960px] w-full mx-auto px-6 pt-16 pb-8 flex-1 flex flex-col scroll-mt-[90px]">
+      <main id="main-content" class="max-w-[960px] w-full mx-auto px-6 pt-6 md:pt-16 pb-28 md:pb-8 flex-1 flex flex-col scroll-mt-[90px]">
         <div class="flex-1 flex flex-col w-full">
           <NuxtPage />
         </div>
