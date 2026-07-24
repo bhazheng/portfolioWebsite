@@ -1,5 +1,5 @@
 <template>
-  <footer class="border-t border-line-dark mt-20 pt-12 pb-16 w-full">
+  <footer class="snap-start border-t border-line-dark mt-16 pt-12 pb-16 w-full">
     <!-- Top Grid Section (4 Columns) -->
     <div class="grid grid-cols-4 gap-8 pb-12 border-b border-line-dark max-[1024px]:grid-cols-2 max-[640px]:grid-cols-1 max-[640px]:gap-8">
       

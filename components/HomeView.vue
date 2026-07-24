@@ -1,7 +1,7 @@
 <template>
   <div class="flex flex-col gap-0">
     <!-- HERO SECTION WRAPPER -->
-    <div class="snap-start snap-always min-h-dvh flex flex-col justify-center pt-2 md:pt-6 pb-28 md:pb-6">
+    <div class="snap-start snap-always min-h-[85vh] flex flex-col justify-center pt-2 md:pt-6 pb-12">
       <div class="grid grid-cols-[1.1fr_0.9fr] gap-8 items-center py-6 max-[960px]:grid-cols-1 max-[960px]:gap-6" id="hero">
         <div class="flex flex-col gap-4">
           <div class="font-mono text-[11px] font-semibold tracking-[0.16em] text-brass-soft uppercase inline-flex items-center gap-1.5">
@@ -55,7 +55,7 @@
     </div>
 
     <!-- INTERACTIVE CAREER JOURNEY MAP SECTION -->
-    <section id="career-journey" class="snap-start snap-always min-h-dvh flex flex-col justify-center pt-6 md:pt-20 pb-28 md:pb-8 scroll-mt-6 md:scroll-mt-[90px]">
+    <section id="career-journey" class="snap-start min-h-0 flex flex-col justify-center py-10 md:py-14 scroll-mt-6 md:scroll-mt-[90px]">
       <div class="flex items-baseline justify-between border-b border-line pb-2 mb-6">
         <h2 class="font-display font-bold text-[clamp(1.4rem,3vw,1.9rem)] tracking-tight text-paper">
           Interactive Career Map
@@ -138,7 +138,7 @@
     <div id="summary-sections" class="flex flex-col gap-0 scroll-mt-[90px]">
       
       <!-- 1. Recent Experience -->
-      <section id="experience-summary" class="snap-start snap-always min-h-dvh flex flex-col justify-center pt-6 md:pt-20 pb-28 md:pb-8 scroll-mt-6 md:scroll-mt-[90px]">
+      <section id="experience-summary" class="snap-start min-h-0 flex flex-col justify-center py-10 md:py-14 scroll-mt-6 md:scroll-mt-[90px]">
         <div class="grid grid-cols-[1fr_2.2fr] gap-10 max-[1024px]:grid-cols-[1fr_1.8fr] max-[768px]:grid-cols-1 max-[768px]:gap-6 items-start w-full">
           <!-- Left Column -->
           <div class="flex flex-col gap-6 sticky top-24 max-[768px]:relative max-[768px]:top-0">
@@ -220,7 +220,7 @@
       </section>
 
       <!-- 2. Education -->
-      <section id="education-summary" class="snap-start snap-always min-h-dvh flex flex-col justify-center pt-6 md:pt-20 pb-28 md:pb-8 scroll-mt-6 md:scroll-mt-[90px]">
+      <section id="education-summary" class="snap-start min-h-0 flex flex-col justify-center py-10 md:py-14 scroll-mt-6 md:scroll-mt-[90px]">
         <div class="grid grid-cols-[1fr_2.2fr] gap-10 max-[1024px]:grid-cols-[1fr_1.8fr] max-[768px]:grid-cols-1 max-[768px]:gap-6 items-start w-full">
           <div class="flex flex-col gap-6 sticky top-24 max-[768px]:relative max-[768px]:top-0">
             <div>
@@ -299,7 +299,7 @@
       </section>
 
       <!-- 3. Featured Projects -->
-      <section id="projects-summary" class="snap-start snap-always min-h-dvh flex flex-col justify-center pt-6 md:pt-20 pb-28 md:pb-8 scroll-mt-6 md:scroll-mt-[90px]">
+      <section id="projects-summary" class="snap-start min-h-0 flex flex-col justify-center py-10 md:py-14 scroll-mt-6 md:scroll-mt-[90px]">
         <div class="grid grid-cols-[1fr_2.2fr] gap-10 max-[1024px]:grid-cols-[1fr_1.8fr] max-[768px]:grid-cols-1 max-[768px]:gap-6 items-start w-full">
           <div class="flex flex-col gap-6 sticky top-24 max-[768px]:relative max-[768px]:top-0">
             <div>
@@ -370,7 +370,7 @@
       </section>
 
       <!-- 4. Key Skills -->
-      <section id="skills-summary" class="snap-start snap-always min-h-dvh flex flex-col justify-center pt-6 md:pt-20 pb-28 md:pb-8 scroll-mt-6 md:scroll-mt-[90px]">
+      <section id="skills-summary" class="snap-start min-h-0 flex flex-col justify-center py-10 md:py-14 scroll-mt-6 md:scroll-mt-[90px]">
         <div class="grid grid-cols-[1fr_2.2fr] gap-10 max-[1024px]:grid-cols-[1fr_1.8fr] max-[768px]:grid-cols-1 max-[768px]:gap-6 items-start w-full">
           <div class="flex flex-col gap-6 sticky top-24 max-[768px]:relative max-[768px]:top-0">
             <div>
@@ -438,74 +438,10 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed, onMounted, onUnmounted } from 'vue';
+import { ref, computed } from 'vue';
 import type { CareerMilestone } from '~/types/career';
 
 const activeTab = useState('activeTab', () => 'home');
-
-let isScrolling = false;
-let scrollTimeout: ReturnType<typeof setTimeout> | null = null;
-
-function handleWheel(e: WheelEvent) {
-  // Prevent default scroll to allow custom smooth animation
-  e.preventDefault();
-
-  if (isScrolling) return;
-
-  const sections = Array.from(document.querySelectorAll('.snap-start')) as HTMLElement[];
-  if (!sections.length) return;
-
-  const viewportHeight = window.innerHeight;
-  let currentIndex = 0;
-  
-  // Find which section is currently most visible in viewport
-  let maxVisibleRatio = 0;
-  sections.forEach((sec, idx) => {
-    const rect = sec.getBoundingClientRect();
-    const visibleHeight = Math.max(0, Math.min(rect.bottom, viewportHeight) - Math.max(rect.top, 0));
-    const visibleRatio = visibleHeight / viewportHeight;
-    
-    if (visibleRatio > maxVisibleRatio) {
-      maxVisibleRatio = visibleRatio;
-      currentIndex = idx;
-    }
-  });
-
-  let targetIndex = currentIndex;
-  
-  // Determine direction
-  if (e.deltaY > 0) {
-    targetIndex = Math.min(currentIndex + 1, sections.length - 1);
-  } else if (e.deltaY < 0) {
-    targetIndex = Math.max(currentIndex - 1, 0);
-  }
-
-  // If we should move to a new section
-  if (targetIndex !== currentIndex) {
-    isScrolling = true;
-    const targetSection = sections[targetIndex];
-    
-    window.scrollTo({
-      top: targetSection.offsetTop,
-      behavior: 'smooth'
-    });
-
-    if (scrollTimeout) clearTimeout(scrollTimeout);
-    scrollTimeout = setTimeout(() => {
-      isScrolling = false;
-    }, 800); // 800ms gives time for smooth scroll to finish
-  }
-}
-
-onMounted(() => {
-  // Use passive: false so we can preventDefault() and hijack wheel scroll
-  window.addEventListener('wheel', handleWheel, { passive: false });
-});
-
-onUnmounted(() => {
-  window.removeEventListener('wheel', handleWheel);
-  if (scrollTimeout) clearTimeout(scrollTimeout);
-});
 
 function scrollToSection(id: string) {
   const el = document.getElementById(id);
