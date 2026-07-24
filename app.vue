@@ -1,5 +1,5 @@
 <template>
-  <div class="min-h-dvh flex flex-col bg-ink text-paper font-body selection:bg-brass/20 selection:text-brass-soft relative overflow-hidden">
+  <div class="min-h-dvh flex flex-col bg-ink text-paper font-body selection:bg-brass/20 selection:text-brass-soft relative overflow-x-hidden">
     <a href="#main-content" class="skip-link">Skip to main content</a>
     
     <!-- Background Effects Layer (z-0) -->

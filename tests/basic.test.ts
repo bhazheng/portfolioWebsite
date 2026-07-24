@@ -2,15 +2,15 @@ import { fileURLToPath } from 'node:url'
 import { describe, it, expect } from 'vitest'
 import { setup, $fetch } from '@nuxt/test-utils'
 
-describe('Center-Aligned Direct Snap Scroll', async () => {
+describe('Native CSS Scroll Snap & Hero Fullscreen', async () => {
   await setup({
     rootDir: fileURLToPath(new URL('..', import.meta.url)),
     server: true
   })
 
-  it('contains snap-center snap-always section classes and footer snap-start anchor', async () => {
+  it('contains min-h-dvh Hero section and footer snap-start anchor', async () => {
     const html = await $fetch('/')
-    expect(html).toContain('snap-center snap-always min-h-[88vh]')
+    expect(html).toContain('min-h-dvh')
     expect(html).toContain('snap-start border-t border-line-dark')
   })
 })
