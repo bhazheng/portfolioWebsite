@@ -76,7 +76,7 @@
           <a href="https://wa.me/6285172455808" target="_blank" rel="noopener noreferrer" class="p-2.5 rounded-full bg-glass-card border border-line-dark text-paper hover:text-brass-soft hover:border-brass-soft hover:scale-110 transition-all duration-200" aria-label="WhatsApp Contact">
             <i class="ph ph-whatsapp-logo text-sm"></i>
           </a>
-          <a href="https://github.com/akbarlucky" target="_blank" rel="noopener noreferrer" class="p-2.5 rounded-full bg-glass-card border border-line-dark text-paper hover:text-brass-soft hover:border-brass-soft hover:scale-110 transition-all duration-200" aria-label="GitHub Profile">
+          <a href="https://github.com/bhazheng" target="_blank" rel="noopener noreferrer" class="p-2.5 rounded-full bg-glass-card border border-line-dark text-paper hover:text-brass-soft hover:border-brass-soft hover:scale-110 transition-all duration-200" aria-label="GitHub Profile">
             <i class="ph ph-github-logo text-sm"></i>
           </a>
         </div>

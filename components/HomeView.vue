@@ -32,7 +32,7 @@
             <a class="font-mono text-[10px] font-medium tracking-wide text-text-muted inline-flex items-center gap-1 hover:text-brass-soft transition-all" href="https://wa.me/6285172455808" target="_blank" rel="noopener noreferrer">
               <i class="ph ph-whatsapp-logo text-xs"></i> WhatsApp
             </a>
-            <a class="font-mono text-[10px] font-medium tracking-wide text-text-muted inline-flex items-center gap-1 hover:text-brass-soft transition-all" href="https://github.com/akbarlucky" target="_blank" rel="noopener noreferrer">
+            <a class="font-mono text-[10px] font-medium tracking-wide text-text-muted inline-flex items-center gap-1 hover:text-brass-soft transition-all" href="https://github.com/bhazheng" target="_blank" rel="noopener noreferrer">
               <i class="ph ph-github-logo text-xs"></i> GitHub
             </a>
           </div>
