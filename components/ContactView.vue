@@ -22,8 +22,8 @@
           </div>
           <div class="bg-glass-card/80 border border-line-dark p-4 rounded-lg flex flex-col gap-0.5 hover:-translate-y-1.5 hover:border-brass-soft hover:shadow-[0_8px_30px_rgba(254,128,25,0.12)] active:scale-[0.99] transition-all duration-300 ease-spring">
             <span class="font-mono text-[10px] font-semibold tracking-widest text-text-faint uppercase">Phone / WhatsApp</span>
-            <a href="tel:+628999655808" class="font-mono text-sm font-medium text-paper border-b-2 border-brass pb-0.5 w-fit hover:text-brass-soft hover:border-paper transition-all">
-              +62 899 9655 805
+            <a href="tel:+6285172455808" class="font-mono text-sm font-medium text-paper border-b-2 border-brass pb-0.5 w-fit hover:text-brass-soft hover:border-paper transition-all">
+              +62 851 7245 5808
             </a>
           </div>
           <div class="bg-glass-card/80 border border-line-dark p-4 rounded-lg flex flex-col gap-0.5 hover:-translate-y-1.5 hover:border-brass-soft hover:shadow-[0_8px_30px_rgba(254,128,25,0.12)] active:scale-[0.99] transition-all duration-300 ease-spring">
