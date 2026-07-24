@@ -38,21 +38,27 @@
     </div>
   </header>
 
-  <!-- Mobile Floating Dock (Mobile Only) -->
+  <!-- Mobile Floating Dock (Mobile Only with Morphing UI) -->
   <nav 
-    class="md:hidden fixed bottom-6 left-1/2 -translate-x-1/2 z-[100] h-14 w-[92%] max-w-[420px] bg-glass-nav backdrop-blur-xl border border-line-dark rounded-full px-4 flex items-center justify-around gap-1 shadow-glass-nav transition-all duration-300 ease-in-out"
-    :class="isNavbarVisible ? 'translate-y-0 opacity-100' : 'translate-y-28 opacity-0 pointer-events-none'"
+    class="md:hidden fixed bottom-6 left-1/2 -translate-x-1/2 z-[100] h-14 bg-glass-nav backdrop-blur-xl border border-line-dark rounded-full flex items-center justify-around shadow-glass-nav transition-all duration-300 ease-spring"
+    :class="isDockMinimized ? 'w-14 px-0 cursor-pointer' : 'w-[92%] max-w-[420px] px-4'"
+    @click="isDockMinimized ? isDockMinimized = false : null"
   >
     <NuxtLink
       v-for="item in navItems"
       :key="item.path"
       :to="item.path"
-      class="group relative flex items-center justify-center w-10 h-10 rounded-full transition-all duration-200 ease-out active:scale-90 active:translate-y-0"
-      active-class="text-brass-soft bg-brass/10 border border-brass/20 shadow-glass-inner"
-      :class="route.path === item.path ? 'text-brass-soft bg-brass/10 border border-brass/20 shadow-glass-inner' : 'text-text-secondary border border-transparent hover:text-paper hover:bg-glass-hover'"
+      class="group relative flex items-center justify-center transition-all duration-200 ease-out"
+      :class="[
+        route.path === item.path ? 'text-brass-soft bg-brass/10 border border-brass/20 shadow-glass-inner w-10 h-10 rounded-full' : 'text-text-secondary border border-transparent w-10 h-10 rounded-full hover:text-paper hover:bg-glass-hover',
+        route.path === item.path ? 'flex' : (isDockMinimized ? 'hidden' : 'flex')
+      ]"
     >
       <!-- Floating Tooltip -->
-      <span class="absolute bottom-full mb-2 left-1/2 -translate-x-1/2 px-2 py-0.5 bg-ink border border-line-dark text-[8px] font-mono uppercase tracking-wider rounded shadow-badge opacity-0 pointer-events-none group-hover:opacity-100 group-focus:opacity-100 group-hover:-translate-y-1 transition-all duration-200">
+      <span 
+        v-if="!isDockMinimized"
+        class="absolute bottom-full mb-2 left-1/2 -translate-x-1/2 px-2 py-0.5 bg-ink border border-line-dark text-[8px] font-mono uppercase tracking-wider rounded shadow-badge opacity-0 pointer-events-none group-hover:opacity-100 group-focus:opacity-100 group-hover:-translate-y-1 transition-all duration-200"
+      >
         {{ item.name }}
       </span>
 
@@ -67,6 +73,7 @@ import { ref, onMounted, onUnmounted } from 'vue';
 
 const route = useRoute();
 const isNavbarVisible = ref(true);
+const isDockMinimized = ref(false);
 let lastScrollY = 0;
 
 function handleScroll() {
@@ -74,13 +81,16 @@ function handleScroll() {
   
   if (currentScrollY <= 20) {
     isNavbarVisible.value = true;
+    isDockMinimized.value = false;
     return;
   }
   
   if (currentScrollY > lastScrollY && currentScrollY > 60) {
     isNavbarVisible.value = false;
+    isDockMinimized.value = true;
   } else if (currentScrollY < lastScrollY) {
     isNavbarVisible.value = true;
+    isDockMinimized.value = false;
   }
   
   lastScrollY = currentScrollY;
