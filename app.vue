@@ -4,7 +4,6 @@
     
     <!-- Background Effects Layer (z-0) -->
     <div class="fixed inset-0 pointer-events-none z-0">
-      <!-- Ambient Background Grid & Floating Glowing Orbs -->
       <div class="bg-grid"></div>
       <div class="bg-orb bg-orb-1"></div>
       <div class="bg-orb bg-orb-2"></div>
@@ -35,11 +34,7 @@
 
       <main id="main-content" class="max-w-[960px] w-full mx-auto px-6 pt-16 pb-8 flex-1 flex flex-col scroll-mt-[90px]">
         <div class="flex-1 flex flex-col w-full">
-          <router-view v-slot="{ Component }">
-            <transition name="page-fade" mode="out-in">
-              <component :is="Component" />
-            </transition>
-          </router-view>
+          <NuxtPage />
         </div>
         <Footer />
       </main>
@@ -49,8 +44,6 @@
 
 <script setup lang="ts">
 import { ref, onMounted, onUnmounted } from 'vue';
-import Navbar from './components/Navbar.vue';
-import Footer from './components/Footer.vue';
 
 const mouseX = ref(-1000);
 const mouseY = ref(-1000);
@@ -60,13 +53,12 @@ function handleMouseMove(e: MouseEvent) {
   mouseY.value = e.clientY;
 }
 
-// Pre-compute particle styles to avoid reactivity overhead
 const particles = Array.from({ length: 40 }).map(() => {
-  const size = Math.random() * 2.5 + 1; // 1px to 3.5px
+  const size = Math.random() * 2.5 + 1;
   const left = Math.random() * 100;
   const top = Math.random() * 100;
-  const duration = Math.random() * 30 + 20; // 20s to 50s for very slow drift
-  const delay = Math.random() * -30; // negative delay so they start immediately
+  const duration = Math.random() * 30 + 20;
+  const delay = Math.random() * -30;
   const opacity = Math.random() * 0.3 + 0.1;
   const color = Math.random() > 0.5 ? 'var(--color-brass-soft)' : 'var(--color-teal)';
   
