@@ -1,7 +1,7 @@
 <template>
   <div class="flex flex-col gap-0">
     <!-- HERO SECTION WRAPPER -->
-    <div class="snap-start snap-always min-h-[85vh] flex flex-col justify-center pt-2 md:pt-6 pb-12">
+    <div class="snap-start snap-always min-h-dvh flex flex-col justify-center pt-2 md:pt-6 pb-28 md:pb-6">
       <div class="grid grid-cols-[1.1fr_0.9fr] gap-8 items-center py-6 max-[960px]:grid-cols-1 max-[960px]:gap-6" id="hero">
         <div class="flex flex-col gap-4">
           <div class="font-mono text-[11px] font-semibold tracking-[0.16em] text-brass-soft uppercase inline-flex items-center gap-1.5">
@@ -52,6 +52,17 @@
           </div>
         </a>
       </div>
+    </div>
+
+    <!-- Glowing Glass Line Section Divider 1 -->
+    <div class="w-full flex items-center justify-center my-6 opacity-80 pointer-events-none">
+      <div class="h-[1px] flex-1 bg-gradient-to-r from-transparent via-line-dark to-brass/30"></div>
+      <div class="px-4 flex items-center gap-2 font-mono text-[9px] text-text-faint">
+        <span class="w-1 h-1 rounded-full bg-brass-soft shadow-[0_0_8px_var(--color-brass-soft)]"></span>
+        <span class="text-[9px] text-brass-soft/60 uppercase tracking-widest font-bold">❖</span>
+        <span class="w-1 h-1 rounded-full bg-brass-soft shadow-[0_0_8px_var(--color-brass-soft)]"></span>
+      </div>
+      <div class="h-[1px] flex-1 bg-gradient-to-l from-transparent via-line-dark to-brass/30"></div>
     </div>
 
     <!-- INTERACTIVE CAREER JOURNEY MAP SECTION -->
@@ -133,6 +144,17 @@
         </div>
       </div>
     </section>
+
+    <!-- Glowing Glass Line Section Divider 2 -->
+    <div class="w-full flex items-center justify-center my-6 opacity-80 pointer-events-none">
+      <div class="h-[1px] flex-1 bg-gradient-to-r from-transparent via-line-dark to-brass/30"></div>
+      <div class="px-4 flex items-center gap-2 font-mono text-[9px] text-text-faint">
+        <span class="w-1 h-1 rounded-full bg-brass-soft shadow-[0_0_8px_var(--color-brass-soft)]"></span>
+        <span class="text-[9px] text-brass-soft/60 uppercase tracking-widest font-bold">❖</span>
+        <span class="w-1 h-1 rounded-full bg-brass-soft shadow-[0_0_8px_var(--color-brass-soft)]"></span>
+      </div>
+      <div class="h-[1px] flex-1 bg-gradient-to-l from-transparent via-line-dark to-brass/30"></div>
+    </div>
 
     <!-- SUMMARY SECTIONS WRAPPER -->
     <div id="summary-sections" class="flex flex-col gap-0 scroll-mt-[90px]">
@@ -219,6 +241,17 @@
         </div>
       </section>
 
+      <!-- Glowing Glass Line Section Divider 3 -->
+      <div class="w-full flex items-center justify-center my-6 opacity-80 pointer-events-none">
+        <div class="h-[1px] flex-1 bg-gradient-to-r from-transparent via-line-dark to-brass/30"></div>
+        <div class="px-4 flex items-center gap-2 font-mono text-[9px] text-text-faint">
+          <span class="w-1 h-1 rounded-full bg-brass-soft shadow-[0_0_8px_var(--color-brass-soft)]"></span>
+          <span class="text-[9px] text-brass-soft/60 uppercase tracking-widest font-bold">❖</span>
+          <span class="w-1 h-1 rounded-full bg-brass-soft shadow-[0_0_8px_var(--color-brass-soft)]"></span>
+        </div>
+        <div class="h-[1px] flex-1 bg-gradient-to-l from-transparent via-line-dark to-brass/30"></div>
+      </div>
+
       <!-- 2. Education -->
       <section id="education-summary" class="snap-start min-h-0 flex flex-col justify-center py-10 md:py-14 scroll-mt-6 md:scroll-mt-[90px]">
         <div class="grid grid-cols-[1fr_2.2fr] gap-10 max-[1024px]:grid-cols-[1fr_1.8fr] max-[768px]:grid-cols-1 max-[768px]:gap-6 items-start w-full">
@@ -298,6 +331,17 @@
         </div>
       </section>
 
+      <!-- Glowing Glass Line Section Divider 4 -->
+      <div class="w-full flex items-center justify-center my-6 opacity-80 pointer-events-none">
+        <div class="h-[1px] flex-1 bg-gradient-to-r from-transparent via-line-dark to-brass/30"></div>
+        <div class="px-4 flex items-center gap-2 font-mono text-[9px] text-text-faint">
+          <span class="w-1 h-1 rounded-full bg-brass-soft shadow-[0_0_8px_var(--color-brass-soft)]"></span>
+          <span class="text-[9px] text-brass-soft/60 uppercase tracking-widest font-bold">❖</span>
+          <span class="w-1 h-1 rounded-full bg-brass-soft shadow-[0_0_8px_var(--color-brass-soft)]"></span>
+        </div>
+        <div class="h-[1px] flex-1 bg-gradient-to-l from-transparent via-line-dark to-brass/30"></div>
+      </div>
+
       <!-- 3. Featured Projects -->
       <section id="projects-summary" class="snap-start min-h-0 flex flex-col justify-center py-10 md:py-14 scroll-mt-6 md:scroll-mt-[90px]">
         <div class="grid grid-cols-[1fr_2.2fr] gap-10 max-[1024px]:grid-cols-[1fr_1.8fr] max-[768px]:grid-cols-1 max-[768px]:gap-6 items-start w-full">
@@ -368,6 +412,17 @@
           </div>
         </div>
       </section>
+
+      <!-- Glowing Glass Line Section Divider 5 -->
+      <div class="w-full flex items-center justify-center my-6 opacity-80 pointer-events-none">
+        <div class="h-[1px] flex-1 bg-gradient-to-r from-transparent via-line-dark to-brass/30"></div>
+        <div class="px-4 flex items-center gap-2 font-mono text-[9px] text-text-faint">
+          <span class="w-1 h-1 rounded-full bg-brass-soft shadow-[0_0_8px_var(--color-brass-soft)]"></span>
+          <span class="text-[9px] text-brass-soft/60 uppercase tracking-widest font-bold">❖</span>
+          <span class="w-1 h-1 rounded-full bg-brass-soft shadow-[0_0_8px_var(--color-brass-soft)]"></span>
+        </div>
+        <div class="h-[1px] flex-1 bg-gradient-to-l from-transparent via-line-dark to-brass/30"></div>
+      </div>
 
       <!-- 4. Key Skills -->
       <section id="skills-summary" class="snap-start min-h-0 flex flex-col justify-center py-10 md:py-14 scroll-mt-6 md:scroll-mt-[90px]">
