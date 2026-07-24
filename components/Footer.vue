@@ -4,9 +4,9 @@
       
       <!-- Left Section: Name and Bio -->
       <div class="flex flex-col gap-3">
-        <router-link to="/" class="font-display font-bold text-lg tracking-tight text-paper">
+        <NuxtLink to="/" class="font-display font-bold text-lg tracking-tight text-paper">
           Akbar Lucky <span class="text-brass-soft">Basuki</span>
-        </router-link>
+        </NuxtLink>
         <p class="font-body text-xs text-text-secondary max-w-[45ch] leading-relaxed">
           Business Analyst & Data Storyteller. Translating raw data into regulatory-grade decisions with a taste for detail.
         </p>
@@ -18,12 +18,12 @@
         <div class="flex flex-col gap-2.5">
           <span class="font-mono text-[9px] font-semibold tracking-wider text-text-faint uppercase">Pages</span>
           <nav class="flex flex-col gap-1.5">
-            <router-link to="/" class="font-body text-xs text-text-secondary hover:text-paper transition-colors duration-150">Home</router-link>
-            <router-link to="/experience" class="font-body text-xs text-text-secondary hover:text-paper transition-colors duration-150">Experience</router-link>
-            <router-link to="/education" class="font-body text-xs text-text-secondary hover:text-paper transition-colors duration-150">Education</router-link>
-            <router-link to="/projects" class="font-body text-xs text-text-secondary hover:text-paper transition-colors duration-150">Projects</router-link>
-            <router-link to="/skills" class="font-body text-xs text-text-secondary hover:text-paper transition-colors duration-150">Skills</router-link>
-            <router-link to="/contact" class="font-body text-xs text-text-secondary hover:text-paper transition-colors duration-150">Contact</router-link>
+            <NuxtLink to="/" class="font-body text-xs text-text-secondary hover:text-paper transition-colors duration-150">Home</NuxtLink>
+            <NuxtLink to="/experience" class="font-body text-xs text-text-secondary hover:text-paper transition-colors duration-150">Experience</NuxtLink>
+            <NuxtLink to="/education" class="font-body text-xs text-text-secondary hover:text-paper transition-colors duration-150">Education</NuxtLink>
+            <NuxtLink to="/projects" class="font-body text-xs text-text-secondary hover:text-paper transition-colors duration-150">Projects</NuxtLink>
+            <NuxtLink to="/skills" class="font-body text-xs text-text-secondary hover:text-paper transition-colors duration-150">Skills</NuxtLink>
+            <NuxtLink to="/contact" class="font-body text-xs text-text-secondary hover:text-paper transition-colors duration-150">Contact</NuxtLink>
           </nav>
         </div>
 
@@ -32,8 +32,8 @@
           <span class="font-mono text-[9px] font-semibold tracking-wider text-text-faint uppercase">Resources</span>
           <nav class="flex flex-col gap-1.5">
             <a href="https://github.com/akbarlucky" target="_blank" rel="noopener noreferrer" class="font-body text-xs text-text-secondary hover:text-paper transition-colors duration-150">Source Code</a>
-            <router-link to="/privacy" class="font-body text-xs text-text-secondary hover:text-paper transition-colors duration-150">Privacy Policy</router-link>
-            <router-link to="/terms" class="font-body text-xs text-text-secondary hover:text-paper transition-colors duration-150">Terms & Conditions</router-link>
+            <NuxtLink to="/privacy" class="font-body text-xs text-text-secondary hover:text-paper transition-colors duration-150">Privacy Policy</NuxtLink>
+            <NuxtLink to="/terms" class="font-body text-xs text-text-secondary hover:text-paper transition-colors duration-150">Terms & Conditions</NuxtLink>
           </nav>
         </div>
       </div>
