@@ -2,14 +2,17 @@ import { fileURLToPath } from 'node:url'
 import { describe, it, expect } from 'vitest'
 import { setup, $fetch } from '@nuxt/test-utils'
 
-describe('NUXT SSG Bootstrap', async () => {
+describe('Mobile Bottom Nav Dock', async () => {
   await setup({
     rootDir: fileURLToPath(new URL('..', import.meta.url)),
     server: true
   })
 
-  it('renders index page successfully', async () => {
+  it('contains bottom mobile dock elements', async () => {
     const html = await $fetch('/')
-    expect(html).toContain('Akbar Lucky Basuki')
+    // Assert presence of bottom dock navigation markup
+    expect(html).toContain('fixed bottom-6')
+    expect(html).toContain('ph-house')
+    expect(html).toContain('ph-briefcase')
   })
 })

@@ -1,16 +1,16 @@
 <template>
-  <!-- Floating Island Wrapper -->
-  <header class="fixed top-4 left-1/2 -translate-x-1/2 w-[92%] max-w-[720px] z-[100] transition-all duration-300">
+  <!-- Floating Island Wrapper (Desktop Only Header) -->
+  <header class="fixed top-4 left-1/2 -translate-x-1/2 w-[92%] max-w-[720px] z-[100] transition-all duration-300 max-md:hidden">
     <div class="bg-glass-nav backdrop-blur-xl border border-line-dark rounded-full h-12 flex items-center justify-between px-4 md:px-5 shadow-glass-nav">
       
       <!-- Brand Logo -->
       <NuxtLink to="/" class="font-display font-bold text-xs tracking-widest text-paper hover:text-brass-soft transition-colors duration-200 uppercase flex items-center gap-1.5">
         AL<span class="text-brass-soft">B</span>
-        <span class="w-1 h-1 rounded-full bg-brass-soft shadow-[0_0_8px_var(--color-brass-soft)] hidden md:block"></span>
+        <span class="w-1 h-1 rounded-full bg-brass-soft shadow-[0_0_8px_var(--color-brass-soft)]"></span>
       </NuxtLink>
  
       <!-- Desktop Nav Links -->
-      <nav class="hidden md:flex items-center gap-1">
+      <nav class="flex items-center gap-1">
         <NuxtLink
           v-for="item in navItems"
           :key="item.path"
@@ -23,83 +23,48 @@
         </NuxtLink>
       </nav>
  
-      <!-- Right Side CTA / Menu Toggle -->
+      <!-- Right Side CTA -->
       <div class="flex items-center gap-2">
-        <!-- Hire Me CTA (Desktop) -->
         <NuxtLink
           to="/contact"
-          class="hidden md:flex items-center gap-1.5 font-mono text-[9px] font-bold uppercase tracking-wider text-ink bg-brass px-4 py-1.5 rounded-full hover:bg-brass-soft hover:-translate-y-0.5 transition-all duration-200 shadow-btn-primary"
+          class="flex items-center gap-1.5 font-mono text-[9px] font-bold uppercase tracking-wider text-ink bg-brass px-4 py-1.5 rounded-full hover:bg-brass-soft hover:-translate-y-0.5 transition-all duration-200 shadow-btn-primary"
         >
           Hire Me
         </NuxtLink>
- 
-        <!-- Hamburger Menu Button (Mobile) -->
-        <button
-          @click="isMobileMenuOpen = !isMobileMenuOpen"
-          class="md:hidden w-8 h-8 rounded-full border border-line-dark bg-glass-card flex items-center justify-center text-paper hover:border-brass-soft transition-colors duration-200 shadow-glass-inner"
-          :aria-label="isMobileMenuOpen ? 'Close menu' : 'Open menu'"
-        >
-          <i :class="isMobileMenuOpen ? 'ph ph-x text-sm' : 'ph ph-list text-sm'"></i>
-        </button>
       </div>
     </div>
- 
-    <!-- Mobile Menu Dropdown -->
-    <transition name="mobile-menu">
-      <div v-if="isMobileMenuOpen" class="md:hidden absolute top-14 left-0 w-full bg-glass-mobile backdrop-blur-2xl border border-line-dark rounded-2xl p-2 shadow-badge flex flex-col gap-1 overflow-hidden">
-        <NuxtLink
-          v-for="item in navItems"
-          :key="item.path"
-          :to="item.path"
-          @click="isMobileMenuOpen = false"
-          class="font-mono text-[10px] font-semibold uppercase tracking-wider px-4 py-3 rounded-xl transition-all duration-200 flex items-center gap-2"
-          active-class="text-brass-soft bg-brass/10 border border-brass/20 shadow-glass-inner"
-          :class="route.path === item.path ? 'text-brass-soft bg-brass/10 border border-brass/20 shadow-glass-inner' : 'text-text-secondary border border-transparent hover:text-paper hover:bg-glass-hover'"
-        >
-          <i v-if="route.path === item.path" class="ph ph-caret-right text-brass-soft"></i>
-          {{ item.name }}
-        </NuxtLink>
-        <div class="w-full h-px bg-line-dark my-1"></div>
-        <NuxtLink
-          to="/contact"
-          @click="isMobileMenuOpen = false"
-          class="font-mono text-[10px] font-bold uppercase tracking-wider text-ink bg-brass px-4 py-3 rounded-xl text-center shadow-[0_4px_12px_rgba(254,128,25,0.25)] hover:bg-brass-soft transition-colors"
-        >
-          Hire Me
-        </NuxtLink>
-      </div>
-    </transition>
   </header>
+
+  <!-- Mobile Floating Dock (Mobile Only) -->
+  <nav class="md:hidden fixed bottom-6 left-1/2 -translate-x-1/2 z-[100] h-14 w-[92%] max-w-[420px] bg-glass-nav backdrop-blur-xl border border-line-dark rounded-full px-4 flex items-center justify-around gap-1 shadow-glass-nav">
+    <NuxtLink
+      v-for="item in navItems"
+      :key="item.path"
+      :to="item.path"
+      class="group relative flex items-center justify-center w-10 h-10 rounded-full transition-all duration-200"
+      active-class="text-brass-soft bg-brass/10 border border-brass/20 shadow-glass-inner"
+      :class="route.path === item.path ? 'text-brass-soft bg-brass/10 border border-brass/20 shadow-glass-inner' : 'text-text-secondary border border-transparent hover:text-paper hover:bg-glass-hover'"
+    >
+      <!-- Floating Tooltip -->
+      <span class="absolute bottom-full mb-2 left-1/2 -translate-x-1/2 px-2 py-0.5 bg-ink border border-line-dark text-[8px] font-mono uppercase tracking-wider rounded shadow-badge opacity-0 pointer-events-none group-hover:opacity-100 group-focus:opacity-100 group-hover:-translate-y-1 transition-all duration-200">
+        {{ item.name }}
+      </span>
+
+      <!-- Icon -->
+      <i :class="[item.icon, 'text-lg transition-transform duration-200 group-hover:scale-125 group-hover:-translate-y-1']"></i>
+    </NuxtLink>
+  </nav>
 </template>
  
 <script setup lang="ts">
-import { ref } from 'vue';
- 
-const isMobileMenuOpen = ref(false);
 const route = useRoute();
  
 const navItems = [
-  { name: 'home', path: '/' },
-  { name: 'experience', path: '/experience' },
-  { name: 'education', path: '/education' },
-  { name: 'projects', path: '/projects' },
-  { name: 'skills', path: '/skills' }
+  { name: 'home', path: '/', icon: 'ph ph-house' },
+  { name: 'experience', path: '/experience', icon: 'ph ph-briefcase' },
+  { name: 'education', path: '/education', icon: 'ph ph-graduation-cap' },
+  { name: 'projects', path: '/projects', icon: 'ph ph-code' },
+  { name: 'skills', path: '/skills', icon: 'ph ph-wrench' },
+  { name: 'contact', path: '/contact', icon: 'ph ph-paper-plane-tilt' }
 ];
 </script>
-
-<style scoped>
-.mobile-menu-enter-active,
-.mobile-menu-leave-active {
-  transition: opacity 250ms cubic-bezier(0.16, 1, 0.3, 1), transform 250ms cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.mobile-menu-enter-from {
-  opacity: 0;
-  transform: translateY(-8px) scale(0.98);
-}
-
-.mobile-menu-leave-to {
-  opacity: 0;
-  transform: translateY(-4px) scale(0.98);
-}
-</style>
