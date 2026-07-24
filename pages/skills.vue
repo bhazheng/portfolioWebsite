@@ -40,7 +40,7 @@
 </template>
 
 <script setup lang="ts">
-import type { SkillCategory } from '@/types/skills';
+import type { SkillCategory } from '~/types/skills';
 
 const SKILL_CATEGORIES: SkillCategory[] = [
   {

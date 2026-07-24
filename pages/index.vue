@@ -127,9 +127,9 @@
               {{ tech }}
             </span>
           </div>
-          <router-link :to="activeMilestone.detailRoute" class="font-mono text-xs text-brass-soft hover:text-paper inline-flex items-center gap-1 transition-colors duration-150 font-semibold">
+          <NuxtLink :to="activeMilestone.detailRoute" class="font-mono text-xs text-brass-soft hover:text-paper inline-flex items-center gap-1 transition-colors duration-150 font-semibold">
             Explore full history →
-          </router-link>
+          </NuxtLink>
         </div>
       </div>
     </section>
@@ -164,9 +164,9 @@
               </div>
             </div>
 
-            <router-link to="/experience" class="font-mono text-xs text-brass-soft hover:text-paper inline-flex items-center gap-1 transition-colors duration-150">
+            <NuxtLink to="/experience" class="font-mono text-xs text-brass-soft hover:text-paper inline-flex items-center gap-1 transition-colors duration-150">
               View full history →
-            </router-link>
+            </NuxtLink>
           </div>
 
           <!-- Right Column -->
@@ -245,9 +245,9 @@
               </div>
             </div>
 
-            <router-link to="/education" class="font-mono text-xs text-brass-soft hover:text-paper inline-flex items-center gap-1 transition-colors duration-150">
+            <NuxtLink to="/education" class="font-mono text-xs text-brass-soft hover:text-paper inline-flex items-center gap-1 transition-colors duration-150">
               View education details →
-            </router-link>
+            </NuxtLink>
           </div>
 
           <div class="flex flex-col gap-5 w-full relative pl-6 before:content-[''] before:absolute before:left-[11px] before:top-4 before:bottom-4 before:w-[1px] before:bg-line-dark">
@@ -324,9 +324,9 @@
               </div>
             </div>
 
-            <router-link to="/projects" class="font-mono text-xs text-brass-soft hover:text-paper inline-flex items-center gap-1 transition-colors duration-150">
+            <NuxtLink to="/projects" class="font-mono text-xs text-brass-soft hover:text-paper inline-flex items-center gap-1 transition-colors duration-150">
               View all projects →
-            </router-link>
+            </NuxtLink>
           </div>
 
           <div class="flex flex-col gap-5 w-full">
@@ -395,9 +395,9 @@
               </div>
             </div>
 
-            <router-link to="/skills" class="font-mono text-xs text-brass-soft hover:text-paper inline-flex items-center gap-1 transition-colors duration-150">
+            <NuxtLink to="/skills" class="font-mono text-xs text-brass-soft hover:text-paper inline-flex items-center gap-1 transition-colors duration-150">
               View skills details →
-            </router-link>
+            </NuxtLink>
           </div>
 
           <div class="grid grid-cols-2 gap-4 max-[480px]:grid-cols-1 w-full">
@@ -439,8 +439,11 @@
 
 <script setup lang="ts">
 import { ref, computed, onMounted, onUnmounted } from 'vue';
-import HeroDashboard from '../components/HeroDashboard.vue';
-import type { CareerMilestone } from '@/types/career';
+import type { CareerMilestone } from '~/types/career';
+ 
+useHead({
+  title: 'Akbar Lucky Basuki — Business Analyst & Data Storyteller'
+})
 
 let isScrolling = false;
 let scrollTimeout: ReturnType<typeof setTimeout> | null = null;

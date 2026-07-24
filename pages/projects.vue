@@ -48,4 +48,7 @@
 </template>
 
 <script setup lang="ts">
+useHead({
+  title: 'Featured Projects — Akbar Lucky Basuki'
+})
 </script>

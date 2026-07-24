@@ -56,7 +56,7 @@
           active-class="text-brass-soft bg-brass/10 border border-brass/20 shadow-glass-inner"
           :class="route.path === item.path ? 'text-brass-soft bg-brass/10 border border-brass/20 shadow-glass-inner' : 'text-text-secondary border border-transparent hover:text-paper hover:bg-glass-hover'"
         >
-          <i v-slot="{ isExactActive }"><i v-if="route.path === item.path" class="ph ph-caret-right text-brass-soft"></i></i>
+          <i v-if="route.path === item.path" class="ph ph-caret-right text-brass-soft"></i>
           {{ item.name }}
         </NuxtLink>
         <div class="w-full h-px bg-line-dark my-1"></div>

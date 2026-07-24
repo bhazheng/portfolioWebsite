@@ -61,4 +61,7 @@
 </template>
 
 <script setup lang="ts">
+useHead({
+  title: 'Education & Certifications — Akbar Lucky Basuki'
+})
 </script>

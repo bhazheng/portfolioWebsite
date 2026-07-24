@@ -90,4 +90,7 @@
 </template>
 
 <script setup lang="ts">
+useHead({
+  title: 'Work Experience — Akbar Lucky Basuki'
+})
 </script>

@@ -89,7 +89,7 @@
 
 <script setup lang="ts">
 import { ref, reactive, computed } from 'vue';
-import type { MetricDataset, NodeItem, TooltipState } from '@/types/dashboard';
+import type { MetricDataset, NodeItem, TooltipState } from '~/types/dashboard';
 
 type MetricKey = 'mnr' | 'indobert' | 'wayang';
 
