@@ -5,6 +5,11 @@ export interface NodeItem {
   period: string;
 }
 
+export interface LegendItem {
+  label: string;
+  swatch: 'trend' | 'forecast' | 'node' | 'bar';
+}
+
 export interface MetricDataset {
   xLabels: string[];
   nodes: NodeItem[];
@@ -14,6 +19,11 @@ export interface MetricDataset {
   fanPath: string;
   barHeights: number[];
   badge: string;
+  title: string;
+  caption: string;
+  narrative: string;
+  yAxisLabel: string;
+  legend: LegendItem[];
 }
 
 export interface TooltipState {

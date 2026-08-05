@@ -1,0 +1,109 @@
+# Impeccable Critique Snapshot — components/
+
+Method: dual-agent (A: design review · B: detector evidence)
+Target: components/ + app.vue + pages/index.vue (whole site)
+Mode: Experience (portfolio)
+Run date: 2026-08-05
+
+## Design Health Score
+
+| # | Heuristic | Score | Key Issue |
+|---|-----------|-------|-----------|
+| 1 | Visibility of System Status | 3 | Active tab visible; HeroDashboard chart has no loading/empty state, dataset selector invisible. |
+| 2 | Match System / Real World | 3 | Copy grounded in real projects; "Optim/Target" chart vocabulary is not real-world. |
+| 3 | User Control and Freedom | 2 | No way to switch HeroDashboard dataset; no undo; Privacy/Terms dead-end tabs. |
+| 4 | Consistency and Standards | 2 | Inconsistent header counts; hover lifts vary; two divider motifs. |
+| 5 | Error Prevention | 3 | mailto only; no failure mode but no fallback. |
+| 6 | Recognition Rather Than Recall | 3 | Skills re-listed across Experience and Skills tabs. |
+| 7 | Flexibility and Efficiency | n/a | Experience surface. |
+| 8 | Aesthetic and Minimalist Design | 2 | Background layer (5 orbs + 40 particles + grid + noise + spotlight) competes with content. |
+| 9 | Error Recovery | n/a | No form input. |
+| 10 | Help and Documentation | n/a | Experience surface. |
+| **Total** | | **18/24** | **Adequate** |
+
+n/a heuristics: 7, 9, 10
+P0 count: 1
+P1 count: 2
+
+## Design Specificity Verdict
+
+Mostly category-interchangeable. Gruvbox-derived dark-glass system is competent but generic — a SaaS landing page or crypto dashboard could swap copy unchanged. Specificity asserted by content (MnR data, OJK research, IndoBERT thesis, Wayang classifier) but not by the design itself.
+
+HeroDashboard.vue is the proof artifact and the biggest missed opportunity + bug:
+- Three datasets defined (mnr, indobert, wayang) but activeMetric hardcoded to 'mnr' (line 144), never toggled. IndoBERT and Wayang datasets (lines 112-141) are dead code.
+- Chart has no title, no y-axis labels, no legend, no caption. "Optim/Target" is unexplained jargon. Tooltip shows "94% Optim" — "Optim" of what?
+
+## Detector Findings
+
+1 finding, 1 true positive:
+- bounce-easing at HomeView.vue:50 — scroll-down arrow uses literal bounce animation (@keyframes bounce-arrow in global.css:73). Category: slop, severity: warning.
+
+Browser visualization skipped: no browser automation exposed (no Playwright/Puppeteer installed, no system Chrome found). Dev server on port 3000 was already running; not started by this run, not stopped by it.
+
+## Strengths
+
+1. Token system disciplined — Gruvbox palette consistent, opacity ladder for text is a real system, shadow tokens reused.
+2. Copy grounded in real work — real tools (IndoBERT, Ajaib Kripto), real research (OJK digital-asset regulation), real institutions (Universitas Brawijaya).
+3. Floating-island desktop nav well-judged — pill nav with ALB monogram + brass dot is confident, restrained identity.
+
+## Priority Issues
+
+### [P0] HeroDashboard is a broken proof artifact
+- activeMetric hardcoded, no dataset toggle UI, no title/axis/legend/caption, "Optim" jargon unexplained.
+- Fix: add dataset switcher; add per-dataset title + caption; label y-axis + legend; replace jargon.
+- Suggested command: /impeccable shape
+
+### [P1] Background layer competes with content
+- app.vue:6-29 layers 5 orbs + 40 particles + grid + noise + spotlight.
+- Fix: cut to 2 orbs, ≤12 particles at 0.15-0.3 opacity, or drop particles entirely.
+- Suggested command: /impeccable quieter
+
+### [P1] Redundant skill listings across tabs
+- SkillsView (16), ExperienceView (per-role chips), ProjectsView (per-project chips) repeat the same 6-8 tools 3+ times.
+- Fix: one canonical surface (Skills); in Experience/Projects show only 1-2 most relevant tools per work.
+- Suggested command: /impeccable distill
+
+### [P2] Header counts inconsistent and noisy
+- "03 items" / "02 items" / "16 items" teal pills on every section header.
+- Fix: remove counts, or replace with one-word framing tag (Selected, Recent, Stack).
+- Suggested command: /impeccable clarify
+
+### [P2] No keyboard route between tabs
+- Nav buttons click-only; no aria-current="page" on active tab.
+- Fix: add aria-current; optionally number-key shortcuts 1-6.
+- Suggested command: /impeccable audit
+
+### [P2] Bounce-easing on scroll arrow
+- HomeView.vue:50 animate-bounce-arrow.
+- Fix: replace with smooth translateY pulse using ease-out-quart.
+- Suggested command: /impeccable animate
+
+## Persona Red Flags
+
+### Recruiter-on-a-clock (3 min)
+- Hero chart "94% Optim" — can't tell what it measures, moves on. Proof artifact fails 3-second test.
+- Projects — 2 projects, dense chips, no outcome/metric. Can't assess impact. Passes.
+- Bounce arrow reads junior.
+
+### Senior-analyst peer (judging depth)
+- Skills — 16 chips, duplicates, can't tell deep vs familiar. Assumes surface-level.
+- HeroDashboard — no axis labels, no legend, no toggle. Concludes author can't present data — exact opposite of thesis.
+- ExperienceView — "PT. Pesta Pora Abadi" no link, no context, no outcome. Can't verify.
+
+### Mobile visitor on flaky network
+- Navbar.vue hides desktop nav at max-md — mobile nav pattern not visible in the file read; verify it exists.
+- 40 particles + 5 orbs + noise + spotlight is real jank on mid-tier Android.
+
+## Minor Observations
+
+- Footer "executive decision frameworks" claim stronger than hero copy supports — back it or tone it.
+- ContactView introduces "policy" — doesn't appear elsewhere; add evidence or cut.
+- EducationView and ExperienceView use identical timeline visual — same template, déjà vu.
+- SkillsView Phosphor icons — verify icon set loads; missing icons render as empty squares.
+- PrivacyView/TermsView tabs — unusual on a personal portfolio; consider whether they need nav presence.
+
+## Questions to Consider
+
+1. What if the hero chart were the thesis, not decoration? Full-width, titled, captioned, first thing read — flips site from "portfolio with a chart" to "data storyteller's argument".
+2. Does this need to feel this atmospheric? Confident version earns mood through type scale + whitespace, not layer count. Bloomberg/FT contributor page vs SaaS dashboard.
+3. What's the one number a recruiter should remember? No headline metric anywhere. A data storyteller without a number is a data teller.

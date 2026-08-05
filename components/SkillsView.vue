@@ -1,40 +1,39 @@
 <template>
   <div class="py-4 md:py-6">
     <!-- Header -->
-    <div class="flex items-baseline justify-between border-b border-line pb-2 mb-5">
+    <div class="flex items-baseline justify-between border-b border-line pb-2 mb-6">
       <h2 class="font-display font-bold text-[clamp(1.4rem,3vw,1.9rem)] tracking-tight text-paper">
-        Skills & Technology
+        Skills &amp; Technology
       </h2>
-      <div class="font-mono text-[10px] font-semibold tracking-wider text-teal bg-teal/15 px-2.5 py-0.5 rounded-full">16 items</div>
     </div>
 
-    <!-- Skill Category Grid -->
-    <div class="grid grid-cols-2 gap-4 max-[768px]:grid-cols-1">
-      <div
+    <!-- Capabilities -->
+    <div class="flex flex-col gap-6">
+      <section
         v-for="cat in SKILL_CATEGORIES"
         :key="cat.id"
-        class="bg-glass border border-line-dark rounded-2xl p-6 max-[768px]:p-5 shadow-glass hover:-translate-y-1.5 hover:border-brass-soft hover:shadow-[0_8px_30px_rgba(254,128,25,0.12)] active:scale-[0.99] transition-all duration-300 ease-spring"
+        class="bg-glass border border-line-dark rounded-2xl shadow-glass overflow-hidden"
       >
-        <h4 class="font-display font-bold text-xs tracking-wider text-brass-soft uppercase border-b border-line pb-2.5 mb-4 flex items-center gap-2">
-          <i :class="[cat.icon, 'text-sm text-teal']"></i> {{ cat.title }}
-        </h4>
+        <!-- Category header row -->
+        <header class="flex items-baseline justify-between px-6 py-4 border-b border-line max-[640px]:px-5">
+          <h4 class="font-display font-bold text-sm tracking-tight text-paper">{{ cat.title }}</h4>
+          <span class="font-mono text-[10px] uppercase tracking-widest text-text-faint">{{ cat.skills.length }} entries</span>
+        </header>
 
-        <!-- Skill Chips Grid -->
-        <div class="grid grid-cols-2 gap-2.5 max-[480px]:grid-cols-1">
-          <div
+        <!-- Skill rows -->
+        <ul class="divide-y divide-line">
+          <li
             v-for="skill in cat.skills"
             :key="skill.id"
-            class="bg-glass-card border border-line-dark rounded-xl p-3 shadow-glass-inner flex flex-col justify-between hover:border-brass/40 transition-all duration-200"
+            class="flex items-start gap-3 px-6 py-3.5 hover:bg-glass-hover transition-colors duration-150 max-[640px]:px-5"
           >
-            <div class="font-display font-semibold text-xs text-paper flex items-center gap-1.5">
-              <span class="text-brass font-bold">→</span> {{ skill.name }}
+            <div class="flex-1">
+              <div class="font-display font-semibold text-xs text-paper">{{ skill.name }}</div>
+              <div class="font-mono text-[10px] text-text-muted mt-0.5">{{ skill.appliedIn }}</div>
             </div>
-            <div class="font-mono text-[9px] text-text-muted flex items-center gap-1 opacity-80 mt-2">
-              <i class="ph ph-briefcase text-[10px] text-teal"></i> {{ skill.appliedIn }}
-            </div>
-          </div>
-        </div>
-      </div>
+          </li>
+        </ul>
+      </section>
     </div>
   </div>
 </template>

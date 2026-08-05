@@ -1,30 +1,19 @@
 <template>
-  <div class="min-h-dvh flex flex-col bg-ink text-paper font-body selection:bg-brass/20 selection:text-brass-soft relative overflow-x-hidden">
+  <div class="min-h-dvh flex flex-col bg-ink text-paper font-body selection:bg-brass/20 selection:text-brass relative overflow-x-hidden">
     <a href="#main-content" class="skip-link">Skip to main content</a>
-    
+
     <!-- Background Effects Layer (z-0) -->
     <div class="fixed inset-0 pointer-events-none z-0">
       <div class="bg-grid"></div>
       <div class="bg-orb bg-orb-1"></div>
       <div class="bg-orb bg-orb-2"></div>
-      <div class="bg-orb bg-orb-3"></div>
-      <div class="bg-orb bg-orb-4"></div>
-      <div class="bg-orb bg-orb-5"></div>
 
-      <!-- Tech Particles Array -->
+      <!-- Paper Dust Motes -->
       <div class="particles-container">
-        <div v-for="i in 40" :key="i" class="particle" :style="getParticleStyle(i)"></div>
+        <div v-for="i in 10" :key="i" class="particle" :style="getParticleStyle(i)"></div>
       </div>
 
-      <!-- Mouse Cursor Spotlight Tracker -->
-      <div
-        class="absolute inset-0 transition-opacity duration-300 max-md:hidden"
-        :style="{
-          background: `radial-gradient(600px circle at ${mouseX}px ${mouseY}px, rgba(254, 128, 25, 0.08), transparent 80%)`
-        }"
-      ></div>
-
-      <!-- Noise Texture -->
+      <!-- Paper Grain -->
       <div class="noise-overlay" aria-hidden="true"></div>
     </div>
 
@@ -43,25 +32,17 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted, onUnmounted } from 'vue';
+import { onMounted, onUnmounted } from 'vue';
 
-const mouseX = ref(-1000);
-const mouseY = ref(-1000);
-
-function handleMouseMove(e: MouseEvent) {
-  mouseX.value = e.clientX;
-  mouseY.value = e.clientY;
-}
-
-const particles = Array.from({ length: 40 }).map(() => {
-  const size = Math.random() * 2.5 + 1;
+const particles = Array.from({ length: 10 }).map(() => {
+  const size = Math.random() * 2 + 0.8;
   const left = Math.random() * 100;
   const top = Math.random() * 100;
-  const duration = Math.random() * 30 + 20;
-  const delay = Math.random() * -30;
-  const opacity = Math.random() * 0.3 + 0.1;
-  const color = Math.random() > 0.5 ? 'var(--color-brass-soft)' : 'var(--color-teal)';
-  
+  const duration = Math.random() * 40 + 30;
+  const delay = Math.random() * -40;
+  const opacity = Math.random() * 0.12 + 0.04;
+  const color = Math.random() > 0.5 ? 'var(--color-brass)' : 'var(--color-teal)';
+
   return {
     width: `${size}px`,
     height: `${size}px`,
@@ -78,12 +59,4 @@ const particles = Array.from({ length: 40 }).map(() => {
 function getParticleStyle(i: number) {
   return particles[i - 1];
 }
-
-onMounted(() => {
-  window.addEventListener('mousemove', handleMouseMove);
-});
-
-onUnmounted(() => {
-  window.removeEventListener('mousemove', handleMouseMove);
-});
 </script>
