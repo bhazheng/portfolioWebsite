@@ -1,46 +1,42 @@
-# Design — The Trader's Ledger
+# Design — EVA-01 Tactical Telemetry
 
 <!-- impeccable:design-schema 1 -->
 
-A redesign of Akbar Lucky Basuki's portfolio. Treats the previous dark-glass "translucent modern tech" world as anti-reference. The visual system is grounded in an Indonesian market trader's hand-ruled ledger — the person who keeps honest books on chaos.
+A redesign of Akbar Lucky Basuki's portfolio grounded in Evangelion's NERV tactical telemetry and the MAGI supercomputer command displays.
 
 ## World Statement
 
-After the stall closes, the trader opens the ledger under a warm hanging bulb and writes the day's truth in ink. Every number is accounted for, a changed figure gets a red correction stroke, a proof gets a rubber stamp. That discipline — making legible order out of the day's noise — is exactly the job of a business analyst and data storyteller. The site is that ledger, and the visitor is reading the honest books.
+In high-stakes environments, thousands of complex data channels converge. The data analyst's job is not to add noise, but to synthesize critical telemetry into immediate, unambiguous decisions. Grounded in the iconic EVA-01 aesthetic, the interface acts as a tactical command center: deep obsidian violet canvas, high-contrast lunar titanium reading type, sync acid lime data paths, and NERV emergency orange action anchors.
 
 ## Platform / Delivery
 
-Nuxt 3 static export. SFC components + Tailwind v4. Content stays verbatim except the Skills tab, which is redesigned (content + treatment).
+Nuxt 3 static export. SFC components + Tailwind v4. Plus Jakarta Sans for reading & display, IBM Plex Mono for tabular figures.
 
 ## Palette
 
-Color strategy: **Ristretto Dark ground, one committed accent + two data colors.**
+Color strategy: **Obsidian Violet ground, Lunar Titanium text, Sync Acid Lime data, and NERV Orange actions.**
 
-- `--color-paper`: soft warm foreground `#D8D1C0` — the light and the text
-- `--color-paper-2`: muted foreground `#C2B8A0`
-- `--color-ink`: deep warm black `#100B08` — the ground
-- `--color-ink-2`: elevated surface `#1D1612`
-- `--color-charcoal`: warm elevated panel `#2A2119`
-- `--color-brass`: Ristretto orange — THE committed accent (primary, corrections, proof) `#CE6A2F`
-- `--color-brass-soft`: lighter orange hover `#E08A3C`
-- `--color-teal`: faded data teal (data / figures / visualization) `#6F8F8F`
-- `--color-line`: hairline rule on dark `rgba(216, 209, 192, 0.1)`
-- `--color-line-dark`: stronger rule `rgba(216, 209, 192, 0.16)`
-- `--color-red`: correction ink `#CF4A2A` (changed figures, alerts, "updated" marks)
+- `--color-ink`: deep obsidian violet ground `#0C0914`
+- `--color-ink-2`: elevated armor plate surface `#171224`
+- `--color-charcoal`: elevated command cell `#221B34`
+- `--color-paper`: lunar titanium primary text `#E6E1EE` (15.4:1 AAA contrast)
+- `--color-paper-2`: muted silver secondary text `#A8A1B6` (7.9:1 AAA contrast)
+- `--color-brass`: NERV emergency orange — primary action & CTA `#FF6622` (6.7:1 AA contrast)
+- `--color-brass-soft`: lighter emergency orange hover `#FF8544`
+- `--color-teal`: EVA sync acid lime — data visualization, trends, metrics `#8CE600` (12.6:1 AAA contrast)
+- `--color-red`: MAGI core alert red `#FF3344`
+- `--color-line`: tactical hairline rule `rgba(230, 225, 238, 0.08)`
+- `--color-line-dark`: tactical boundary rule `rgba(230, 225, 238, 0.15)`
 
-Text opacity ladder on dark: primary `#D8D1C0`, secondary `rgba(216, 209, 192, 0.82)`, tertiary `rgba(216, 209, 192, 0.66)`, muted `rgba(216, 209, 192, 0.5)`, faint `rgba(216, 209, 192, 0.34)`.
-
-Glass/translucency is gone. Surfaces are warm dark panels with soft shadows (a folded page), not frosted glass.
-
+Text opacity ladder on dark: primary `#E6E1EE`, secondary `rgba(230, 225, 238, 0.82)`, tertiary `rgba(230, 225, 238, 0.66)`, muted `rgba(230, 225, 238, 0.5)`, faint `rgba(230, 225, 238, 0.34)`.
 ## Typography
 
 Faces chosen as objects from the ledger's world.
 
-- **Display — IBM Plex Serif** (tegas, record-keeping, not the cream-editorial rut): name, section titles, key figures.
-- **Body — IBM Plex Sans** (humanist, readable at length): running copy, ledgers' printed rule lines.
-- **Mono — IBM Plex Mono** (tabular figures): every number, column, date, chip, and label. The mono is earned by ledger columns being tabular accounts, not by "tech."
+- **Display & Body — Plus Jakarta Sans**: Indonesian-designed modern geometric sans with warm, open circular counters (like Poppins) and engineered micro-legibility. Used for the hero name, section headings, and running narrative copy.
+- **Data & Numbers — IBM Plex Mono**: Tabular figures for every number, metric percentage, date, and technical key, ensuring strict column alignment.
 
-Display is set tight (`-0.02em`) and the name reads large. Numbers always set in mono, tabular-nums, so columns align like a ledger.
+Headings are set with crisp tracking (`-0.02em`) for punchy visual authority. Numbers always set in mono, tabular-nums.
 
 ## Material Language
 

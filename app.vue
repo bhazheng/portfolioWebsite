@@ -5,6 +5,7 @@
     <!-- Background Effects Layer (z-0) -->
     <div class="fixed inset-0 pointer-events-none z-0">
       <div class="bg-grid"></div>
+      <div class="bg-wash"></div>
       <div class="bg-orb bg-orb-1"></div>
       <div class="bg-orb bg-orb-2"></div>
 

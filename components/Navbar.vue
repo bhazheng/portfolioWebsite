@@ -10,21 +10,20 @@
         @click="activeTab = 'home'"
         class="flex items-center pr-2 active:scale-95 cursor-pointer group"
         :aria-current="activeTab === 'home' ? 'page' : undefined"
+        aria-label="Akbar Lucky Basuki - Return to Home"
       >
-        <span class="font-display font-bold text-base tracking-wide text-paper group-hover:text-brass transition-colors duration-200 uppercase">
-          AL<span class="text-brass">B</span>
-        </span>
+          AL<span class="text-brass">B</span><span class="text-teal font-mono ml-0.5 font-bold">.</span>
       </button>
-
       <!-- Desktop Nav Links -->
-      <nav class="flex items-center flex-1 justify-center gap-1 px-2">
+      <nav class="flex items-center flex-1 justify-center gap-1 px-2" aria-label="Main Navigation">
         <button
           v-for="item in navItems"
           :key="item.name"
           @click="activeTab = item.name"
           :aria-current="activeTab === item.name ? 'page' : undefined"
+          :aria-label="`Navigate to ${item.name}`"
           class="font-mono text-[10px] font-semibold uppercase tracking-wider px-3 py-1.5 rounded-full transition-all duration-200 ease-out active:scale-90 relative cursor-pointer"
-          :class="activeTab === item.name ? 'text-paper bg-brass shadow-btn-primary' : 'text-text-secondary hover:text-paper hover:bg-glass-hover'"
+          :class="activeTab === item.name ? 'text-ink font-bold bg-brass shadow-btn-primary' : 'text-text-secondary hover:text-paper hover:bg-glass-hover'"
         >
           {{ item.name }}
         </button>
@@ -46,6 +45,8 @@
   <nav
     class="md:hidden fixed bottom-6 left-1/2 -translate-x-1/2 z-[100] h-14 bg-glass-nav border border-line-dark rounded-full flex items-center justify-around shadow-glass-nav transition-all duration-300 ease-spring"
     :class="isDockMinimized ? 'w-14 px-0 cursor-pointer' : 'w-[92%] max-w-[420px] px-4'"
+    :aria-expanded="!isDockMinimized"
+    aria-label="Mobile Navigation Dock"
     @click="isDockMinimized ? isDockMinimized = false : null"
   >
     <button
@@ -53,9 +54,10 @@
       :key="item.name"
       @click.stop="activeTab = item.name"
       :aria-current="activeTab === item.name ? 'page' : undefined"
+      :aria-label="item.name"
       class="group relative flex items-center justify-center transition-all duration-200 ease-out cursor-pointer"
       :class="[
-        activeTab === item.name ? 'text-paper bg-brass shadow-btn-primary w-10 h-10 rounded-full' : 'text-text-secondary border border-transparent w-10 h-10 rounded-full hover:text-ink hover:bg-glass-hover',
+        activeTab === item.name ? 'text-ink font-bold bg-brass shadow-btn-primary w-10 h-10 rounded-full' : 'text-text-secondary border border-transparent w-10 h-10 rounded-full hover:text-paper hover:bg-brass/20',
         activeTab === item.name ? 'flex' : (isDockMinimized ? 'hidden' : 'flex')
       ]"
     >
