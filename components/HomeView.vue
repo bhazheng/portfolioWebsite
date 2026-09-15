@@ -76,13 +76,13 @@
       <div class="bg-ink-2 border border-line-dark rounded-2xl p-6 shadow-glass mb-6">
         <div class="relative w-full">
           <!-- Desktop Connecting SVG Line -->
-          <svg class="w-full h-8 max-[640px]:hidden" viewBox="0 0 800 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <line x1="100" y1="16" x2="700" y2="16" stroke="var(--color-line-dark)" stroke-width="2" stroke-dasharray="4 4" />
-            <line x1="100" y1="16" x2="700" y2="16" stroke="var(--color-brass)" stroke-width="2" stroke-opacity="0.3" />
+          <svg class="w-full h-8 max-[640px]:hidden" viewBox="0 0 1000 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <line x1="70" y1="16" x2="930" y2="16" stroke="var(--color-line-dark)" stroke-width="2" stroke-dasharray="4 4" />
+            <line x1="70" y1="16" x2="930" y2="16" stroke="var(--color-brass)" stroke-width="2" stroke-opacity="0.3" />
           </svg>
 
           <!-- Milestone Node Buttons -->
-          <div class="grid grid-cols-4 gap-2 max-[640px]:grid-cols-2 max-[480px]:grid-cols-1">
+          <div class="grid grid-cols-5 gap-2 max-[960px]:grid-cols-3 max-[640px]:grid-cols-2 max-[480px]:grid-cols-1">
             <button
               v-for="m in CAREER_MILESTONES"
               :key="m.id"
@@ -166,15 +166,32 @@ const CAREER_MILESTONES: (CareerMilestone & { detailTab: string })[] = [
     organization: 'Universitas Brawijaya',
     location: 'Malang, ID',
     badge: 'GPA 3.77 / 4.00',
-    summary: 'Focused on systems analysis, database architecture, business process modeling, and data visualization. Mentored 270+ students as a Laboratory Teaching Assistant in SQL database modeling.',
+    summary: 'Focused on systems analysis, database architecture, business process modeling, and data visualization. Conducted thesis research on Ajaib Kripto user sentiment using IndoBERT and Root Cause Analysis.',
     impactMetrics: [
       { label: 'Academic GPA', value: '3.77 / 4.00' },
       { label: 'Thesis Research', value: 'IndoBERT NLP' },
-      { label: 'Students Mentored', value: '270+ Scholars' }
+      { label: 'Core Discipline', value: 'Systems Analysis' }
     ],
-    techStack: ['Systems Analysis', 'Advanced SQL', 'Data Modeling', 'Python NLP'],
+    techStack: ['Systems Analysis', 'Data Modeling', 'Enterprise Arch', 'Python NLP'],
     detailRoute: '/education',
     detailTab: 'education'
+  },
+  {
+    id: 'lab-assistant',
+    period: '2021 — 2023',
+    role: 'Laboratory Teaching Assistant',
+    organization: 'Universitas Brawijaya (FILKOM)',
+    location: 'Malang, East Java, ID',
+    badge: 'Teaching Assistant',
+    summary: 'Translated complex database modeling and programming logic into easily digestible learning materials for over 270 students. Facilitated hands-on lab workshops on logical system design, ERD creation, and advanced SQL querying.',
+    impactMetrics: [
+      { label: 'Students Mentored', value: '270+ Scholars' },
+      { label: 'Domain Scope', value: 'SQL & Database' },
+      { label: 'Workshop Cohort', value: '4 Semesters' }
+    ],
+    techStack: ['Advanced SQL', 'Data Modeling', 'ERD Architecture', 'Technical Mentoring'],
+    detailRoute: '/experience',
+    detailTab: 'experience'
   },
   {
     id: 'bangkit',
@@ -230,6 +247,6 @@ const CAREER_MILESTONES: (CareerMilestone & { detailTab: string })[] = [
 ];
 
 const activeMilestone = computed(() => {
-  return CAREER_MILESTONES.find(m => m.id === activeMilestoneId.value) || CAREER_MILESTONES[3];
+  return CAREER_MILESTONES.find(m => m.id === activeMilestoneId.value) || CAREER_MILESTONES[CAREER_MILESTONES.length - 1];
 });
 </script>
