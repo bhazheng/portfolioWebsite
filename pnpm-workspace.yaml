@@ -1,2 +1,6 @@
+packages:
+  - '.'
+onlyBuiltDependencies:
+  - esbuild
 minimumReleaseAgeExclude:
   - vuetify@4.2.5
