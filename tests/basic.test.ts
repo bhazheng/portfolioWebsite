@@ -8,9 +8,14 @@ describe('Native CSS Scroll Snap & Hero Fullscreen', async () => {
     server: true
   })
 
-  it('contains min-h-dvh Hero section and footer snap-start anchor', async () => {
+  it('renders the one-page Material Design 3 sections', async () => {
     const html = await $fetch('/')
-    expect(html).toContain('min-h-dvh')
-    expect(html).toContain('snap-start border-t border-line-dark')
+    expect(html).toContain('v-application')
+    expect(html).toContain('id="hero"')
+    expect(html).toContain('id="experience"')
+    expect(html).toContain('id="education"')
+    expect(html).toContain('id="projects"')
+    expect(html).toContain('id="skills"')
+    expect(html).toContain('id="contact"')
   })
 })

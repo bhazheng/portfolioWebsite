@@ -6,7 +6,7 @@ dist-ssr/
 
 # Dependencies
 node_modules/
-.wrangler
+.wrangler/
 
 # Environment Variables & Secrets
 .env
@@ -34,7 +34,9 @@ lerna-debug.log*
 *.sln
 *.sw?
 
-# AI / Local Knowledge Graph
+# Visual test & temporary QA artifacts
+screenshots/
+.tmp-*/
+
+# AI Harness
 .agents/
-.superpowers/
-graphify-out/
