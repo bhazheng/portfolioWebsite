@@ -1,47 +1,10 @@
-<template>
-  <section id="skills" class="rei-section page-width">
-    <div class="section-heading" v-reveal>
-      <h2>Skills<span class="heading-dot">.</span></h2>
-      <p>The capabilities I use to turn raw data into decisions leaders act on.</p>
-    </div>
+import type { SkillCategory } from '../types/skills'
 
-    <div class="skills-grid">
-      <div
-        v-for="(cat, index) in SKILL_CATEGORIES"
-        :key="cat.id"
-        class="skill-card"
-        v-reveal="index * 100"
-      >
-        <svg class="card-accessory" :class="`acc-${index % 3}`" viewBox="0 0 100 100" fill="none" aria-hidden="true">
-          <rect x="20" y="20" width="60" height="60" rx="16" stroke="currentColor" stroke-width="1.5" opacity="0.25" />
-          <rect x="35" y="35" width="30" height="30" rx="8" stroke="currentColor" stroke-width="1" opacity="0.2" />
-          <circle cx="50" cy="50" r="4" fill="currentColor" opacity="0.2" />
-        </svg>
-        <div class="skill-card-head">
-          <div class="skill-card-icon">
-            <v-icon :icon="cat.icon" :color="cat.color" size="24" />
-          </div>
-          <h3>{{ cat.title }}</h3>
-        </div>
-        <ul class="skill-list">
-          <li v-for="skill in cat.skills" :key="skill.id">
-            <span class="skill-name">{{ skill.name }}</span>
-            <span class="skill-applied font-mono">{{ skill.appliedIn }}</span>
-          </li>
-        </ul>
-      </div>
-    </div>
-  </section>
-</template>
-
-<script setup lang="ts">
-import type { SkillCategory } from '~/types/skills'
-
-interface SkillCategoryWithColor extends SkillCategory {
+export interface SkillCategoryWithColor extends SkillCategory {
   color: string
 }
 
-const SKILL_CATEGORIES: SkillCategoryWithColor[] = [
+export const SKILL_CATEGORIES: SkillCategoryWithColor[] = [
   {
     id: 'business',
     title: 'Business & Data Analytics',
@@ -91,4 +54,3 @@ const SKILL_CATEGORIES: SkillCategoryWithColor[] = [
     ]
   }
 ]
-</script>

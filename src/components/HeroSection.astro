@@ -1,0 +1,88 @@
+---
+import portrait from '../assets/profile.jpeg'
+---
+<section id="hero" class="hero-section page-width">
+  <div class="hero-copy">
+    <div class="hero-intro" data-reveal data-reveal-delay="0">
+      <span class="hero-intro-line"></span>
+      Hello, I'm Akbar
+    </div>
+
+    <h1 class="hero-headline" data-reveal data-reveal-delay="150">
+      Business Analyst<br>
+      &amp; <span class="accent">Data Storyteller</span>
+    </h1>
+
+    <p class="hero-copy" data-reveal data-reveal-delay="300">
+      An Information Systems graduate from Universitas Brawijaya. I translate complex data
+      into intuitive dashboards, conduct strategic market analysis, and build machine
+      learning solutions that guide decisions leaders act on.
+    </p>
+
+    <div class="hero-actions" data-reveal data-reveal-delay="450">
+      <a href="#contact" class="btn btn--large btn--primary btn--pill">
+        Email me
+      </a>
+      <a href="#projects" class="text-link">
+        Explore projects
+        <span class="i-material-symbols:arrow-downward icon" style="font-size:18px;width:18px;height:18px" aria-hidden="true"></span>
+      </a>
+    </div>
+
+    <div class="hero-socials" data-reveal data-reveal-delay="550">
+      <a
+        href="https://www.linkedin.com/in/akbarlucky/"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="btn btn--small btn--text"
+      >
+        <span class="i-mdi:linkedin icon" style="font-size:20px;width:20px;height:20px" aria-hidden="true"></span>
+        LinkedIn
+      </a>
+      <a
+        href="https://wa.me/6285172455808"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="btn btn--small btn--text"
+      >
+        <span class="i-mdi:whatsapp icon" style="font-size:20px;width:20px;height:20px" aria-hidden="true"></span>
+        WhatsApp
+      </a>
+      <a
+        href="https://github.com/bhazheng"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="btn btn--small btn--text"
+      >
+        <span class="i-mdi:github icon" style="font-size:20px;width:20px;height:20px" aria-hidden="true"></span>
+        GitHub
+      </a>
+    </div>
+  </div>
+
+  <!-- Hero art: portrait frame + stickers -->
+  <div class="hero-art" data-reveal data-reveal-delay="350">
+    <div class="portrait-frame">
+      <img
+        src={portrait.src}
+        alt="Akbar Lucky Basuki"
+        class="hero-portrait"
+        width={portrait.width}
+        height={portrait.height}
+      />
+    </div>
+
+    <div class="orbit-symbol">
+      <span class="i-material-symbols:monitoring icon" style="font-size:40px;width:40px;height:40px" aria-hidden="true"></span>
+    </div>
+
+    <div class="code-sticker">
+      <span class="i-material-symbols:code icon" style="font-size:32px;width:32px;height:32px" aria-hidden="true"></span>
+    </div>
+
+    <div class="identity-sticker">
+      <strong>ALB.</strong>
+      <span>Analyst</span>
+    </div>
+  </div>
+</section>

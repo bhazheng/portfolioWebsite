@@ -1,8 +1,6 @@
-# Nuxt 3 build/output
-.nuxt/
-.output/
+# Astro build output
 dist/
-dist-ssr/
+.astro/
 
 # Dependencies
 node_modules/

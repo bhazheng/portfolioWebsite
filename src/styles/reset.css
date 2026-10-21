@@ -1,0 +1,11 @@
+*, *::before, *::after { box-sizing: border-box; }
+body, html { margin: 0; }
+html {
+  font-family: var(--v-font-body);
+  font-size: 1rem;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+button, input, select, textarea { font: inherit; }
+button { color: inherit; cursor: pointer; }

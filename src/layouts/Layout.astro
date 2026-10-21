@@ -1,0 +1,46 @@
+---
+import '../styles/reset.css'
+import '../styles/tokens.css'
+import '../styles/main.css'
+import '../styles/base.css'
+import '../styles/navbar.css'
+import Navbar from '../components/Navbar.astro'
+import Footer from '../components/Footer.astro'
+
+interface Props { title: string }
+const { title } = Astro.props
+---
+<!doctype html>
+<html lang="en" data-theme="dark">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Google+Sans+Flex:wght@300..800&family=Google+Sans+Code:wght@300..800&display=swap" />
+    <script is:inline>
+      (function () {
+        try {
+          var m = document.cookie.match(/(?:^|;\s*)color-scheme=(dark|light)/);
+          var t = m ? m[1] : 'dark';
+          document.documentElement.dataset.theme = t;
+          document.documentElement.style.colorScheme = t;
+        } catch (e) {}
+      })();
+    </script>
+  </head>
+  <body>
+    <div class="app">
+      <a href="#hero" class="skip-link">Skip to content</a>
+      <Navbar />
+      <main class="main"><slot /></main>
+      <Footer />
+    </div>
+    <script>
+      import '../scripts/theme'
+      import '../scripts/nav'
+      import '../scripts/reveal'
+    </script>
+  </body>
+</html>

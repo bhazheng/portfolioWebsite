@@ -1,0 +1,29 @@
+.app { background: rgb(var(--v-theme-background)); color: rgb(var(--v-theme-on-background)); display: flex; min-height: 100dvh; flex-direction: column; }
+.main { flex: 1 0 auto; max-width: 100%; }
+
+/* v-icon replacement. Size is set per-instance via inline
+   style="font-size:Npx;width:Npx;height:Npx" to match the old rendered DOM. */
+.icon { display: inline-flex; align-items: center; justify-content: center; flex: none; line-height: 1; vertical-align: middle; }
+
+/* v-btn replacement */
+.btn {
+  display: inline-flex; align-items: center; justify-content: center;
+  gap: 8px; border: 0; border-radius: 24px; text-decoration: none;
+  font-weight: 500; letter-spacing: 0; line-height: normal; cursor: pointer;
+  transition: background 0.28s, transform 0.28s, box-shadow 0.28s;
+}
+.btn--large { height: 44px; padding: 0 20px; font-size: 1rem; min-width: 78px; }
+.btn--small { height: 28px; padding: 0 12px; font-size: 0.75rem; min-width: 50px; }
+.btn--primary { background: rgb(var(--v-theme-primary)); color: rgb(var(--v-theme-on-primary)); }
+.btn--text { background: transparent; color: inherit; }
+.btn--text:hover { background: color-mix(in srgb, currentColor 8%, transparent); }
+.btn--pill { border-radius: 9999px; }
+
+/* theme color utilities (Vuetify's generated .text-* classes) */
+.text-primary { color: rgb(var(--v-theme-primary)); }
+.text-secondary { color: rgb(var(--v-theme-secondary)); }
+.text-tertiary { color: rgb(var(--v-theme-tertiary)); }
+.text-eva-orange { color: rgb(var(--v-theme-eva-orange)); }
+
+/* replaces class="d-flex flex-wrap ga-2 mt-6" on the hero social row */
+.hero-socials { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 24px; }

@@ -1,21 +1,18 @@
-import { fileURLToPath } from 'node:url'
+import { experimental_AstroContainer as AstroContainer } from 'astro/container'
 import { describe, it, expect } from 'vitest'
-import { setup, $fetch } from '@nuxt/test-utils'
+import Index from '../src/pages/index.astro'
 
-describe('Native CSS Scroll Snap & Hero Fullscreen', async () => {
-  await setup({
-    rootDir: fileURLToPath(new URL('..', import.meta.url)),
-    server: true
-  })
+describe('one-page EVA-01 sections', () => {
+  it('renders all six section anchors', async () => {
+    const container = await AstroContainer.create()
+    const html = await container.renderToString(Index)
 
-  it('renders the one-page Material Design 3 sections', async () => {
-    const html = await $fetch('/')
-    expect(html).toContain('v-application')
-    expect(html).toContain('id="hero"')
-    expect(html).toContain('id="experience"')
-    expect(html).toContain('id="education"')
-    expect(html).toContain('id="projects"')
-    expect(html).toContain('id="skills"')
-    expect(html).toContain('id="contact"')
+    for (const id of ['hero', 'projects', 'experience', 'education', 'skills', 'contact']) {
+      expect(html).toContain(`id="${id}"`)
+    }
+    expect(html).toContain('Business Analyst')
+    expect(html).toContain('data-theme="dark"')
+    expect(html).not.toContain('v-application')
+    expect(html).not.toContain('v-icon')
   })
 })

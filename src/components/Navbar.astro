@@ -1,0 +1,58 @@
+---
+import { NAV_SECTIONS } from '../data/nav'
+---
+<div>
+  <!-- Top header — scrolls away normally -->
+  <header class="site-header page-width">
+    <div class="site-header-inner">
+      <a href="#hero" class="brand-mark" aria-label="Akbar Lucky Basuki — home">
+        AL<span class="text-primary">B</span><span class="text-tertiary font-mono">.</span>
+      </a>
+
+      <div class="header-actions">
+        <button class="theme-toggle" type="button" aria-label="Switch to light theme">
+          <span class="i-material-symbols:light-mode icon" style="font-size:22px;width:22px;height:22px" aria-hidden="true"></span>
+        </button>
+        <a href="#contact" class="header-contact">
+          Get in touch
+          <span class="i-material-symbols:arrow-outward icon" style="font-size:16px;width:16px;height:16px" aria-hidden="true"></span>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Desktop/tablet sticky pill nav — floats at top on scroll -->
+  <nav class="floating-nav sticky-pill" aria-label="Main navigation">
+    {NAV_SECTIONS.map((s) => (
+      <a href={`#${s.id}`} class:list={[{ current: s.id === 'hero' }]} aria-current={s.id === 'hero' ? 'page' : undefined}>
+        <span class={`${s.icon} icon`} style="font-size:18px;width:18px;height:18px" aria-hidden="true"></span>
+        <span>{s.label}</span>
+      </a>
+    ))}
+  </nav>
+
+  <!-- Mobile bottom dock: shrinks to 1 icon on scroll, expands when stopped -->
+  <div class="mobile-nav-wrap">
+    <span class="active-label font-mono">Home</span>
+    <nav class="mobile-dock" aria-label="Main navigation">
+      <!-- Shrunk: only active icon -->
+      <div class="dock-single">
+        <a href="#" class="mobile-dock-item current" data-shrunk-item aria-label="Show navigation">
+          <span class="i-material-symbols:home icon" style="font-size:24px;width:24px;height:24px" aria-hidden="true"></span>
+        </a>
+      </div>
+      <!-- Expanded: all icons -->
+      <div class="dock-full">
+        {NAV_SECTIONS.map((s) => (
+          <a
+            href={`#${s.id}`}
+            class:list={['mobile-dock-item', { current: s.id === 'hero' }]}
+            aria-current={s.id === 'hero' ? 'page' : undefined}
+          >
+            <span class={`${s.icon} icon`} style="font-size:22px;width:22px;height:22px" aria-hidden="true"></span>
+          </a>
+        ))}
+      </div>
+    </nav>
+  </div>
+</div>

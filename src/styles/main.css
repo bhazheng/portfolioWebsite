@@ -106,7 +106,7 @@ section[id] {
   align-items: center;
   box-shadow: 0 2px 12px rgba(0,0,0,0.08);
 }
-.dark .floating-nav {
+[data-theme='dark'] .floating-nav {
   box-shadow: 0 2px 16px rgba(0,0,0,0.28);
 }
 .floating-nav a {
@@ -1310,11 +1310,6 @@ a:active, button:active {
   outline: 2px solid rgb(var(--v-theme-tertiary));
   outline-offset: 2px;
 }
-/* Preserve Vuetify's own focus treatment for inputs/fields that already work */
-.v-field :focus-visible,
-.v-input :focus-visible {
-  outline: none;
-}
 
 /* WCAG 2.5.8: ensure contact links meet 24px minimum touch target */
 .contact-link {
@@ -1324,10 +1319,3 @@ a:active, button:active {
   text-decoration: none;
 }
 
-/* WCAG readability: ensure body and title text meets 1.30x line-height floor */
-.text-body-medium,
-.text-body-small,
-.text-title-medium,
-.text-title-small {
-  line-height: 1.3;
-}

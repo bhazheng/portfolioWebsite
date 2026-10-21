@@ -1,0 +1,143 @@
+/* Navbar styles — moved verbatim from the scoped block in the retired
+   Navbar.vue, now global (the nav script toggles classes at runtime). */
+
+/* ── Shared header (normal flow, scrolls away) ────────────── */
+.site-header {
+  display: block;
+  padding-block: 12px;
+}
+.site-header-inner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+  height: 76px;
+}
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+/* ── Desktop/tablet sticky pill — fixed at top on scroll ──── */
+.sticky-pill {
+  position: fixed;
+  top: 14px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 100;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.12);
+  transition: box-shadow 0.3s, top 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+/* ── Mobile bottom dock: icon-only pill + floating label ──── */
+
+.mobile-nav-wrap {
+  position: fixed;
+  bottom: max(14px, env(safe-area-inset-bottom));
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 200;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+}
+
+/* Floating active label — above the pill */
+.active-label {
+  background: rgb(var(--v-theme-primary));
+  color: rgb(var(--v-theme-on-primary));
+  font-size: 11px;
+  font-weight: 600;
+  padding: 4px 12px;
+  border-radius: 20px;
+  white-space: nowrap;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+}
+
+/* Icon-only pill — animates between shrunk (1 icon) and expanded (all) */
+.mobile-dock {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  padding: 6px;
+  border-radius: 30px;
+  background: rgb(var(--v-theme-surface-container));
+  border: 1px solid rgb(var(--v-theme-outline-variant));
+  box-shadow: 0 6px 28px rgba(0, 0, 0, 0.18);
+  max-width: calc(100vw - 32px);
+  transition: gap 0.4s cubic-bezier(0.2, 0.8, 0.2, 1),
+              padding 0.4s cubic-bezier(0.2, 0.8, 0.2, 1),
+              border-radius 0.4s cubic-bezier(0.2, 0.8, 0.2, 1),
+              box-shadow 0.3s;
+}
+
+/* Shrunk: single round icon */
+.mobile-nav-wrap.shrunk .mobile-dock {
+  gap: 0;
+  padding: 5px;
+  border-radius: 50%;
+}
+.mobile-nav-wrap.shrunk .mobile-dock-item {
+  width: 52px;
+  height: 52px;
+}
+
+/* Expanded: all icons in a row */
+.mobile-nav-wrap:not(.shrunk) .mobile-dock {
+  gap: 3px;
+  padding: 7px;
+  border-radius: 34px;
+}
+
+.mobile-dock-item {
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  color: rgb(var(--v-theme-on-surface-variant));
+  text-decoration: none;
+  transition: background 0.25s cubic-bezier(0.2, 0.8, 0.2, 1),
+              color 0.25s,
+              transform 0.25s cubic-bezier(0.2, 0.8, 0.2, 1),
+              width 0.4s cubic-bezier(0.2, 0.8, 0.2, 1),
+              height 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+.mobile-dock-item.current {
+  background: rgb(var(--v-theme-primary-container));
+  color: rgb(var(--v-theme-on-primary-container));
+  transform: scale(1.1);
+}
+.mobile-dock-item:active {
+  transform: scale(0.92);
+}
+
+/* ── Responsive ────────────────────────────────────────────── */
+@media (max-width: 767px) {
+  .site-header-inner { height: 64px; gap: 10px; }
+
+  .header-actions .header-contact { display: none; }
+}
+
+/* ── Static-render adaptations ─────────────────────────────── */
+/* Label is always in the DOM now (no Vue <Transition>); fade it while shrunk. */
+.active-label { transition: opacity .25s var(--ease), transform .25s var(--ease); }
+.mobile-nav-wrap.shrunk .active-label { opacity: 0; transform: translateY(8px); pointer-events: none; }
+
+/* Both dock states render; CSS picks one. */
+.dock-single { display: none; }
+.dock-full { display: flex; align-items: center; gap: 3px; }
+.mobile-nav-wrap.shrunk .dock-single { display: flex; }
+.mobile-nav-wrap.shrunk .dock-full { display: none; }
+
+/* Both navs render; md threshold (960px) picks one, as useDisplay().mdAndUp did. */
+@media (max-width: 959.98px) {
+  .floating-nav.sticky-pill { display: none; }
+  .header-contact { display: none; }
+}
+@media (min-width: 960px) {
+  .mobile-nav-wrap { display: none; }
+}

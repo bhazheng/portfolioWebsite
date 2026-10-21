@@ -1,0 +1,81 @@
+---
+import { EXPERIENCE } from '../data/experience'
+---
+<section id="experience" class="rei-section page-width">
+  <div class="experience-grid">
+    <!-- Left: intro + stamp -->
+    <div class="experience-intro">
+      <div class="section-heading" data-reveal>
+        <h2>Experience<span class="heading-dot">.</span></h2>
+        <p>My work in analytics, compliance research, and academic mentoring.</p>
+      </div>
+      <div data-reveal data-reveal-delay="200">
+        <div class="experience-stamp">
+          <span class="i-material-symbols:workspace-premium icon" style="font-size:28px;width:28px;height:28px" aria-hidden="true"></span>
+          <span>Security &amp; software, data-driven.</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Right: timeline list -->
+    <div class="experience-timeline">
+      {EXPERIENCE.map((entry, i) => (
+        <div class:list={['exp-entry', { current: entry.current }]} data-reveal>
+          <!-- Timeline rail + company avatar -->
+          <div class="exp-rail">
+            <div class:list={['exp-avatar', { ongoing: entry.current }]}>
+              {entry.organization.charAt(0)}
+            </div>
+          </div>
+
+          <!-- Card body (M3 filled card — tonal elevation, no outline) -->
+          <div class="exp-card">
+            <!-- Vector accessory: decorative corner shape -->
+            <svg
+              class:list={['card-accessory', `acc-${i % 3}`]}
+              viewBox="0 0 120 120"
+              fill="none"
+              aria-hidden="true"
+            >
+              <circle cx="60" cy="60" r="48" stroke="currentColor" stroke-width="1.5" stroke-dasharray="6 8" opacity="0.35" />
+              <circle cx="60" cy="60" r="28" stroke="currentColor" stroke-width="1" opacity="0.2" />
+              <circle cx="60" cy="60" r="6" fill="currentColor" opacity="0.25" />
+            </svg>
+
+            <div class="exp-card-head">
+              <div class="exp-head-text">
+                <h3>{entry.organization}</h3>
+                <div class="exp-period font-mono">
+                  {entry.period} · {entry.location}
+                </div>
+              </div>
+              <span class="employment-type font-mono">{entry.type}</span>
+            </div>
+
+            <div class="exp-role-row">
+              <h4>{entry.role}</h4>
+              {entry.current && <span class="current-badge font-mono">Current</span>}
+            </div>
+
+            <ul class="experience-bullets">
+              {entry.bullets.map((bullet) => <li>{bullet}</li>)}
+            </ul>
+
+            <div class="experience-metrics">
+              {entry.metrics.map((metric) => (
+                <div class="metric-tile">
+                  <div class="metric-value font-mono">{metric.value}</div>
+                  <div class="metric-label">{metric.label}</div>
+                </div>
+              ))}
+            </div>
+
+            <div class="exp-tech-chips">
+              {entry.tech.map((tech) => <span class="font-mono">{tech}</span>)}
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

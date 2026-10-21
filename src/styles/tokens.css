@@ -1,0 +1,86 @@
+/* Theme tokens — the M3 color maps from the retired Vuetify config.
+   Values are R, G, B triplets because main.css reads them as rgb(var(--v-theme-*)). */
+
+:root {
+  color-scheme: dark;
+  --v-theme-background: 24, 15, 38;
+  --v-theme-on-background: 235, 220, 254;
+  --v-theme-surface: 24, 15, 38;
+  --v-theme-on-surface: 235, 220, 254;
+  --v-theme-surface-variant: 76, 66, 92;
+  --v-theme-on-surface-variant: 207, 193, 225;
+  --v-theme-surface-container-lowest: 18, 9, 33;
+  --v-theme-surface-container-low: 32, 23, 47;
+  --v-theme-surface-container: 36, 27, 51;
+  --v-theme-surface-container-high: 47, 38, 62;
+  --v-theme-surface-container-highest: 58, 48, 74;
+  --v-theme-surface-bright: 62, 53, 78;
+  --v-theme-surface-dim: 24, 15, 38;
+  --v-theme-outline: 152, 139, 169;
+  --v-theme-outline-variant: 76, 66, 92;
+  --v-theme-inverse-surface: 235, 220, 254;
+  --v-theme-inverse-on-surface: 53, 44, 69;
+  --v-theme-inverse-primary: 115, 72, 170;
+  --v-theme-primary: 217, 185, 255;
+  --v-theme-on-primary: 67, 18, 120;
+  --v-theme-primary-container: 90, 47, 144;
+  --v-theme-on-primary-container: 238, 220, 255;
+  --v-theme-secondary: 213, 187, 255;
+  --v-theme-on-secondary: 59, 33, 102;
+  --v-theme-secondary-container: 83, 57, 126;
+  --v-theme-on-secondary-container: 236, 220, 255;
+  --v-theme-tertiary: 134, 221, 0;
+  --v-theme-on-tertiary: 30, 55, 0;
+  --v-theme-tertiary-container: 45, 80, 0;
+  --v-theme-on-tertiary-container: 159, 251, 41;
+  --v-theme-error: 255, 180, 171;
+  --v-theme-on-error: 105, 0, 5;
+  --v-theme-error-container: 147, 0, 10;
+  --v-theme-on-error-container: 255, 218, 214;
+  --v-theme-eva-orange: 255, 181, 154;
+  --v-theme-on-eva-orange: 91, 27, 0;
+  --v-theme-eva-orange-container: 128, 42, 0;
+  --v-theme-on-eva-orange-container: 255, 219, 207;
+}
+
+html[data-theme='light'] {
+  color-scheme: light;
+  --v-theme-background: 254, 247, 255;
+  --v-theme-on-background: 32, 23, 47;
+  --v-theme-surface: 254, 247, 255;
+  --v-theme-on-surface: 32, 23, 47;
+  --v-theme-surface-variant: 235, 220, 254;
+  --v-theme-on-surface-variant: 76, 66, 92;
+  --v-theme-surface-container-lowest: 255, 255, 255;
+  --v-theme-surface-container-low: 250, 240, 255;
+  --v-theme-surface-container: 245, 234, 255;
+  --v-theme-surface-container-high: 240, 227, 255;
+  --v-theme-surface-container-highest: 235, 220, 254;
+  --v-theme-surface-bright: 254, 247, 255;
+  --v-theme-surface-dim: 227, 212, 245;
+  --v-theme-outline: 126, 114, 143;
+  --v-theme-outline-variant: 207, 193, 225;
+  --v-theme-inverse-surface: 53, 44, 69;
+  --v-theme-inverse-on-surface: 247, 237, 255;
+  --v-theme-inverse-primary: 217, 185, 255;
+  --v-theme-primary: 115, 72, 170;
+  --v-theme-on-primary: 255, 255, 255;
+  --v-theme-primary-container: 238, 220, 255;
+  --v-theme-on-primary-container: 90, 47, 144;
+  --v-theme-secondary: 107, 81, 151;
+  --v-theme-on-secondary: 255, 255, 255;
+  --v-theme-secondary-container: 236, 220, 255;
+  --v-theme-on-secondary-container: 83, 57, 126;
+  --v-theme-tertiary: 62, 106, 0;
+  --v-theme-on-tertiary: 255, 255, 255;
+  --v-theme-tertiary-container: 159, 251, 41;
+  --v-theme-on-tertiary-container: 45, 80, 0;
+  --v-theme-error: 186, 26, 26;
+  --v-theme-on-error: 255, 255, 255;
+  --v-theme-error-container: 255, 218, 214;
+  --v-theme-on-error-container: 147, 0, 10;
+  --v-theme-eva-orange: 168, 57, 0;
+  --v-theme-on-eva-orange: 255, 255, 255;
+  --v-theme-eva-orange-container: 255, 219, 207;
+  --v-theme-on-eva-orange-container: 56, 13, 0;
+}

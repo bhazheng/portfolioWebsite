@@ -6,7 +6,7 @@
     "nodejs_compat"
   ],
   "assets": {
-    "directory": "./.output/public",
+    "directory": "./dist",
     "binding": "ASSETS"
   },
   "observability": {
