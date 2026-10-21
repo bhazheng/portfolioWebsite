@@ -35,10 +35,11 @@ Tailwind; no SASS customization — typography is set through Vuetify's `--v-fon
 
 ## Section Order
 
-Hero → Projects → Experience → Education → Skills → Contact
+Hero → Experience → Education → Projects → Skills → Contact
 
-This order leads with identity and proof-of-work, then walks through career history,
-academic foundations, capabilities, and closes with a call to action.
+This order leads with identity, then walks through career history and academic
+foundations before showing project proof-of-work, closing with capabilities and a
+call to action.
 
 ## Palette
 

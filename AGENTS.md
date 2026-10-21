@@ -7,7 +7,7 @@ Personal portfolio website for **Akbar Lucky Basuki** (Business Analyst & Data S
 - **Package**: `akbar-portfolio-astro` v4.0.0 (private, ESM)
 - **Stack**: Astro 7.4 (`output: 'static'`) + TypeScript 5.9 + UnoCSS 66 (icons only) + Vite 8 (via Astro)
 - **Architecture**: One prerendered route (`/`), six `<section>` blocks with anchor-based navigation, zero API calls, zero client framework runtime
-- **Section order**: Hero → Projects → Experience → Education → Skills → Contact
+- **Section order**: Hero → Experience → Education → Projects → Skills → Contact
 - **Client JS**: ~2.8 KB inline bundle (nav scroll-spy, theme toggle, scroll reveal). No Vue, no hydration.
 
 > History: this was a Nuxt 3 + Vuetify 4 site. It was ported to Astro in v4.0.0 to drop the Vue runtime and the SSR server — Cloudflare's `pnpm install --frozen-lockfile` failed on the workspace file and Vercel 500'd because Vuetify's `ssrClientHints` mutated response headers in a serverless runtime. Do not reintroduce either.
@@ -203,7 +203,7 @@ grep -c 'v-icon' dist/index.html             # must be 0
 - **Framework**: Vitest 5.0.5 + `experimental_AstroContainer` from `astro/container`. No DOM environment needed — components render to HTML strings.
 - **Config**: `vitest.config.ts` wraps `getViteConfig()` so Astro components compile under test.
 - **One test file**: `tests/basic.test.ts` renders `src/pages/index.astro` and asserts:
-  - all six section ids (`hero`, `projects`, `experience`, `education`, `skills`, `contact`) are present,
+  - all six section ids (`hero`, `experience`, `education`, `projects`, `skills`, `contact`) are present, and appear in that order,
   - `Business Analyst` and `data-theme="dark"` appear,
   - `v-application` and `v-icon` do **not** appear — the regression guard for "Vuetify is actually gone".
 - **No unit tests** for scripts, data modules, or types.
@@ -225,7 +225,7 @@ describe('my feature', () => {
 })
 ```
 
-When adding a section, update `NAV_SECTIONS` **and** the six-id assertion in the smoke test. The test is what keeps `NAV_SECTIONS` and the `<section id>` attributes in sync.
+When adding a section, update `NAV_SECTIONS`, the `SECTION_ORDER` array in the smoke test, and the component order in `src/pages/index.astro`. The test asserts both presence and document order, which is what keeps `NAV_SECTIONS` and the `<section id>` attributes in sync.
 
 ### Manual QA checklist
 
