@@ -1,7 +1,7 @@
 export interface SkillItem {
   id: string;
   name: string;
-  appliedIn: string;
+  appliedIn?: string;
 }
 
 export interface SkillCategory {

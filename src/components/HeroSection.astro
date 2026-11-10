@@ -1,30 +1,49 @@
 ---
+import { Image } from 'astro:assets'
 import portrait from '../assets/profile.jpeg'
+import { UI, CV_URL, type Locale } from '../i18n'
+
+interface Props { lang: Locale }
+const { lang } = Astro.props
+const ui = UI[lang]
 ---
 <section id="hero" class="hero-section page-width">
   <div class="hero-copy">
     <div class="hero-intro" data-reveal data-reveal-delay="0">
       <span class="hero-intro-line"></span>
-      Hello, I'm Akbar
+      {ui.hero.intro}
     </div>
 
     <h1 class="hero-headline" data-reveal data-reveal-delay="150">
-      Business Analyst<br>
-      &amp; <span class="accent">Data Storyteller</span>
+      <span class="hl">Business Analyst</span><br>
+      <span class="hl">&amp; <span class="accent">Data Storyteller</span></span>
     </h1>
 
     <p class="hero-copy" data-reveal data-reveal-delay="300">
-      An Information Systems graduate from Universitas Brawijaya. I translate complex data
-      into intuitive dashboards, conduct strategic market analysis, and build machine
-      learning solutions that guide decisions leaders act on.
+      {ui.hero.paragraph}
+    </p>
+
+    <p class="status-chip" data-reveal data-reveal-delay="380">
+      <span class="status-dot" aria-hidden="true"></span>
+      {ui.hero.status}
     </p>
 
     <div class="hero-actions" data-reveal data-reveal-delay="450">
-      <a href="#contact" class="btn btn--large btn--primary btn--pill">
-        Email me
+      <a href="mailto:akbarlucky@protonmail.com" class="btn btn--large btn--primary btn--pill">
+        {ui.hero.emailCta}
+      </a>
+      <a
+        href={CV_URL}
+        target="_blank"
+        rel="noopener noreferrer"
+        class="btn btn--large btn--tonal btn--pill"
+        aria-label={`${ui.hero.cvCta} (${ui.hero.newTab})`}
+      >
+        <span class="i-material-symbols:description icon" style="font-size:20px;width:20px;height:20px" aria-hidden="true"></span>
+        {ui.hero.cvCta}
       </a>
       <a href="#projects" class="text-link">
-        Explore projects
+        {ui.hero.projectsCta}
         <span class="i-material-symbols:arrow-downward icon" style="font-size:18px;width:18px;height:18px" aria-hidden="true"></span>
       </a>
     </div>
@@ -36,7 +55,7 @@ import portrait from '../assets/profile.jpeg'
         rel="noopener noreferrer"
         class="btn btn--small btn--text"
       >
-        <span class="i-mdi:linkedin icon" style="font-size:20px;width:20px;height:20px" aria-hidden="true"></span>
+        <span class="i-mdi:linkedin icon brand-linkedin" style="font-size:20px;width:20px;height:20px" aria-hidden="true"></span>
         LinkedIn
       </a>
       <a
@@ -45,7 +64,7 @@ import portrait from '../assets/profile.jpeg'
         rel="noopener noreferrer"
         class="btn btn--small btn--text"
       >
-        <span class="i-mdi:whatsapp icon" style="font-size:20px;width:20px;height:20px" aria-hidden="true"></span>
+        <span class="i-mdi:whatsapp icon brand-whatsapp" style="font-size:20px;width:20px;height:20px" aria-hidden="true"></span>
         WhatsApp
       </a>
       <a
@@ -63,12 +82,18 @@ import portrait from '../assets/profile.jpeg'
   <!-- Hero art: portrait frame + stickers -->
   <div class="hero-art" data-reveal data-reveal-delay="350">
     <div class="portrait-frame">
-      <img
-        src={portrait.src}
-        alt="Akbar Lucky Basuki"
+      <Image
+        src={portrait}
+        alt={ui.hero.portraitAlt}
         class="hero-portrait"
-        width={portrait.width}
-        height={portrait.height}
+        width={390}
+        height={390}
+        densities={[1, 2]}
+        format="webp"
+        quality={80}
+        loading="eager"
+        fetchpriority="high"
+        decoding="async"
       />
     </div>
 

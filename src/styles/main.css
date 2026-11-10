@@ -598,10 +598,6 @@ section[id] {
   background: rgb(var(--v-theme-tertiary-container));
   color: rgb(var(--v-theme-on-tertiary-container));
 }
-.exp-entry:hover .exp-avatar {
-  transform: scale(1.08);
-}
-
 /* Card body — M3 filled card (tonal elevation, no outline) */
 .exp-card {
   position: relative;
@@ -612,12 +608,6 @@ section[id] {
   transition: background 0.3s cubic-bezier(0.2, 0.8, 0.2, 1),
               box-shadow 0.3s cubic-bezier(0.2, 0.8, 0.2, 1),
               transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
-}
-/* M3 state layer: elevate surface tonally on hover (not outline) */
-.exp-entry:hover .exp-card {
-  background: rgb(var(--v-theme-surface-container-high));
-  box-shadow: 0 2px 6px -1px rgba(0,0,0,0.12), 0 4px 12px rgba(0,0,0,0.08);
-  transform: translateY(-2px);
 }
 /* Current job: tonal primary elevation, not a border */
 .exp-entry.current .exp-card {
@@ -661,10 +651,7 @@ section[id] {
 .card-accessory.acc-0 { color: rgb(var(--v-theme-tertiary)); }
 .card-accessory.acc-1 { color: rgb(var(--v-theme-primary)); }
 .card-accessory.acc-2 { color: rgb(var(--v-theme-eva-orange)); }
-.exp-entry:hover .card-accessory,
-.edu-entry:hover .card-accessory,
-.project-card:hover .card-accessory,
-.skill-card:hover .card-accessory {
+.project-card:hover .card-accessory {
   opacity: 0.9;
   transform: rotate(15deg) scale(1.1);
 }
@@ -769,9 +756,6 @@ section[id] {
   padding: 12px 14px;
   transition: background 0.3s;
 }
-.exp-entry:hover .metric-tile {
-  background: rgb(var(--v-theme-surface-container-highest));
-}
 .metric-tile .metric-value {
   font-size: 14.5px;
   font-weight: 600;
@@ -802,10 +786,6 @@ section[id] {
   color: rgb(var(--v-theme-on-surface-variant));
   transition: background 0.3s, color 0.3s;
 }
-.exp-entry:hover .exp-tech-chips span {
-  background: rgb(var(--v-theme-surface-container-highest));
-}
-
 @media (max-width: 767px) {
   .exp-entry { grid-template-columns: 40px 1fr; gap: 10px; }
   .exp-avatar { width: 36px; height: 36px; font-size: 15px; }
@@ -871,10 +851,6 @@ section[id] {
   background: rgb(var(--v-theme-eva-orange));
   color: rgb(var(--v-theme-on-eva-orange));
 }
-.edu-entry:hover .edu-avatar {
-  transform: scale(1.08);
-}
-
 /* Card body — M3 filled card (tonal elevation, no outline) */
 .edu-card {
   position: relative;
@@ -887,11 +863,6 @@ section[id] {
               transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
 }
 /* M3 state layer: tonal elevation on hover (not outline) */
-.edu-entry:hover .edu-card {
-  background: rgb(var(--v-theme-surface-container-high));
-  box-shadow: 0 2px 6px -1px rgba(0,0,0,0.12), 0 4px 12px rgba(0,0,0,0.08);
-  transform: translateY(-2px);
-}
 /* First entry (degree): primary tonal elevation (not stinging lime) */
 .edu-entry:first-child .edu-card {
   background: rgb(var(--v-theme-primary-container));
@@ -900,7 +871,7 @@ section[id] {
 .edu-entry:first-child .edu-card .edu-desc {
   color: rgb(var(--v-theme-on-surface));
 }
-.edu-entry:first-child .edu-card .edu-head-text h4 {
+.edu-entry:first-child .edu-card .edu-head-text h3 {
   color: rgb(var(--v-theme-on-surface));
 }
 .edu-entry:first-child .edu-card .edu-program {
@@ -911,11 +882,6 @@ section[id] {
   background: rgba(0,0,0,0.12);
   color: rgb(var(--v-theme-on-surface));
 }
-.edu-entry:first-child:hover .edu-card {
-  background: rgb(var(--v-theme-primary-container));
-  filter: brightness(1.05);
-}
-
 .edu-card-head {
   display: flex;
   justify-content: space-between;
@@ -929,7 +895,7 @@ section[id] {
   font-size: 13px;
   line-height: 1.4;
 }
-.edu-head-text h4 {
+.edu-head-text h3 {
   font-size: 18px;
   font-weight: 600;
   letter-spacing: -0.2px;
@@ -1028,11 +994,6 @@ section[id] {
   border-radius: 28px;
   padding: 24px;
   transition: background 0.3s, box-shadow 0.3s cubic-bezier(0.2, 0.8, 0.2, 1), transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
-}
-.skill-card:hover {
-  background: rgb(var(--v-theme-surface-container));
-  box-shadow: 0 2px 6px -1px rgba(0,0,0,0.12), 0 4px 12px rgba(0,0,0,0.08);
-  transform: translateY(-2px);
 }
 .skill-card-head {
   display: flex;

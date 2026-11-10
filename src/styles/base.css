@@ -1,3 +1,9 @@
+:root {
+  /* Material 3 motion: standard easing, short durations for state changes. */
+  --m3-standard: cubic-bezier(0.2, 0, 0, 1);
+  --m3-short: 200ms;
+}
+
 .app { background: rgb(var(--v-theme-background)); color: rgb(var(--v-theme-on-background)); display: flex; min-height: 100dvh; flex-direction: column; }
 .main { flex: 1 0 auto; max-width: 100%; }
 
@@ -16,6 +22,10 @@
 .btn--small { height: 28px; padding: 0 12px; font-size: 0.75rem; min-width: 50px; }
 .btn--primary { background: rgb(var(--v-theme-primary)); color: rgb(var(--v-theme-on-primary)); }
 .btn--text { background: transparent; color: inherit; }
+/* M3 tonal button: secondary-container, with a state layer (8% hover, 10% focus/press) instead of a brightness hack. */
+.btn--tonal { background: rgb(var(--v-theme-secondary-container)); color: rgb(var(--v-theme-on-secondary-container)); }
+.btn--tonal:hover { box-shadow: inset 0 0 0 999px color-mix(in srgb, currentColor 8%, transparent); }
+.btn--tonal:focus-visible, .btn--tonal:active { box-shadow: inset 0 0 0 999px color-mix(in srgb, currentColor 10%, transparent); }
 .btn--text:hover { background: color-mix(in srgb, currentColor 8%, transparent); }
 .btn--pill { border-radius: 9999px; }
 
@@ -27,3 +37,575 @@
 
 /* replaces class="d-flex flex-wrap ga-2 mt-6" on the hero social row */
 .hero-socials { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 24px; }
+
+/* 5th skill card spans the full row (a 2-col grid would leave an orphan). */
+.skills-grid > .skill-card:last-child:nth-child(odd) { grid-column: 1 / -1; }
+
+/* Skills are name-only: render each list as wrapping tonal chips. */
+.skill-list { display: flex; flex-wrap: wrap; gap: 8px; }
+.skill-list li,
+.skill-list li + li { margin: 0; padding: 0 12px; min-height: 32px; border-radius: 8px; background: rgb(var(--v-theme-surface-container-high)); }
+.skill-list .skill-name { font-size: 14px; }
+
+/* Experience: role row wraps so the Current badge never squeezes the title; team line sits under it */
+.exp-role-row { flex-wrap: wrap; row-gap: 6px; }
+.exp-team {
+  margin-top: 4px;
+  font-size: 14px;
+  line-height: 1.45;
+  color: rgb(var(--v-theme-on-surface-variant));
+  position: relative;
+  z-index: 1;
+}
+.exp-entry.current .exp-card .exp-team { color: rgb(var(--v-theme-on-surface)); }
+
+/* Contact: let the grid track shrink and the long email fit narrow phones */
+.contact-section-inner > * { min-width: 0; }
+.email-link { max-width: 100%; overflow-wrap: anywhere; }
+@media (max-width: 480px) {
+  .email-link { font-size: clamp(14px, 4.2vw, 20px); gap: 8px; letter-spacing: -0.4px; }
+}
+
+/* Language switch (EN | ID) — tonal pill, same height as the theme toggle */
+.lang-switch {
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+  height: 44px;
+  padding: 3px;
+  border-radius: 9999px;
+  background: rgb(var(--v-theme-surface-container-high));
+}
+.lang-switch a {
+  display: grid;
+  place-items: center;
+  min-width: 38px;
+  height: 38px;
+  padding-inline: 10px;
+  border-radius: 9999px;
+  font-family: 'Google Sans Code', ui-monospace, monospace;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  text-decoration: none;
+  color: rgb(var(--v-theme-on-surface-variant));
+  transition: background 0.2s, color 0.2s;
+}
+.lang-switch a:hover { background: rgb(var(--v-theme-surface-container-highest)); }
+.lang-switch a.current {
+  background: rgb(var(--v-theme-primary-container));
+  color: rgb(var(--v-theme-on-surface));
+}
+
+/* Language switch placement.
+   - <1240px: sits against the theme toggle on the right (auto margin pushes it over).
+   - ≥1240px: moves beside the brand on the left, because the fixed pill nav (~700px, centered)
+     would otherwise cover it. Below that there is no room beside the brand. */
+.lang-switch { margin-left: auto; }
+@media (min-width: 1240px) {
+  .lang-switch { margin-left: 16px; margin-right: auto; }
+}
+/* 960–1239px: the pill nav reaches into the right-hand controls, and "Get in touch" duplicates
+   the pill's Contact item, so drop the button here (it already hides below 960px). */
+@media (min-width: 960px) and (max-width: 1239px) {
+  .header-contact { display: none; }
+}
+/* 960–1139px: the pill's icons repeat its labels, so drop them here to keep the pill clear of
+   the brand and the language/theme controls (Indonesian labels are wider than English). */
+@media (min-width: 960px) and (max-width: 1139px) {
+  .floating-nav a .icon { display: none; }
+}
+
+/* ── Audit fixes ─────────────────────────────────────────────── */
+
+/* Contrast (WCAG 1.4.3): lime text is dimmed to 45–70% only on dark surfaces. In light theme the
+   dark-lime `tertiary` at 70% measures 2.9–3.1:1; at full opacity it is 6.1:1. */
+html[data-theme='light'] .exp-role-row h4,
+html[data-theme='light'] .edu-program,
+html[data-theme='light'] .heading-dot { opacity: 1; }
+/* Metric values sit on the darker tonal tile, where plain `tertiary` is only 4.3:1; the darker lime
+   container-on role gives ≥ 7:1. (The current Experience card overrides this with `on-surface`.) */
+html[data-theme='light'] .metric-tile .metric-value {
+  color: rgb(var(--v-theme-on-tertiary-container));
+  opacity: 1;
+}
+
+/* Touch targets: primary tappable text controls reach 44px without changing their look. */
+.hero-socials .btn--small { height: 44px; }
+.text-link { min-height: 44px; }
+.email-link { min-height: 44px; }
+.header-contact { min-height: 44px; }
+.brand-mark { padding-block: 5px; }
+
+/* Nothing smaller than 12px. */
+.current-badge,
+.project-category,
+.project-number,
+.rei-footer,
+.rei-footer span { font-size: 12px; }
+
+/* ── UX pass: density, mobile hero, project outcomes ─────────────── */
+
+/* Experience: first bullet always visible, the rest in a native <details> (works without JS). */
+.exp-more { margin-top: 4px; }
+.exp-more > summary {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 44px;
+  padding-inline: 4px;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  list-style: none;
+  color: rgb(var(--v-theme-on-surface));
+  border-radius: 8px;
+}
+.exp-more > summary::-webkit-details-marker { display: none; }
+.exp-more > summary::after {
+  content: '';
+  width: 7px;
+  height: 7px;
+  border-right: 2px solid currentColor;
+  border-bottom: 2px solid currentColor;
+  transform: rotate(45deg) translateY(-2px);
+  transition: transform 0.2s;
+}
+.exp-more[open] > summary::after { transform: rotate(-135deg) translateY(-2px); }
+.exp-more > summary .exp-more-open,
+.exp-more[open] > summary .exp-more-closed { display: none; }
+.exp-more[open] > summary .exp-more-open { display: inline; }
+.exp-more > summary:hover { text-decoration: underline; }
+
+/* Project cards: outcome stats up front. */
+.project-highlights {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 28px;
+  margin-top: 16px;
+  position: relative;
+  z-index: 1;
+}
+.project-highlights div { display: flex; flex-direction: column; gap: 2px; }
+.project-highlights strong {
+  font-size: 22px;
+  font-weight: 650;
+  line-height: 1.1;
+  color: rgb(var(--v-theme-on-surface));
+}
+.project-highlights span {
+  font-size: 12px;
+  color: rgb(var(--v-theme-on-surface-variant));
+}
+
+/* Skills: tighter rhythm so the section is roughly a fifth shorter. */
+.skill-card { padding: 20px 22px; }
+.skill-card-head { margin-bottom: 8px; }
+
+/* Desktop hero: no dead band between the social links and Experience. */
+@media (min-width: 768px) {
+  .hero-section { min-height: 0; padding-block: 40px 0; }
+}
+
+/* Mobile hero: portrait first (smaller), so the visitor meets a person, not a wall of text. */
+@media (max-width: 767px) {
+  .hero-section { gap: 24px; padding-block: 16px 24px; }
+  .hero-art { order: -1; width: 58%; max-width: 230px; }
+  .orbit-symbol { width: 60px; height: 60px; padding: 10px; border-radius: 22px; }
+  .orbit-symbol .icon { font-size: 28px !important; width: 28px !important; height: 28px !important; }
+  .code-sticker { width: 52px; height: 52px; border-radius: 18px; bottom: 30px; left: -10px; }
+  .code-sticker .icon { font-size: 24px !important; width: 24px !important; height: 24px !important; }
+  .identity-sticker { padding: 10px 16px; }
+  .identity-sticker strong { font-size: 15px; }
+}
+
+/* The mobile dock floats over the bottom of the viewport: keep the footer clear of it. */
+@media (max-width: 959px) {
+  .rei-footer { padding-bottom: 104px; }
+}
+
+/* ── Compact mobile layout (≤767px) ──────────────────────────────────
+   Same identity, tighter rhythm: smaller section gaps, slimmer cards, no corner accessories,
+   inline metric tiles, shorter project art, denser skill rows. Desktop is untouched. */
+@media (max-width: 767px) {
+  .rei-section { padding-block: 44px 0; }
+  .rei-section + .rei-section { padding-top: 12px; }
+  .section-heading h2 { font-size: 28px; }
+  .section-heading { margin-bottom: 14px; }
+  .section-heading p { font-size: 14px; line-height: 1.5; }
+  .card-accessory { display: none; }
+
+  /* Experience */
+  .experience-timeline::before { left: 15px; top: 15px; bottom: 15px; }
+  .exp-entry { grid-template-columns: 32px 1fr; gap: 8px; margin-bottom: 12px; }
+  .exp-avatar { width: 30px; height: 30px; font-size: 13px; }
+  .exp-rail { padding-top: 2px; }
+  .exp-card { padding: 14px; border-radius: 14px; }
+  .exp-card-head { gap: 6px; }
+  .exp-head-text h3 { font-size: 16px; }
+  .exp-period { font-size: 12px; margin-top: 2px; }
+  .employment-type { padding: 3px 8px; }
+  .exp-role-row { margin-top: 10px; }
+  .exp-role-row h4 { font-size: 15px; }
+  .exp-team { margin-top: 2px; font-size: 13px; }
+  .experience-bullets { margin-top: 8px; padding-left: 0; }
+  .experience-bullets li { margin-bottom: 6px; font-size: 14px; line-height: 1.55; padding-left: 14px; }
+  .experience-bullets li::before { top: 8px; }
+  .exp-more { margin-top: 0; }
+  .exp-more > summary { min-height: 40px; }
+  .experience-metrics { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px; }
+  .metric-tile { flex: 1 1 auto; padding: 7px 10px; border-radius: 10px; }
+  .exp-tech-chips { gap: 6px; margin-top: 10px; }
+  .exp-tech-chips span { padding: 4px 8px; }
+
+  /* Education */
+  .education-timeline::before { left: 15px; top: 15px; bottom: 15px; }
+  .edu-entry { grid-template-columns: 32px 1fr; gap: 8px; margin-bottom: 12px; }
+  .edu-avatar { width: 30px; height: 30px; font-size: 13px; }
+  .edu-card { padding: 14px; border-radius: 14px; }
+  .edu-card-head { gap: 4px; }
+
+  /* Projects */
+  .project-grid { gap: 12px; }
+  .project-card { border-radius: 22px; }
+  .project-art { height: 128px; margin: 6px 6px 0; border-radius: 18px; padding-top: 18px; }
+  .project-art::before { width: 170px; height: 170px; }
+  .project-art::after { width: 120px; height: 120px; }
+  .project-glyph { font-size: 52px !important; width: 52px !important; height: 52px !important; }
+  .project-content { padding: 14px 16px 16px; }
+  .project-content h3 { font-size: 19px; }
+  .project-content p { min-height: 0; margin-top: 8px; font-size: 14px; line-height: 1.55; }
+  .project-highlights { margin-top: 12px; gap: 8px 22px; }
+  .project-highlights strong { font-size: 19px; }
+  .project-tags { gap: 6px; margin-top: 12px; }
+  .project-tags span { padding: 4px 10px; }
+
+  /* Skills */
+  .skills-grid { gap: 10px; }
+  .skill-card { padding: 14px 14px 10px; border-radius: 20px; }
+  .skill-card-head { gap: 10px; margin-bottom: 2px; }
+  .skill-card-icon { width: 36px; height: 36px; border-radius: 11px; }
+  .skill-card h3 { font-size: 16px; }
+  .skill-list { gap: 6px; }
+  .skill-list li,
+  .skill-list li + li { padding: 0 12px; }
+
+  /* Contact */
+  .contact-section-inner { margin-top: 36px; padding: 22px 18px; gap: 14px; border-radius: 26px; }
+  .contact-shape { width: 56px; height: 56px; }
+  .hero-socials { margin-top: 10px; }
+}
+
+
+/* ── Visual identity: HUD labels, status chip, scroll progress ── */
+
+/* Section eyebrow: "// 01 · EXPERIENCE" + a short segmented bar (EVA-01 HUD feel, text-only). */
+.eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 10px;
+  font-size: 12px;
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+  color: rgb(var(--v-theme-on-surface-variant));
+}
+.eyebrow > span { color: rgb(var(--v-theme-eva-orange)); font-weight: 700; }
+.eyebrow::after {
+  content: '';
+  width: 44px;
+  height: 4px;
+  background: repeating-linear-gradient(90deg, rgb(var(--v-theme-eva-orange)) 0 10px, transparent 10px 14px);
+  opacity: 0.65;
+}
+html[data-theme='light'] .eyebrow > span { color: rgb(var(--v-theme-on-eva-orange-container)); }
+
+/* "Open to roles" status chip under the hero paragraph. */
+.status-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 18px;
+  padding: 8px 14px;
+  border-radius: 9999px;
+  background: rgb(var(--v-theme-surface-container-high));
+  color: rgb(var(--v-theme-on-surface));
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 1.3;
+}
+.status-dot {
+  flex: none;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: rgb(var(--v-theme-tertiary));
+  box-shadow: 0 0 0 0 rgb(var(--v-theme-tertiary));
+  animation: status-pulse 2.4s ease-out infinite;
+}
+@keyframes status-pulse {
+  0% { box-shadow: 0 0 0 0 rgba(134, 221, 0, 0.55); }
+  70%, 100% { box-shadow: 0 0 0 8px rgba(134, 221, 0, 0); }
+}
+.status-chip + .hero-actions { margin-top: 18px; }
+
+@media (max-width: 767px) {
+  .eyebrow { margin-bottom: 6px; }
+  .status-chip { margin-top: 14px; padding: 7px 12px; }
+}
+
+/* Thin lime scroll-progress bar inside the desktop pill nav (value set by nav.ts). */
+.floating-nav::after {
+  content: '';
+  position: absolute;
+  left: 22px;
+  right: 22px;
+  bottom: 1px;
+  height: 2px;
+  border-radius: 2px;
+  pointer-events: none;
+  background: linear-gradient(90deg, rgb(var(--v-theme-tertiary)) calc(var(--scroll-progress, 0) * 100%), transparent 0);
+  opacity: 0.85;
+}
+
+/* ── Make it livelier: headline entrance, tool ticker, accent-coded skill chips ── */
+
+/* Hero headline: the two lines rise in one after the other (CSS only; ends visible without JS). */
+.hero-headline .hl { display: inline-block; animation: hl-rise 0.8s var(--ease, ease-out) both; }
+.hero-headline .hl:nth-of-type(2) { animation-delay: 0.14s; }
+@keyframes hl-rise {
+  from { opacity: 0; transform: translateY(0.4em); }
+  to { opacity: 1; transform: none; }
+}
+
+/* Tool ticker: a slow NERV-console style strip of the tools used. Pauses on hover, static when
+   the visitor prefers reduced motion. */
+.tool-ticker {
+  position: relative;
+  overflow: hidden;
+  margin-block: 32px 8px;
+  padding-block: 14px;
+  background: rgb(var(--v-theme-surface-container-low));
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+  mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+}
+.tool-ticker-track { display: flex; width: max-content; animation: ticker-scroll 150s linear infinite; }
+.tool-ticker:hover .tool-ticker-track { animation-play-state: paused; }
+.tool-ticker ul { display: flex; margin: 0; padding: 0; list-style: none; }
+.tool-ticker li {
+  display: flex;
+  align-items: center;
+  padding-right: 16px;
+}
+/* Each logo sits in a tile tinted with its own brand colour (M3 "custom colour container" pattern).
+   The tiles are decorative and non-interactive, so they have no hover/pressed state. */
+.tool-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  height: 48px;
+  padding: 0 20px 0 14px;
+  border-radius: 12px;
+  background: color-mix(in srgb, var(--logo-color) 18%, rgb(var(--v-theme-surface-container-high)));
+  white-space: nowrap;
+}
+.tool-logo {
+  display: block;
+  flex: none;
+  font-size: 24px;
+  width: 24px;
+  height: 24px;
+  color: var(--logo-color);
+}
+/* Name next to the logo: label-large (14/500), so the strip is never icons alone. */
+.tool-name {
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 0.1px;
+  color: rgb(var(--v-theme-on-surface));
+}
+/* Brand colours are tuned for dark surfaces; darken them a touch on the light theme. */
+html[data-theme='light'] .tool-logo { filter: brightness(0.72) saturate(1.2); }
+@media (max-width: 767px) {
+  .tool-chip { height: 40px; padding: 0 16px 0 12px; gap: 8px; }
+  .tool-ticker li { padding-right: 12px; }
+  .tool-ticker { margin-block: 24px 4px; }
+}
+@keyframes ticker-scroll { to { transform: translateX(-50%); } }
+
+/* Skill chips: each card tints its chips (lime / violet / orange, same cycle as the card accents). */
+.skill-card[data-accent='0'] { --chip-accent: var(--v-theme-tertiary); }
+.skill-card[data-accent='1'] { --chip-accent: var(--v-theme-primary); }
+.skill-card[data-accent='2'] { --chip-accent: var(--v-theme-eva-orange); }
+.skill-list li {
+  display: inline-flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 8px;
+}
+.skill-list li::before {
+  content: '';
+  flex: none;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: rgb(var(--chip-accent, var(--v-theme-primary)));
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tool-ticker-track,
+  .status-dot,
+  .hero-headline .hl { animation: none; }
+  .tool-ticker { overflow-x: auto; }
+}
+
+/* ── Contact revamp: focal email + copy, labelled channel tiles (Material 3) ───── */
+.contact-v2 { grid-template-columns: auto minmax(0, 1fr); gap: 28px 32px; align-items: start; padding: 48px; border-radius: 28px; /* M3 extra-large */ }
+.contact-v2 .contact-copy { min-width: 0; }
+.contact-v2 .eyebrow { color: inherit; margin-bottom: 12px; }
+.contact-v2 .eyebrow > span { color: inherit; }
+.contact-v2 .email-row { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 16px; margin-top: 20px; }
+.contact-v2 .email-link { margin-top: 0; }
+
+/* Copy = M3 tonal-style button: 40dp tall, full shape, label-large (14/500), 48dp touch target, state layers. */
+.copy-btn {
+  position: relative;
+  min-height: 40px;
+  padding: 0 20px;
+  border: 0;
+  border-radius: 9999px;
+  background: rgba(0, 0, 0, 0.18);
+  color: inherit;
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 0.1px;
+  cursor: pointer;
+  transition: background var(--m3-short) var(--m3-standard), color var(--m3-short) var(--m3-standard);
+}
+.copy-btn[hidden] { display: none; }
+.copy-btn:hover { box-shadow: inset 0 0 0 999px color-mix(in srgb, currentColor 8%, transparent); }
+.copy-btn:focus-visible, .copy-btn:active { box-shadow: inset 0 0 0 999px color-mix(in srgb, currentColor 10%, transparent); }
+.copy-btn.copied { background: rgb(var(--v-theme-tertiary)); color: rgb(var(--v-theme-on-tertiary)); }
+
+.contact-channels {
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 12px;
+  margin: 8px 0 0;
+  padding: 0;
+  list-style: none;
+}
+/* Channel tile = M3 filled card used as a link: large shape (16dp), 8% hover / 10% focus + press state layer. */
+.channel {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-height: 64px;
+  padding: 12px 16px;
+  border-radius: 16px;
+  background: rgba(0, 0, 0, 0.14);
+  color: inherit;
+  text-decoration: none;
+}
+.channel::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: currentColor;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity var(--m3-short) var(--m3-standard);
+}
+.channel:hover::after { opacity: 0.08; }
+.channel:focus-visible::after, .channel:active::after { opacity: 0.1; }
+.channel-icon {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.18);
+}
+.channel-text { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+.channel-text strong { font-size: 16px; font-weight: 500; line-height: 1.25; letter-spacing: 0.15px; } /* title-medium */
+.channel-text span { font-size: 12px; letter-spacing: 0.5px; overflow-wrap: anywhere; } /* label-medium */
+.channel-arrow { position: absolute; top: 10px; right: 10px; opacity: 0.6; }
+
+@media (max-width: 959px) {
+  .contact-channels { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 767px) {
+  .contact-v2 { grid-template-columns: 1fr; gap: 14px; padding: 22px 18px; }
+  .contact-channels { gap: 8px; margin-top: 4px; }
+  .channel { min-height: 56px; padding: 10px 12px; gap: 10px; }
+  .channel-icon { width: 36px; height: 36px; }
+  .channel-arrow { display: none; }
+  .contact-v2 .email-row { margin-top: 14px; }
+}
+
+/* ── Brand-coloured icons ──────────────────────────────────────────────────── */
+/* Real brand colours, with a darker light-theme variant so they keep contrast on pale surfaces. */
+.brand-linkedin { color: #5aa9f0; }
+.brand-whatsapp { color: #25d366; }
+html[data-theme='light'] .brand-linkedin { color: #0a66c2; }
+html[data-theme='light'] .brand-whatsapp { color: #128c4a; }
+/* The contact block's light theme has a pale surface, so keep the lime CV icon readable there. */
+html[data-theme='light'] .channel-icon .text-tertiary { color: rgb(var(--v-theme-on-tertiary-container)); }
+
+/* Skill-card icon tile: tinted with the icon's own colour (filled tonal container, no outline). */
+.skill-card-icon {
+  background: color-mix(in srgb, rgb(var(--tile, var(--v-theme-primary))) 22%, rgb(var(--v-theme-surface-container-high)));
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
+}
+@media (max-width: 767px) {
+  .skill-card-icon { width: 40px; height: 40px; }
+}
+
+/* ── Material 3 touch targets: 48dp hit area around 44px controls (visual size unchanged) ── */
+.btn, .text-link, .email-link, .copy-btn { position: relative; }
+.btn::after, .text-link::after, .email-link::after, .copy-btn::after {
+  content: '';
+  position: absolute;
+  inset: -2px 0;
+}
+.copy-btn::after { inset: -4px 0; }
+
+/* ── Material 3 audit pass ─────────────────────────────────────────────────────────────── */
+
+/* Motion: every var(--ease) transition now uses the M3 standard curve. */
+:root { --ease: var(--m3-standard); }
+
+/* Focus indicator: M3 specifies a 3dp ring offset by 2dp (colour stays the theme's tertiary). */
+:focus-visible { outline-width: 3px; }
+
+/* Interactive controls use state layers (8% hover) instead of rotating / lifting. */
+.theme-toggle:hover { transform: none; }
+.header-contact:hover { transform: none; box-shadow: inset 0 0 0 999px color-mix(in srgb, currentColor 8%, transparent); }
+.header-contact:focus-visible, .header-contact:active { box-shadow: inset 0 0 0 999px color-mix(in srgb, currentColor 10%, transparent); }
+
+/* 48dp touch targets for the chrome controls (visual size unchanged; the extension is invisible). */
+.brand-mark, .lang-switch a, .theme-toggle, .header-contact, .floating-nav a, .mobile-dock-item { position: relative; }
+.brand-mark::after, .theme-toggle::after, .header-contact::after, .mobile-dock-item::after { content: ''; position: absolute; inset: -2px; }
+.floating-nav a::after { content: ''; position: absolute; inset: -4px 0; }
+.lang-switch a::after { content: ''; position: absolute; inset: -5px; }
+.lang-switch a:first-child::after { right: 0; }
+.lang-switch a:last-child::after { left: 0; }
+/* The Experience "show more" toggle: grow it to a full 48dp row. */
+.exp-more > summary { min-height: 48px; }
+
+/* ── No outlines (Material 3 filled style) ─────────────────────────────────────────────── */
+/* Project art: the two concentric rings become filled tonal discs (the mask that carved the
+   outline is removed; a rotating disc is invisible, so the spin goes too). */
+.project-art::before,
+.project-art::after {
+  mask: none;
+  -webkit-mask: none;
+  animation: none;
+  opacity: 0.09;
+}

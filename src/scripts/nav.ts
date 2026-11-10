@@ -14,7 +14,9 @@ function setActive(id: string) {
     if (on) a.setAttribute('aria-current', 'page')
     else a.removeAttribute('aria-current')
   })
-  if (label) label.textContent = section.label
+  // Labels are localized server-side and carried on the anchors; never hard-code them here.
+  const localized = document.querySelector<HTMLElement>(`.floating-nav a[href="#${section.id}"]`)?.dataset.label
+  if (label && localized) label.textContent = localized
   if (shrunkIcon) shrunkIcon.className = `${section.icon} icon`
 }
 
@@ -50,5 +52,21 @@ dock?.addEventListener('click', (e) => {
 window.matchMedia('(min-width: 960px)').addEventListener('change', (e) => {
   if (e.matches) mobileWrap?.classList.remove('shrunk')
 })
+
+// Scroll progress for the pill nav's thin lime bar (CSS reads --scroll-progress).
+const root = document.documentElement
+let ticking = false
+function updateProgress() {
+  const max = root.scrollHeight - window.innerHeight
+  root.style.setProperty('--scroll-progress', String(max > 0 ? Math.min(1, Math.max(0, window.scrollY / max)) : 0))
+  ticking = false
+}
+window.addEventListener('scroll', () => {
+  if (!ticking) {
+    ticking = true
+    requestAnimationFrame(updateProgress)
+  }
+}, { passive: true })
+updateProgress()
 
 setActive('hero')

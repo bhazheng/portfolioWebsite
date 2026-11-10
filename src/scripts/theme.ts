@@ -7,7 +7,9 @@ const MAX_AGE = 60 * 60 * 24 * 365
 function renderToggle(theme: 'dark' | 'light') {
   const btn = document.querySelector<HTMLButtonElement>('.theme-toggle')
   if (!btn) return
-  btn.setAttribute('aria-label', theme === 'dark' ? 'Switch to light theme' : 'Switch to dark theme')
+  // Labels are localized server-side (data attributes), so this works on every language route.
+  const next = theme === 'dark' ? btn.dataset.labelToLight : btn.dataset.labelToDark
+  if (next) btn.setAttribute('aria-label', next)
   const icon = btn.querySelector<HTMLElement>('.icon')
   if (icon) icon.className = `${theme === 'dark' ? 'i-material-symbols:light-mode' : 'i-material-symbols:dark-mode'} icon`
 }

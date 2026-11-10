@@ -1,7 +1,11 @@
 ---
+import { UI, type Locale } from '../i18n'
+
+interface Props { lang: Locale }
+const { lang } = Astro.props
 const currentYear = new Date().getFullYear()
 ---
 <footer class="rei-footer page-width">
-  <span class="font-mono">© {currentYear} Akbar Lucky Basuki. · All rights reserved.</span>
+  <span class="font-mono">© {currentYear} Akbar Lucky Basuki. · {UI[lang].footer.rights}</span>
   <span class="font-mono">Astro 7 · UnoCSS · EVA-01</span>
 </footer>

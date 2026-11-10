@@ -8,7 +8,10 @@ export default defineConfig({
     'i-material-symbols:school', 'i-material-symbols:build', 'i-material-symbols:mail',
     'i-material-symbols:monitoring', 'i-material-symbols:dashboard',
     'i-material-symbols:database', 'i-material-symbols:neurology',
-    'i-material-symbols:image-search',
+    'i-material-symbols:image-search', 'i-material-symbols:gavel',
+    'i-material-symbols:groups', 'i-material-symbols:translate', 'i-material-symbols:workspace-premium',
     'i-material-symbols:light-mode', 'i-material-symbols:dark-mode',
+    'i-simple-icons:googlesheets', 'i-simple-icons:powerbi', 'i-simple-icons:looker',
+    'i-simple-icons:tableau', 'i-simple-icons:python', 'i-mdi:database',
   ],
 })

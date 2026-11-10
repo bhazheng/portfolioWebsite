@@ -1,43 +1,66 @@
+---
+import { UI, CV_URL, type Locale } from '../i18n'
+
+interface Props { lang: Locale }
+const { lang } = Astro.props
+const ui = UI[lang]
+const EMAIL = 'akbarlucky@protonmail.com'
+const newTab = ui.hero.newTab
+
+// Channel tiles. Brand names are proper nouns; hints are localized or are the account handle.
+const channels = [
+  { icon: 'i-mdi:whatsapp brand-whatsapp', label: 'WhatsApp', hint: ui.contact.whatsappHint, href: 'https://wa.me/6285172455808' },
+  { icon: 'i-mdi:linkedin brand-linkedin', label: 'LinkedIn', hint: 'akbarlucky', href: 'https://www.linkedin.com/in/akbarlucky/' },
+  { icon: 'i-mdi:github', label: 'GitHub', hint: 'bhazheng', href: 'https://github.com/bhazheng' },
+  { icon: 'i-material-symbols:description text-tertiary', label: ui.hero.cvCta, hint: ui.contact.cvHint, href: CV_URL }
+]
+---
 <section id="contact" class="rei-section page-width">
-  <div class="contact-section-inner" data-reveal>
+  <div class="contact-section-inner contact-v2" data-reveal>
     <div class="contact-shape">
       <span class="i-material-symbols:forum icon" style="font-size:44px;width:44px;height:44px" aria-hidden="true"></span>
     </div>
 
-    <div>
-      <h2>Have something in mind?</h2>
-      <p class="contact-sub">A project, a challenge, or just a hello. I'm open for BI &amp; analytics roles, research, and consultations.</p>
-      <a href="mailto:akbarlucky@protonmail.com" class="email-link font-mono">
-        <span class="i-material-symbols:mail icon" style="font-size:24px;width:24px;height:24px" aria-hidden="true"></span>
-        akbarlucky@protonmail.com
-      </a>
+    <div class="contact-copy">
+      <span class="eyebrow font-mono" aria-hidden="true"><span>//</span> 05 · {ui.nav.contact}</span>
+      <h2>{ui.contact.heading}</h2>
+      <p class="contact-sub">{ui.contact.subtitle}</p>
+      <div class="email-row">
+        <a href={`mailto:${EMAIL}`} class="email-link font-mono">
+          <span class="i-material-symbols:mail icon" style="font-size:24px;width:24px;height:24px" aria-hidden="true"></span>
+          {EMAIL}
+        </a>
+        <button
+          type="button"
+          class="copy-btn font-mono"
+          hidden
+          data-copy={EMAIL}
+          data-label-copied={ui.contact.copied}
+        >{ui.contact.copy}</button>
+      </div>
     </div>
 
-    <div class="contact-socials">
-      <a
-        href="https://www.linkedin.com/in/akbarlucky/"
-        target="_blank"
-        rel="noopener noreferrer"
-        aria-label="LinkedIn"
-      >
-        <span class="i-mdi:linkedin icon" style="font-size:20px;width:20px;height:20px" aria-hidden="true"></span>
-      </a>
-      <a
-        href="https://wa.me/6285172455808"
-        target="_blank"
-        rel="noopener noreferrer"
-        aria-label="WhatsApp"
-      >
-        <span class="i-mdi:whatsapp icon" style="font-size:20px;width:20px;height:20px" aria-hidden="true"></span>
-      </a>
-      <a
-        href="https://github.com/bhazheng"
-        target="_blank"
-        rel="noopener noreferrer"
-        aria-label="GitHub"
-      >
-        <span class="i-mdi:github icon" style="font-size:20px;width:20px;height:20px" aria-hidden="true"></span>
-      </a>
-    </div>
+    <ul class="contact-channels">
+      {channels.map((c) => (
+        <li>
+          <a
+            href={c.href}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="channel"
+            aria-label={`${c.label} (${newTab})`}
+          >
+            <span class="channel-icon">
+              <span class={`${c.icon} icon`} style="font-size:22px;width:22px;height:22px" aria-hidden="true"></span>
+            </span>
+            <span class="channel-text">
+              <strong>{c.label}</strong>
+              <span class="font-mono">{c.hint}</span>
+            </span>
+            <span class="i-material-symbols:arrow-outward icon channel-arrow" style="font-size:18px;width:18px;height:18px" aria-hidden="true"></span>
+          </a>
+        </li>
+      ))}
+    </ul>
   </div>
 </section>

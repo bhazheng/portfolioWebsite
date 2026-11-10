@@ -1,25 +1,31 @@
 ---
 import { EXPERIENCE } from '../data/experience'
+import { UI, type Locale } from '../i18n'
+
+interface Props { lang: Locale }
+const { lang } = Astro.props
+const ui = UI[lang]
 ---
 <section id="experience" class="rei-section page-width">
   <div class="experience-grid">
     <!-- Left: intro + stamp -->
     <div class="experience-intro">
       <div class="section-heading" data-reveal>
-        <h2>Experience<span class="heading-dot">.</span></h2>
-        <p>My work in analytics, compliance research, and academic mentoring.</p>
+        <span class="eyebrow font-mono" aria-hidden="true"><span>//</span> 01 · {ui.nav.experience}</span>
+        <h2>{ui.experience.heading}<span class="heading-dot">.</span></h2>
+        <p>{ui.experience.subtitle}</p>
       </div>
       <div data-reveal data-reveal-delay="200">
         <div class="experience-stamp">
           <span class="i-material-symbols:workspace-premium icon" style="font-size:28px;width:28px;height:28px" aria-hidden="true"></span>
-          <span>Security &amp; software, data-driven.</span>
+          <span>{ui.experience.stamp}</span>
         </div>
       </div>
     </div>
 
     <!-- Right: timeline list -->
     <div class="experience-timeline">
-      {EXPERIENCE.map((entry, i) => (
+      {EXPERIENCE[lang].map((entry, i) => (
         <div class:list={['exp-entry', { current: entry.current }]} data-reveal>
           <!-- Timeline rail + company avatar -->
           <div class="exp-rail">
@@ -37,9 +43,9 @@ import { EXPERIENCE } from '../data/experience'
               fill="none"
               aria-hidden="true"
             >
-              <circle cx="60" cy="60" r="48" stroke="currentColor" stroke-width="1.5" stroke-dasharray="6 8" opacity="0.35" />
-              <circle cx="60" cy="60" r="28" stroke="currentColor" stroke-width="1" opacity="0.2" />
-              <circle cx="60" cy="60" r="6" fill="currentColor" opacity="0.25" />
+              <circle cx="60" cy="60" r="48" fill="currentColor" opacity="0.16" />
+              <circle cx="60" cy="60" r="28" fill="currentColor" opacity="0.2" />
+              <circle cx="60" cy="60" r="6" fill="currentColor" opacity="0.35" />
             </svg>
 
             <div class="exp-card-head">
@@ -54,12 +60,24 @@ import { EXPERIENCE } from '../data/experience'
 
             <div class="exp-role-row">
               <h4>{entry.role}</h4>
-              {entry.current && <span class="current-badge font-mono">Current</span>}
+              {entry.current && <span class="current-badge font-mono">{ui.experience.current}</span>}
             </div>
+            {entry.team && <p class="exp-team">{entry.team}</p>}
 
             <ul class="experience-bullets">
-              {entry.bullets.map((bullet) => <li>{bullet}</li>)}
+              <li>{entry.bullets[0]}</li>
             </ul>
+            {entry.bullets.length > 1 && (
+              <details class="exp-more" open={entry.current}>
+                <summary class="font-mono">
+                  <span class="exp-more-closed">{ui.experience.more.replace('{n}', String(entry.bullets.length - 1))}</span>
+                  <span class="exp-more-open">{ui.experience.less}</span>
+                </summary>
+                <ul class="experience-bullets">
+                  {entry.bullets.slice(1).map((bullet) => <li>{bullet}</li>)}
+                </ul>
+              </details>
+            )}
 
             <div class="experience-metrics">
               {entry.metrics.map((metric) => (

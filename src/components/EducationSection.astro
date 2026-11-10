@@ -1,14 +1,20 @@
 ---
 import { EDUCATION } from '../data/education'
+import { UI, type Locale } from '../i18n'
+
+interface Props { lang: Locale }
+const { lang } = Astro.props
+const ui = UI[lang]
 ---
 <section id="education" class="rei-section page-width">
   <div class="section-heading" data-reveal>
-    <h2>Education<span class="heading-dot">.</span></h2>
-    <p>Academic foundations and certifications that shaped my analytical practice.</p>
+    <span class="eyebrow font-mono" aria-hidden="true"><span>//</span> 02 · {ui.nav.education}</span>
+    <h2>{ui.education.heading}<span class="heading-dot">.</span></h2>
+    <p>{ui.education.subtitle}</p>
   </div>
 
   <div class="education-timeline">
-    {EDUCATION.map((entry, index) => (
+    {EDUCATION[lang].map((entry, index) => (
       <div class="edu-entry" data-reveal data-reveal-delay={index * 150}>
         <!-- Timeline rail + institution avatar -->
         <div class="edu-rail">
@@ -26,15 +32,15 @@ import { EDUCATION } from '../data/education'
             fill="none"
             aria-hidden="true"
           >
-            <path d="M20 100 L20 40 Q20 20 40 20 L100 20" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" opacity="0.3" />
-            <path d="M40 80 L40 56 Q40 46 50 46 L74 46" stroke="currentColor" stroke-width="1" stroke-linecap="round" opacity="0.2" />
-            <circle cx="86" cy="46" r="4" fill="currentColor" opacity="0.3" />
+            <rect x="24" y="24" width="72" height="72" rx="24" fill="currentColor" opacity="0.16" />
+            <circle cx="60" cy="60" r="22" fill="currentColor" opacity="0.2" />
+            <circle cx="60" cy="60" r="6" fill="currentColor" opacity="0.35" />
           </svg>
 
           <div class="edu-card-head">
             <div class="edu-head-text">
               <div class="edu-period font-mono">{entry.period} · {entry.location}</div>
-              <h4>{entry.institution}</h4>
+              <h3>{entry.institution}</h3>
               <p class="edu-program">{entry.program}</p>
             </div>
             <div class="edu-credential font-mono">
@@ -50,6 +56,13 @@ import { EDUCATION } from '../data/education'
               <span>{entry.thesis}</span>
             </div>
           )}
+
+          {entry.notes?.map((note) => (
+            <div class="edu-thesis">
+              <span class:list={[note.icon, 'icon', 'thesis-icon']} style="font-size:18px;width:18px;height:18px" aria-hidden="true"></span>
+              <span>{note.text}</span>
+            </div>
+          ))}
 
           <div class="exp-tech-chips">
             {entry.tech.map((tech) => <span class="font-mono">{tech}</span>)}

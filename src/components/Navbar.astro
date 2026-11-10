@@ -1,20 +1,44 @@
 ---
 import { NAV_SECTIONS } from '../data/nav'
+import { UI, LOCALES, localePath, type Locale } from '../i18n'
+
+interface Props { lang: Locale }
+const { lang } = Astro.props
+const ui = UI[lang]
 ---
 <div>
   <!-- Top header — scrolls away normally -->
   <header class="site-header page-width">
     <div class="site-header-inner">
-      <a href="#hero" class="brand-mark" aria-label="Akbar Lucky Basuki — home">
+      <a href="#hero" class="brand-mark" aria-label={ui.header.brandAria}>
         AL<span class="text-primary">B</span><span class="text-tertiary font-mono">.</span>
       </a>
 
+      <!-- Language switch: plain links to the two prerendered routes (no JS needed) -->
+      <nav class="lang-switch" aria-label={ui.header.languageLabel}>
+        {LOCALES.map((l) => (
+          <a
+            href={localePath(l)}
+            hreflang={l}
+            lang={l}
+            data-lang-link
+            class:list={[{ current: l === lang }]}
+            aria-current={l === lang ? 'true' : undefined}
+          >{l.toUpperCase()}</a>
+        ))}
+      </nav>
       <div class="header-actions">
-        <button class="theme-toggle" type="button" aria-label="Switch to light theme">
+        <button
+          class="theme-toggle"
+          type="button"
+          aria-label={ui.header.toLight}
+          data-label-to-light={ui.header.toLight}
+          data-label-to-dark={ui.header.toDark}
+        >
           <span class="i-material-symbols:light-mode icon" style="font-size:22px;width:22px;height:22px" aria-hidden="true"></span>
         </button>
         <a href="#contact" class="header-contact">
-          Get in touch
+          {ui.header.cta}
           <span class="i-material-symbols:arrow-outward icon" style="font-size:16px;width:16px;height:16px" aria-hidden="true"></span>
         </a>
       </div>
@@ -22,22 +46,27 @@ import { NAV_SECTIONS } from '../data/nav'
   </header>
 
   <!-- Desktop/tablet sticky pill nav — floats at top on scroll -->
-  <nav class="floating-nav sticky-pill" aria-label="Main navigation">
+  <nav class="floating-nav sticky-pill" aria-label={ui.header.navLabel}>
     {NAV_SECTIONS.map((s) => (
-      <a href={`#${s.id}`} class:list={[{ current: s.id === 'hero' }]} aria-current={s.id === 'hero' ? 'page' : undefined}>
+      <a
+        href={`#${s.id}`}
+        data-label={ui.nav[s.id]}
+        class:list={[{ current: s.id === 'hero' }]}
+        aria-current={s.id === 'hero' ? 'page' : undefined}
+      >
         <span class={`${s.icon} icon`} style="font-size:18px;width:18px;height:18px" aria-hidden="true"></span>
-        <span>{s.label}</span>
+        <span>{ui.nav[s.id]}</span>
       </a>
     ))}
   </nav>
 
   <!-- Mobile bottom dock: shrinks to 1 icon on scroll, expands when stopped -->
   <div class="mobile-nav-wrap">
-    <span class="active-label font-mono">Home</span>
-    <nav class="mobile-dock" aria-label="Main navigation">
+    <span class="active-label font-mono">{ui.nav.hero}</span>
+    <nav class="mobile-dock" aria-label={ui.header.navLabel}>
       <!-- Shrunk: only active icon -->
       <div class="dock-single">
-        <a href="#" class="mobile-dock-item current" data-shrunk-item aria-label="Show navigation">
+        <a href="#" class="mobile-dock-item current" data-shrunk-item aria-label={ui.header.showNav}>
           <span class="i-material-symbols:home icon" style="font-size:24px;width:24px;height:24px" aria-hidden="true"></span>
         </a>
       </div>
@@ -46,6 +75,8 @@ import { NAV_SECTIONS } from '../data/nav'
         {NAV_SECTIONS.map((s) => (
           <a
             href={`#${s.id}`}
+            data-label={ui.nav[s.id]}
+            aria-label={ui.nav[s.id]}
             class:list={['mobile-dock-item', { current: s.id === 'hero' }]}
             aria-current={s.id === 'hero' ? 'page' : undefined}
           >
