@@ -26,7 +26,7 @@ const ui = UI[lang]
     <!-- Right: timeline list -->
     <div class="experience-timeline">
       {EXPERIENCE[lang].map((entry, i) => (
-        <div class:list={['exp-entry', { current: entry.current }]} data-reveal>
+        <div class:list={['exp-entry', { current: entry.current }]} data-reveal data-reveal-delay={i * 120}>
           <!-- Timeline rail + company avatar -->
           <div class="exp-rail">
             <div class:list={['exp-avatar', { ongoing: entry.current }]}>
@@ -36,16 +36,15 @@ const ui = UI[lang]
 
           <!-- Card body (M3 filled card — tonal elevation, no outline) -->
           <div class="exp-card">
-            <!-- Vector accessory: decorative corner shape -->
+            <!-- Vector accessory: M3 Expressive 6-scallop Cookie -> morphs to Burst on hover -->
             <svg
               class:list={['card-accessory', `acc-${i % 3}`]}
-              viewBox="0 0 120 120"
+              viewBox="0 0 100 100"
               fill="none"
               aria-hidden="true"
             >
-              <circle cx="60" cy="60" r="48" fill="currentColor" opacity="0.16" />
-              <circle cx="60" cy="60" r="28" fill="currentColor" opacity="0.2" />
-              <circle cx="60" cy="60" r="6" fill="currentColor" opacity="0.35" />
+              <path class="accessory-morph" d="M 96.3 50.0 L 95.2 54.5 L 92.2 58.4 L 88.2 61.6 L 84.4 64.2 L 81.5 66.9 L 80.0 70.0 L 79.4 74.1 L 79.0 79.0 L 77.9 84.0 L 75.5 88.2 L 71.8 90.8 L 67.1 91.4 L 62.2 90.2 L 57.6 88.2 L 53.6 86.4 L 50.0 85.7 L 46.4 86.4 L 42.4 88.2 L 37.8 90.2 L 32.9 91.4 L 28.2 90.8 L 24.5 88.2 L 22.1 84.0 L 21.0 79.0 L 20.6 74.1 L 20.0 70.0 L 18.5 66.9 L 15.6 64.2 L 11.8 61.6 L 7.8 58.4 L 4.8 54.5 L 3.7 50.0 L 4.8 45.5 L 7.8 41.6 L 11.8 38.4 L 15.6 35.8 L 18.5 33.1 L 20.0 30.0 L 20.6 25.9 L 21.0 21.0 L 22.1 16.0 L 24.5 11.8 L 28.2 9.2 L 32.9 8.6 L 37.8 9.8 L 42.4 11.8 L 46.4 13.6 L 50.0 14.3 L 53.6 13.6 L 57.6 11.8 L 62.2 9.8 L 67.1 8.6 L 71.8 9.2 L 75.5 11.8 L 77.9 16.0 L 79.0 21.0 L 79.4 25.9 L 80.0 30.0 L 81.5 33.1 L 84.4 35.8 L 88.2 38.4 L 92.2 41.6 L 95.2 45.5 Z" fill="currentColor" opacity="0.16" />
+              <circle cx="50" cy="50" r="14" fill="currentColor" opacity="0.22" />
             </svg>
 
             <div class="exp-card-head">
@@ -64,6 +63,15 @@ const ui = UI[lang]
             </div>
             {entry.team && <p class="exp-team">{entry.team}</p>}
 
+            <div class="experience-metrics">
+              {entry.metrics.map((metric) => (
+                <div class="metric-tile">
+                  <div class="metric-value font-mono">{metric.value}</div>
+                  <div class="metric-label">{metric.label}</div>
+                </div>
+              ))}
+            </div>
+
             <ul class="experience-bullets">
               <li>{entry.bullets[0]}</li>
             </ul>
@@ -78,15 +86,6 @@ const ui = UI[lang]
                 </ul>
               </details>
             )}
-
-            <div class="experience-metrics">
-              {entry.metrics.map((metric) => (
-                <div class="metric-tile">
-                  <div class="metric-value font-mono">{metric.value}</div>
-                  <div class="metric-label">{metric.label}</div>
-                </div>
-              ))}
-            </div>
 
             <div class="exp-tech-chips">
               {entry.tech.map((tech) => <span class="font-mono">{tech}</span>)}

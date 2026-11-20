@@ -56,7 +56,7 @@
   box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
 }
 
-/* Icon-only pill — animates between shrunk (1 icon) and expanded (all) */
+/* Icon-only pill — animates between shrunk (1 icon) and expanded (all) with M3E springs */
 .mobile-dock {
   display: flex;
   align-items: center;
@@ -66,10 +66,10 @@
   background: rgb(var(--v-theme-surface-container-high));
   box-shadow: 0 6px 28px rgba(0, 0, 0, 0.18);
   max-width: calc(100vw - 32px);
-  transition: gap 0.4s cubic-bezier(0.2, 0.8, 0.2, 1),
-              padding 0.4s cubic-bezier(0.2, 0.8, 0.2, 1),
-              border-radius 0.4s cubic-bezier(0.2, 0.8, 0.2, 1),
-              box-shadow 0.3s;
+  transition: gap var(--m3e-dur-default-spatial) var(--m3e-spring-default-spatial),
+              padding var(--m3e-dur-default-spatial) var(--m3e-spring-default-spatial),
+              border-radius var(--m3e-dur-default-spatial) var(--m3e-spring-default-spatial),
+              box-shadow var(--m3e-dur-default-effects) var(--m3e-spring-default-effects);
 }
 
 /* Shrunk: single round icon */
@@ -77,10 +77,6 @@
   gap: 0;
   padding: 5px;
   border-radius: 50%;
-}
-.mobile-nav-wrap.shrunk .mobile-dock-item {
-  width: 52px;
-  height: 52px;
 }
 
 /* Expanded: all icons in a row */
@@ -91,6 +87,8 @@
 }
 
 .mobile-dock-item {
+  flex: none;
+  overflow: hidden;
   width: 44px;
   height: 44px;
   display: flex;
@@ -99,18 +97,22 @@
   border-radius: 50%;
   color: rgb(var(--v-theme-on-surface-variant));
   text-decoration: none;
-  transition: background 0.25s cubic-bezier(0.2, 0.8, 0.2, 1),
-              color 0.25s,
-              transform 0.25s cubic-bezier(0.2, 0.8, 0.2, 1),
-              width 0.4s cubic-bezier(0.2, 0.8, 0.2, 1),
-              height 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
+  transition: background var(--m3e-dur-fast-effects) var(--m3e-spring-fast-effects),
+              color var(--m3e-dur-fast-effects) var(--m3e-spring-fast-effects),
+              opacity var(--m3e-dur-fast-effects) var(--m3e-spring-fast-effects),
+              border-radius var(--m3e-dur-fast-spatial) var(--m3e-spring-fast-spatial),
+              transform var(--m3e-dur-fast-spatial) var(--m3e-spring-fast-spatial),
+              width var(--m3e-dur-default-spatial) var(--m3e-spring-default-spatial),
+              height var(--m3e-dur-default-spatial) var(--m3e-spring-default-spatial);
 }
 .mobile-dock-item.current {
   background: rgb(var(--v-theme-primary-container));
   color: rgb(var(--v-theme-on-primary-container));
-  transform: scale(1.1);
+  border-radius: 16px;
+  transform: scale(1.06);
 }
 .mobile-dock-item:active {
+  border-radius: 12px;
   transform: scale(0.92);
 }
 
@@ -122,15 +124,39 @@
 }
 
 /* ── Static-render adaptations ─────────────────────────────── */
-/* Label is always in the DOM now (no Vue <Transition>); fade it while shrunk. */
-.active-label { transition: opacity .25s var(--ease), transform .25s var(--ease); }
-.mobile-nav-wrap.shrunk .active-label { opacity: 0; transform: translateY(8px); pointer-events: none; }
+/* Label stays visible above the dock in both shrunk and expanded states. */
+.active-label {
+  transition:
+    opacity var(--m3e-dur-fast-effects) var(--m3e-spring-fast-effects),
+    transform var(--m3e-dur-fast-spatial) var(--m3e-spring-fast-spatial);
+}
 
-/* Both dock states render; CSS picks one. */
+/* Keep .dock-full always rendered and smoothly collapse inactive items on .shrunk. */
 .dock-single { display: none; }
-.dock-full { display: flex; align-items: center; gap: 3px; }
-.mobile-nav-wrap.shrunk .dock-single { display: flex; }
-.mobile-nav-wrap.shrunk .dock-full { display: none; }
+.dock-full {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  transition: gap var(--m3e-dur-default-spatial) var(--m3e-spring-default-spatial);
+}
+.mobile-nav-wrap.shrunk .dock-full { gap: 0; }
+.mobile-nav-wrap.shrunk .dock-full .mobile-dock-item:not(.current) {
+  width: 0;
+  min-width: 0;
+  opacity: 0;
+  transform: scale(0.4);
+  overflow: hidden;
+  pointer-events: none;
+}
+.mobile-nav-wrap.shrunk .dock-full .mobile-dock-item:not(.current)::after {
+  display: none;
+}
+.mobile-nav-wrap.shrunk .dock-full .mobile-dock-item.current {
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  transform: scale(1);
+}
 
 /* Both navs render; md threshold (960px) picks one, as useDisplay().mdAndUp did. */
 @media (max-width: 959.98px) {

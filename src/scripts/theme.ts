@@ -21,8 +21,56 @@ function apply(theme: 'dark' | 'light') {
   renderToggle(theme)
 }
 
-document.querySelector<HTMLButtonElement>('.theme-toggle')?.addEventListener('click', () => {
-  apply(document.documentElement.dataset.theme === 'light' ? 'dark' : 'light')
+function triggerSpin() {
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
+  const icon = document.querySelector<HTMLElement>('.theme-toggle .icon')
+  if (!icon) return
+  icon.classList.remove('theme-spin')
+  void icon.offsetWidth
+  icon.classList.add('theme-spin')
+  icon.addEventListener('animationend', () => icon.classList.remove('theme-spin'), { once: true })
+}
+
+const toggleBtn = document.querySelector<HTMLButtonElement>('.theme-toggle')
+
+toggleBtn?.addEventListener('click', () => {
+  const next: 'dark' | 'light' = document.documentElement.dataset.theme === 'light' ? 'dark' : 'light'
+  const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+  const doc = document as Document & {
+    startViewTransition?: (cb: () => void) => { ready: Promise<void> }
+  }
+
+  if (typeof doc.startViewTransition === 'function' && !prefersReduced) {
+    const rect = toggleBtn.getBoundingClientRect()
+    const x = rect.left + rect.width / 2
+    const y = rect.top + rect.height / 2
+    const r = Math.hypot(
+      Math.max(x, window.innerWidth - x),
+      Math.max(y, window.innerHeight - y)
+    )
+    const vt = doc.startViewTransition(() => apply(next))
+    vt.ready.then(() => {
+      document.documentElement.animate(
+        {
+          clipPath: [
+            `circle(0px at ${x}px ${y}px)`,
+            `circle(${r}px at ${x}px ${y}px)`
+          ]
+        },
+        {
+          duration: 460,
+          easing: 'cubic-bezier(0.2, 0, 0, 1)',
+          pseudoElement: '::view-transition-new(root)'
+        }
+      )
+    }).catch(() => {
+      // View transition aborted; theme is already applied.
+    })
+  } else {
+    apply(next)
+  }
+
+  triggerSpin()
 })
 
 renderToggle(document.documentElement.dataset.theme === 'light' ? 'light' : 'dark')

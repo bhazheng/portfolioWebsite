@@ -4,13 +4,18 @@ import '../styles/tokens.css'
 import '../styles/main.css'
 import '../styles/base.css'
 import '../styles/navbar.css'
+import '../styles/m3-expressive.css'
 import Navbar from '../components/Navbar.astro'
 import Footer from '../components/Footer.astro'
-import { UI, type Locale } from '../i18n'
+import FabMenu from '../components/FabMenu.astro'
+import { UI, LOCALES, localePath, type Locale } from '../i18n'
 
 interface Props { lang: Locale }
 const { lang } = Astro.props
 const ui = UI[lang]
+const ogLocale = lang === 'id' ? 'id_ID' : 'en_US'
+const ogLocaleAlt = lang === 'id' ? 'en_US' : 'id_ID'
+const canonicalUrl = Astro.site ? new URL(localePath(lang), Astro.site).href : undefined
 ---
 <!doctype html>
 <html lang={ui.htmlLang} data-theme="dark">
@@ -19,6 +24,27 @@ const ui = UI[lang]
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{ui.title}</title>
     <meta name="description" content={ui.description} />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="theme-color" content="#0d1321" media="(prefers-color-scheme: dark)" />
+    <meta name="theme-color" content="#f8faff" media="(prefers-color-scheme: light)" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={ui.title} />
+    <meta property="og:description" content={ui.description} />
+    <meta property="og:locale" content={ogLocale} />
+    <meta property="og:locale:alternate" content={ogLocaleAlt} />
+    {canonicalUrl && <meta property="og:url" content={canonicalUrl} />}
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content={ui.title} />
+    <meta name="twitter:description" content={ui.description} />
+    {Astro.site && (
+      <>
+        <link rel="canonical" href={canonicalUrl} />
+        {LOCALES.map((l) => (
+          <link rel="alternate" hreflang={l} href={new URL(localePath(l), Astro.site).href} />
+        ))}
+        <link rel="alternate" hreflang="x-default" href={new URL(localePath('en'), Astro.site).href} />
+      </>
+    )}
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Google+Sans+Flex:wght@300..800&family=Google+Sans+Code:wght@300..800&display=swap" />
@@ -39,6 +65,7 @@ const ui = UI[lang]
       <Navbar lang={lang} />
       <main class="main"><slot /></main>
       <Footer lang={lang} />
+      <FabMenu lang={lang} />
     </div>
     <script>
       import '../scripts/theme'
@@ -46,6 +73,9 @@ const ui = UI[lang]
       import '../scripts/reveal'
       import '../scripts/lang'
       import '../scripts/copy'
+      import '../scripts/projects'
+      import '../scripts/split-button'
+      import '../scripts/fab'
     </script>
   </body>
 </html>

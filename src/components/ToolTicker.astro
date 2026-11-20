@@ -1,9 +1,9 @@
 ---
 import { TOOLS } from '../data/tools'
 
-// The track scrolls -50%, so each half must be wider than the viewport. With names, one copy of the
-// list is ~1000 px wide: 4 copies per half (8 total) keeps the loop seamless up to ~4000 px screens.
-const COPIES = 8
+// The track scrolls -50%, so each half must be wider than the viewport. With 12 tools, one copy
+// is ~1,950 px wide: 2 copies per half (4 total, ~3,900 px/half) keeps the loop seamless.
+const COPIES = 4
 ---
 <!-- Decorative: repeats tools already listed in Skills, so it is hidden from assistive tech. -->
 <div class="tool-ticker" aria-hidden="true">

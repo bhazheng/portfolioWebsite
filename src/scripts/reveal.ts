@@ -9,7 +9,20 @@ if (prefersReduced || typeof IntersectionObserver === 'undefined') {
       if (!entry.isIntersecting) continue
       const el = entry.target as HTMLElement
       const delay = el.dataset.revealDelay
-      if (delay) el.style.transitionDelay = `${delay}ms`
+      if (delay) {
+        el.style.transitionDelay = `${delay}ms`
+        const clearDelay = () => { el.style.transitionDelay = '' }
+        const onEnd = (e: TransitionEvent) => {
+          if (e.target !== el || e.propertyName !== 'transform') return
+          el.removeEventListener('transitionend', onEnd)
+          clearDelay()
+        }
+        el.addEventListener('transitionend', onEnd)
+        window.setTimeout(() => {
+          el.removeEventListener('transitionend', onEnd)
+          clearDelay()
+        }, Number(delay) + 700)
+      }
       el.classList.add('reveal-in')
       observer.unobserve(el)
     }

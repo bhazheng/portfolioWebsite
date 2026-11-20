@@ -29,6 +29,9 @@ export interface UiStrings {
     intro: string
     paragraph: string
     emailCta: string
+    moreContact: string
+    copyEmail: string
+    emailCopied: string
     cvCta: string
     newTab: string
     status: string
@@ -37,9 +40,19 @@ export interface UiStrings {
   }
   experience: { heading: string; subtitle: string; stamp: string; current: string; more: string; less: string }
   education: { heading: string; subtitle: string }
-  projects: { heading: string; subtitle: string }
+  projects: {
+    heading: string
+    subtitle: string
+    openCaseStudy: string
+    close: string
+    problem: string
+    approach: string
+    outcome: string
+    viewGithub: string
+  }
   skills: { heading: string; subtitle: string }
   contact: { heading: string; subtitle: string; copy: string; copied: string; whatsappHint: string; cvHint: string }
+  fab: { open: string; close: string; email: string; whatsapp: string; cv: string }
   footer: { rights: string }
 }
 
@@ -76,7 +89,10 @@ export const UI: Record<Locale, UiStrings> = {
       intro: "Hello, I'm Akbar",
       paragraph:
         'An Information Systems graduate from Universitas Brawijaya. I turn data into dashboards in Power BI and Looker Studio, support regulatory and compliance analysis at OJK, and build SQL, Python, and machine learning solutions that guide decisions leaders act on.',
-      emailCta: 'Email me',
+      emailCta: 'Contact me',
+      moreContact: 'More contact options',
+      copyEmail: 'Copy email',
+      emailCopied: 'Email copied',
       cvCta: 'View CV',
       newTab: 'opens in a new tab',
       status: 'Open to IT Assurance & Data Analytics roles',
@@ -97,7 +113,13 @@ export const UI: Record<Locale, UiStrings> = {
     },
     projects: {
       heading: 'Projects',
-      subtitle: 'Some of my work in analytics, machine learning, and data storytelling.'
+      subtitle: 'Some of my work in analytics, machine learning, and data storytelling.',
+      openCaseStudy: 'Open case study',
+      close: 'Close dialog',
+      problem: 'Problem',
+      approach: 'Approach',
+      outcome: 'Outcome',
+      viewGithub: 'View on GitHub'
     },
     skills: {
       heading: 'Skills',
@@ -111,6 +133,13 @@ export const UI: Record<Locale, UiStrings> = {
       heading: 'Have something in mind?',
       subtitle:
         "A project, a challenge, or just a hello. I'm open for data analytics and IT assurance roles (audit, governance, risk & compliance), BI work, and research."
+    },
+    fab: {
+      open: 'Quick actions',
+      close: 'Close quick actions',
+      email: 'Email',
+      whatsapp: 'WhatsApp',
+      cv: 'View CV'
     },
     footer: { rights: 'All rights reserved.' }
   },
@@ -141,7 +170,10 @@ export const UI: Record<Locale, UiStrings> = {
       intro: 'Halo, saya Akbar',
       paragraph:
         'Lulusan Sistem Informasi Universitas Brawijaya. Saya mengubah data menjadi dashboard di Power BI dan Looker Studio, mendukung analisis regulasi dan kepatuhan di OJK, serta membangun solusi SQL, Python, dan machine learning yang membantu para pemimpin mengambil keputusan.',
-      emailCta: 'Kirim email',
+      emailCta: 'Hubungi saya',
+      moreContact: 'Opsi kontak lainnya',
+      copyEmail: 'Salin email',
+      emailCopied: 'Email tersalin',
       cvCta: 'Lihat CV',
       newTab: 'terbuka di tab baru',
       status: 'Terbuka untuk peran IT Assurance & Data Analytics',
@@ -162,7 +194,13 @@ export const UI: Record<Locale, UiStrings> = {
     },
     projects: {
       heading: 'Proyek',
-      subtitle: 'Sebagian karya saya di bidang analitik, machine learning, dan data storytelling.'
+      subtitle: 'Sebagian karya saya di bidang analitik, machine learning, dan data storytelling.',
+      openCaseStudy: 'Buka studi kasus',
+      close: 'Tutup dialog',
+      problem: 'Masalah',
+      approach: 'Pendekatan',
+      outcome: 'Hasil',
+      viewGithub: 'Lihat di GitHub'
     },
     skills: {
       heading: 'Keahlian',
@@ -176,6 +214,13 @@ export const UI: Record<Locale, UiStrings> = {
       heading: 'Punya sesuatu di benak?',
       subtitle:
         'Sebuah proyek, tantangan, atau sekadar menyapa. Saya terbuka untuk peran data analytics dan IT assurance (audit, governance, risk & compliance), pekerjaan BI, dan riset.'
+    },
+    fab: {
+      open: 'Aksi cepat',
+      close: 'Tutup aksi cepat',
+      email: 'Email',
+      whatsapp: 'WhatsApp',
+      cv: 'Lihat CV'
     },
     footer: { rights: 'Hak cipta dilindungi.' }
   }

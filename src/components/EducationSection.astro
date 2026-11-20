@@ -13,59 +13,61 @@ const ui = UI[lang]
     <p>{ui.education.subtitle}</p>
   </div>
 
-  <div class="education-timeline">
+  <div class="edu-list">
     {EDUCATION[lang].map((entry, index) => (
-      <div class="edu-entry" data-reveal data-reveal-delay={index * 150}>
-        <!-- Timeline rail + institution avatar -->
-        <div class="edu-rail">
-          <div class:list={['edu-avatar', { accent: index === 0 }]}>
-            {entry.institution.charAt(0)}
-          </div>
-        </div>
-
-        <!-- Card body (M3 filled card — tonal elevation, no outline) -->
+      <div class="edu-entry" data-reveal data-reveal-delay={index * 120}>
+        <!-- Card body (M3E editorial 2-column card — tonal elevation, no outline) -->
         <div class="edu-card">
-          <!-- Vector accessory: decorative corner shape -->
+          <!-- Vector accessory: M3 Expressive 6-scallop Cookie -> morphs to Burst on hover -->
           <svg
             class:list={['card-accessory', `acc-${index % 3}`]}
-            viewBox="0 0 120 120"
+            viewBox="0 0 100 100"
             fill="none"
             aria-hidden="true"
           >
-            <rect x="24" y="24" width="72" height="72" rx="24" fill="currentColor" opacity="0.16" />
-            <circle cx="60" cy="60" r="22" fill="currentColor" opacity="0.2" />
-            <circle cx="60" cy="60" r="6" fill="currentColor" opacity="0.35" />
+            <path class="accessory-morph" d="M 96.3 50.0 L 95.2 54.5 L 92.2 58.4 L 88.2 61.6 L 84.4 64.2 L 81.5 66.9 L 80.0 70.0 L 79.4 74.1 L 79.0 79.0 L 77.9 84.0 L 75.5 88.2 L 71.8 90.8 L 67.1 91.4 L 62.2 90.2 L 57.6 88.2 L 53.6 86.4 L 50.0 85.7 L 46.4 86.4 L 42.4 88.2 L 37.8 90.2 L 32.9 91.4 L 28.2 90.8 L 24.5 88.2 L 22.1 84.0 L 21.0 79.0 L 20.6 74.1 L 20.0 70.0 L 18.5 66.9 L 15.6 64.2 L 11.8 61.6 L 7.8 58.4 L 4.8 54.5 L 3.7 50.0 L 4.8 45.5 L 7.8 41.6 L 11.8 38.4 L 15.6 35.8 L 18.5 33.1 L 20.0 30.0 L 20.6 25.9 L 21.0 21.0 L 22.1 16.0 L 24.5 11.8 L 28.2 9.2 L 32.9 8.6 L 37.8 9.8 L 42.4 11.8 L 46.4 13.6 L 50.0 14.3 L 53.6 13.6 L 57.6 11.8 L 62.2 9.8 L 67.1 8.6 L 71.8 9.2 L 75.5 11.8 L 77.9 16.0 L 79.0 21.0 L 79.4 25.9 L 80.0 30.0 L 81.5 33.1 L 84.4 35.8 L 88.2 38.4 L 92.2 41.6 L 95.2 45.5 Z" fill="currentColor" opacity="0.16" />
+            <circle cx="50" cy="50" r="14" fill="currentColor" opacity="0.22" />
           </svg>
 
-          <div class="edu-card-head">
-            <div class="edu-head-text">
+          <div class="edu-card-grid">
+            <div class="edu-aside">
+              <div class:list={['edu-badge-icon', index === 0 ? 'is-orange' : 'is-lime']}>
+                <span
+                  class:list={[index === 0 ? 'i-material-symbols:school' : 'i-material-symbols:workspace-premium', 'icon']}
+                  style="font-size:24px;width:24px;height:24px"
+                  aria-hidden="true"
+                ></span>
+              </div>
               <div class="edu-period font-mono">{entry.period} · {entry.location}</div>
+              <div class="edu-credential font-mono">{entry.credential}</div>
+            </div>
+
+            <div class="edu-main">
               <h3>{entry.institution}</h3>
               <p class="edu-program">{entry.program}</p>
-            </div>
-            <div class="edu-credential font-mono">
-              {entry.credential}
-            </div>
-          </div>
+              <p class="edu-desc">{entry.description}</p>
 
-          <p class="edu-desc">{entry.description}</p>
+              {(entry.thesis || entry.notes?.length) && (
+                <div class="edu-notes-stack">
+                  {entry.thesis && (
+                    <div class="edu-thesis">
+                      <span class="i-material-symbols:menu-book icon thesis-icon" style="font-size:18px;width:18px;height:18px" aria-hidden="true"></span>
+                      <span>{entry.thesis}</span>
+                    </div>
+                  )}
+                  {entry.notes?.map((note) => (
+                    <div class="edu-thesis">
+                      <span class:list={[note.icon, 'icon', 'thesis-icon']} style="font-size:18px;width:18px;height:18px" aria-hidden="true"></span>
+                      <span>{note.text}</span>
+                    </div>
+                  ))}
+                </div>
+              )}
 
-          {entry.thesis && (
-            <div class="edu-thesis">
-              <span class="i-material-symbols:menu-book icon thesis-icon" style="font-size:18px;width:18px;height:18px" aria-hidden="true"></span>
-              <span>{entry.thesis}</span>
+              <div class="exp-tech-chips">
+                {entry.tech.map((tech) => <span class="font-mono">{tech}</span>)}
+              </div>
             </div>
-          )}
-
-          {entry.notes?.map((note) => (
-            <div class="edu-thesis">
-              <span class:list={[note.icon, 'icon', 'thesis-icon']} style="font-size:18px;width:18px;height:18px" aria-hidden="true"></span>
-              <span>{note.text}</span>
-            </div>
-          ))}
-
-          <div class="exp-tech-chips">
-            {entry.tech.map((tech) => <span class="font-mono">{tech}</span>)}
           </div>
         </div>
       </div>

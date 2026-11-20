@@ -18,7 +18,10 @@ const channels = [
 <section id="contact" class="rei-section page-width">
   <div class="contact-section-inner contact-v2" data-reveal>
     <div class="contact-shape">
-      <span class="i-material-symbols:forum icon" style="font-size:44px;width:44px;height:44px" aria-hidden="true"></span>
+      <svg class="contact-shape-bg" viewBox="0 0 100 100" fill="none" aria-hidden="true">
+        <path d="M 98.8 50 L 97.8 53.8 L 94.9 57.1 L 91.3 59.9 L 88.1 62.4 L 86.2 65 L 85.7 68.2 L 86.2 72.2 L 86.8 76.7 L 86.4 81.1 L 84.5 84.5 L 81.1 86.4 L 76.7 86.8 L 72.2 86.2 L 68.2 85.7 L 65 86.2 L 62.4 88.1 L 59.9 91.3 L 57.1 94.9 L 53.8 97.8 L 50 98.8 L 46.2 97.8 L 42.9 94.9 L 40.1 91.3 L 37.6 88.1 L 35 86.2 L 31.8 85.7 L 27.8 86.2 L 23.3 86.8 L 18.9 86.4 L 15.5 84.5 L 13.6 81.1 L 13.2 76.7 L 13.8 72.2 L 14.3 68.2 L 13.8 65 L 11.9 62.4 L 8.7 59.9 L 5.1 57.1 L 2.2 53.8 L 1.2 50 L 2.2 46.2 L 5.1 42.9 L 8.7 40.1 L 11.9 37.6 L 13.8 35 L 14.3 31.8 L 13.8 27.8 L 13.2 23.3 L 13.6 18.9 L 15.5 15.5 L 18.9 13.6 L 23.3 13.2 L 27.8 13.8 L 31.8 14.3 L 35 13.8 L 37.6 11.9 L 40.1 8.7 L 42.9 5.1 L 46.2 2.2 L 50 1.2 L 53.8 2.2 L 57.1 5.1 L 59.9 8.7 L 62.4 11.9 L 65 13.8 L 68.2 14.3 L 72.2 13.8 L 76.7 13.2 L 81.1 13.6 L 84.5 15.5 L 86.4 18.9 L 86.8 23.3 L 86.2 27.8 L 85.7 31.8 L 86.2 35 L 88.1 37.6 L 91.3 40.1 L 94.9 42.9 L 97.8 46.2 Z" fill="currentColor" />
+      </svg>
+      <span class="i-material-symbols:forum icon" style="font-size:40px;width:40px;height:40px" aria-hidden="true"></span>
     </div>
 
     <div class="contact-copy">
@@ -36,13 +39,16 @@ const channels = [
           hidden
           data-copy={EMAIL}
           data-label-copied={ui.contact.copied}
-        >{ui.contact.copy}</button>
+        >
+          <span class="i-material-symbols:content-copy icon" style="font-size:16px;width:16px;height:16px" aria-hidden="true"></span>
+          <span class="copy-label">{ui.contact.copy}</span>
+        </button>
       </div>
     </div>
 
     <ul class="contact-channels">
-      {channels.map((c) => (
-        <li>
+      {channels.map((c, index) => (
+        <li data-reveal data-reveal-delay={index * 80}>
           <a
             href={c.href}
             target="_blank"

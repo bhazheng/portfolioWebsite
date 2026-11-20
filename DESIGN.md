@@ -1,12 +1,14 @@
-# Design — Material Design 3 in EVA-01
+# Design — Material Design 3 Expressive in EVA-01
 
 <!-- impeccable:design-schema 1 -->
 
-A one-page scrolling portfolio for Akbar Lucky Basuki, built on Google Material Design 3
-color roles (hand-written CSS tokens, no component library) with a palette derived from Evangelion Unit-01: violet primary, neon-lime data
-accent, and deep violet-black neutrals. The UI/UX is inspired by https://rei.my.id/ —
-floating pill navigation, editorial section headings with accent dots, filled tonal cards
-(no outlines), vector SVG decorative accessories, sticker-style hero portrait, and a
+A one-page scrolling portfolio for Akbar Lucky Basuki, built on Google **Material Design 3 Expressive**
+(spring physics motion tokens, organic 35-shape vocabulary & shape-morphing controls, emphasized
+Google Sans Flex typography, wavy progress indicators, and filled tonal color roles — hand-written
+CSS tokens, no component library) with a palette derived from Evangelion Unit-01: violet primary,
+neon-lime data accent, and deep violet-black neutrals. The UI/UX is inspired by https://rei.my.id/ —
+floating toolbar navigation, editorial section headings with accent dots, filled tonal cards
+(no outlines), organic SVG decorative shapes, sticker-style hero portrait, and a
 large colored contact container.
 
 ## World Statement
@@ -29,7 +31,10 @@ is replaced by neutral `on-surface` text for readability.
 **Astro 7 static output** (`output: 'static'`, two prerendered routes — `/` English and `/id/` Indonesian — and no client framework).
 The Material Design 3 color roles are plain CSS custom properties in `src/styles/tokens.css`
 (`--v-theme-*` as R, G, B triplets — the prefix is a holdover from the retired Vuetify build and
-is kept so `rgb(var(--v-theme-x))` keeps working in `main.css`). **UnoCSS** (icons only)
+is kept so `rgb(var(--v-theme-x))` keeps working in `main.css`), while Material Design 3
+Expressive motion physics, shape scale, emphasized typography, sliding nav indicator, connected
+button groups, morphing feedback, and segmented strips live in `src/styles/m3-expressive.css`
+(loaded last). **UnoCSS** (icons only)
 supplies glyphs from **Material Symbols** (`i-material-symbols:*`, UI) and **MDI**
 (`i-mdi:*`, brand marks). **Google Sans Flex** for reading & display, **Google Sans Code** for
 tabular figures. No Tailwind, no component library; theme is a `data-theme` attribute on
@@ -69,7 +74,8 @@ comma-separated R, G, B triplets (do not convert them to hex).
 | `primary` / `on-primary` | `#d9b9ff` / `#431278` | EVA-01 violet — identity, CTA buttons, mobile active label |
 | `primary-container` / `on-primary-container` | `#5a2f90` / `#eeddff` | Filled violet areas — current experience card, first education card, contact container, floating nav active state |
 | `secondary` / `on-secondary` | `#d5bbff` / `#3b2166` | Violet support role, tech chips |
-| `tertiary` / `on-tertiary` | `#86dd00` / `#1e3700` | **Sync neon lime — data, figures, accents on dark surfaces** |
+| `tertiary` / `on-tertiary` | `#86dd00` / `#1e3700` | **Sync neon lime — focal sparks (status dot, wavy progress, focus ring, current badge)** |
+| `tertiary-soft` | `#a7e855` | **Refined full-opacity chartreuse — data, role titles, and figures on dark surfaces** |
 | `tertiary-container` / `on-tertiary-container` | `#2d5000` / `#9ffb29` | Filled lime areas — ongoing experience avatar, identity sticker |
 | `eva-orange` / `on-eva-orange` | `#ffb59a` / `#5b1b00` | **Chest orange — warm accents, headline accent, code sticker, edu avatar, socials hover** |
 | `eva-orange-container` / `on-eva-orange-container` | `#802a00` / `#ffdbcf` | Filled orange areas — experience stamp, header contact pill, second project art |
@@ -79,23 +85,23 @@ comma-separated R, G, B triplets (do not convert them to hex).
 
 | Role | Value | Use |
 | --- | --- | --- |
-| `background` / `surface` | `#fef7ff` | Violet-white ground |
+| `background` / `surface` | `#fcfaff` | Clean neutral-tinted porcelain ground |
 | `on-surface` / `on-background` | `#20172f` | Primary reading text |
-| `surface-container-lowest` … `-highest` | `#ffffff` → `#ebdcfe` | Tonal elevation ladder |
+| `surface-container-lowest` … `-highest` | `#ffffff` → `#e6e1ee` | Tonal elevation ladder (`#f7f5fb` / `#f2eff7` / `#ece8f3` / `#e6e1ee`) |
 | `on-surface-variant` | `#4c425c` | Secondary text |
 | `outline` / `outline-variant` | `#7e728f` / `#cfc1e1` | Borders, dividers |
 | `primary` / `on-primary` | `#7348aa` / `#ffffff` | EVA-01 violet |
+| `primary-container` / `on-primary-container` | `#e7d4ff` / `#4a217e` | Highlighted cards & nav indicator |
 | `secondary` / `on-secondary` | `#6b5197` / `#ffffff` | Violet support role |
-| `tertiary` / `on-tertiary` | `#3e6a00` / `#ffffff` | **Dark lime for text on light** |
-| `tertiary-container` / `on-tertiary-container` | `#9ffb29` / `#2d5000` | Bright lime for fills |
+| `tertiary` / `tertiary-soft` / `on-tertiary` | `#3e6a00` / `#3e6a00` / `#ffffff` | **Dark lime for text on light** |
+| `tertiary-container` / `on-tertiary-container` | `#c8f57c` / `#1f3b00` | Soft chartreuse fills & AAA metric values |
 | `eva-orange` / `on-eva-orange` | `#a83900` / `#ffffff` | Chest orange |
 | `eva-orange-container` / `on-eva-orange-container` | `#ffdbcf` / `#380d00` | Filled orange areas |
 | `error` / `on-error` | `#ba1a1a` / `#ffffff` | Semantic error |
 
 ### Lime Readability Rules
 
-**Lime (`#86dd00`) is NEVER used at full opacity as text.** It is always dimmed to 45-70%
-opacity, which produces a muted olive-sage accent that's pleasant on dark surfaces.
+In dark mode, data/role text (hero intro, non-current role titles, program names, metric values, and thesis icons) uses full-opacity `--v-theme-tertiary-soft` (`#a7e855`) instead of opacity-dimmed `#86dd00`, keeping crisp contrast without muddy olive tones. Pure `#86dd00` (`--v-theme-tertiary`) is reserved for small focal sparks (status dot, wavy scroll progress, focus ring, current badge fill, subtle heading dot/bullet markers).
 
 | Element | Opacity | Surface | Notes |
 | --- | --- | --- | --- |
@@ -206,17 +212,19 @@ All text sizes are tuned for comfortable reading — no tiny or stinging text:
 - **Header** (`<header>`, scrolls away normally) — brand `ALB.` (violet `B`, lime `.`),
   theme toggle (round, `appearance: none`, tonal fill), "Get in touch" CTA pill
   (`eva-orange-container` bg).
-- **Language switch** (`EN | ID`, `.lang-switch`) — a tonal pill (`surface-container-high`) with
-  two links to the two prerendered routes; the current one is filled `primary-container`. Same
-  44 px height as the theme toggle. Mono face, 12 px. Placement is responsive because the fixed
-  pill nav is ~700 px wide and centered: below 1240 px it sits against the theme toggle on the
-  right; from 1240 px it moves beside the brand on the left. Never place it where the pill can
-  cover it.
+- **Language switch** (`EN | ID`, `.lang-switch`) — M3E connected segmented button group
+  (`surface-container-high`) with two links to the two prerendered routes; inactive sides have
+  asymmetric connected radii (`9999px 8px 8px 9999px` / `8px 9999px 9999px 8px`) and the active
+  item morphs to a full pill (`primary-container`). Same 44 px height as the theme toggle. Mono face,
+  12 px. Placement is responsive because the fixed pill nav is ~700 px wide and centered: below
+  1240 px it sits against the theme toggle on the right; from 1240 px it moves beside the brand on
+  the left. Never place it where the pill can cover it.
 - **Desktop/tablet floating pill** (`position: fixed; top: 14px`) — stays at top on scroll.
-  Icon + label nav items. Active state: `primary-container` bg. Hover: tonal step-up.
-  Indonesian labels (`Pengalaman`, `Pendidikan`) are wider than English, so between 960–1139 px
-  the icons are hidden (labels only) and between 960–1239 px the header "Get in touch" button is
-  hidden (it duplicates the pill's Contact item).
+  Icon + label nav items with a sliding spring active indicator (`.nav-indicator`, falling back to
+  static `primary-container` fill without JS) and a wavy scroll-progress bar. Hover: tonal step-up +
+  radius morph. Indonesian labels (`Pengalaman`, `Pendidikan`) are wider than English, so between
+  960–1139 px the icons are hidden (labels only) and between 960–1239 px the header "Get in touch"
+  button is hidden (it duplicates the pill's Contact item).
 - **Mobile bottom dock** — icon-only pill, shrinks to 1 active icon on scroll, expands to all
   icons when scrolling stops (500ms debounce). Tap shrunk pill to expand manually. Floating
   active label (pill, `primary` bg) appears above dock when expanded.

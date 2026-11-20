@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64">
+  <rect width="64" height="64" rx="18" fill="#1034a6"/>
+  <text x="50%" y="54%" dominant-baseline="middle" text-anchor="middle" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" font-weight="800" font-size="22" letter-spacing="-1.2">
+    <tspan fill="#e4eaf6">AL</tspan><tspan fill="#8cb4ff">B</tspan><tspan fill="#ff6b57">.</tspan>
+  </text>
+</svg>

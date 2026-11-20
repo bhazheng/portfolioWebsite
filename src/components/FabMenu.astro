@@ -1,0 +1,49 @@
+---
+import { CV_URL, UI, type Locale } from '../i18n'
+
+interface Props { lang: Locale }
+const { lang } = Astro.props
+const ui = UI[lang]
+---
+<div class="fab-menu">
+  <div id="fab-menu-items" class="fab-menu-items" role="menu" hidden>
+    <a href="mailto:akbarlucky@protonmail.com" class="fab-action" role="menuitem">
+      <span class="i-material-symbols:mail icon" style="font-size:20px;width:20px;height:20px" aria-hidden="true"></span>
+      <span>{ui.fab.email}</span>
+    </a>
+    <a
+      href="https://wa.me/6285172455808"
+      target="_blank"
+      rel="noopener noreferrer"
+      class="fab-action"
+      role="menuitem"
+      aria-label={`${ui.fab.whatsapp} (${ui.hero.newTab})`}
+    >
+      <span class="i-mdi:whatsapp icon brand-whatsapp" style="font-size:20px;width:20px;height:20px" aria-hidden="true"></span>
+      <span>{ui.fab.whatsapp}</span>
+    </a>
+    <a
+      href={CV_URL}
+      target="_blank"
+      rel="noopener noreferrer"
+      class="fab-action"
+      role="menuitem"
+      aria-label={`${ui.fab.cv} (${ui.hero.newTab})`}
+    >
+      <span class="i-material-symbols:description icon" style="font-size:20px;width:20px;height:20px" aria-hidden="true"></span>
+      <span>{ui.fab.cv}</span>
+    </a>
+  </div>
+  <button
+    type="button"
+    class="fab-trigger"
+    aria-haspopup="menu"
+    aria-expanded="false"
+    aria-controls="fab-menu-items"
+    aria-label={ui.fab.open}
+    data-label-open={ui.fab.open}
+    data-label-close={ui.fab.close}
+  >
+    <span class="i-material-symbols:add icon" style="font-size:24px;width:24px;height:24px" aria-hidden="true"></span>
+  </button>
+</div>

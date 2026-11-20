@@ -47,6 +47,7 @@ const ui = UI[lang]
 
   <!-- Desktop/tablet sticky pill nav — floats at top on scroll -->
   <nav class="floating-nav sticky-pill" aria-label={ui.header.navLabel}>
+    <span class="nav-indicator" aria-hidden="true"></span>
     {NAV_SECTIONS.map((s) => (
       <a
         href={`#${s.id}`}

@@ -1,5 +1,4 @@
 :root {
-  /* Material 3 motion: standard easing, short durations for state changes. */
   --m3-standard: cubic-bezier(0.2, 0, 0, 1);
   --m3-short: 200ms;
 }
@@ -344,8 +343,8 @@ html[data-theme='light'] .eyebrow > span { color: rgb(var(--v-theme-on-eva-orang
   animation: status-pulse 2.4s ease-out infinite;
 }
 @keyframes status-pulse {
-  0% { box-shadow: 0 0 0 0 rgba(134, 221, 0, 0.55); }
-  70%, 100% { box-shadow: 0 0 0 8px rgba(134, 221, 0, 0); }
+  0% { box-shadow: 0 0 0 0 rgba(var(--v-theme-tertiary), 0.55); }
+  70%, 100% { box-shadow: 0 0 0 8px rgba(var(--v-theme-tertiary), 0); }
 }
 .status-chip + .hero-actions { margin-top: 18px; }
 
@@ -576,19 +575,6 @@ html[data-theme='light'] .channel-icon .text-tertiary { color: rgb(var(--v-theme
 }
 .copy-btn::after { inset: -4px 0; }
 
-/* ── Material 3 audit pass ─────────────────────────────────────────────────────────────── */
-
-/* Motion: every var(--ease) transition now uses the M3 standard curve. */
-:root { --ease: var(--m3-standard); }
-
-/* Focus indicator: M3 specifies a 3dp ring offset by 2dp (colour stays the theme's tertiary). */
-:focus-visible { outline-width: 3px; }
-
-/* Interactive controls use state layers (8% hover) instead of rotating / lifting. */
-.theme-toggle:hover { transform: none; }
-.header-contact:hover { transform: none; box-shadow: inset 0 0 0 999px color-mix(in srgb, currentColor 8%, transparent); }
-.header-contact:focus-visible, .header-contact:active { box-shadow: inset 0 0 0 999px color-mix(in srgb, currentColor 10%, transparent); }
-
 /* 48dp touch targets for the chrome controls (visual size unchanged; the extension is invisible). */
 .brand-mark, .lang-switch a, .theme-toggle, .header-contact, .floating-nav a, .mobile-dock-item { position: relative; }
 .brand-mark::after, .theme-toggle::after, .header-contact::after, .mobile-dock-item::after { content: ''; position: absolute; inset: -2px; }
@@ -596,8 +582,6 @@ html[data-theme='light'] .channel-icon .text-tertiary { color: rgb(var(--v-theme
 .lang-switch a::after { content: ''; position: absolute; inset: -5px; }
 .lang-switch a:first-child::after { right: 0; }
 .lang-switch a:last-child::after { left: 0; }
-/* The Experience "show more" toggle: grow it to a full 48dp row. */
-.exp-more > summary { min-height: 48px; }
 
 /* ── No outlines (Material 3 filled style) ─────────────────────────────────────────────── */
 /* Project art: the two concentric rings become filled tonal discs (the mask that carved the
