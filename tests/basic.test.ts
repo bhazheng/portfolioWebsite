@@ -7,7 +7,7 @@ import { LOCALES, UI } from '../src/i18n'
 import { EXPERIENCE } from '../src/data/experience'
 import { EDUCATION } from '../src/data/education'
 import { PROJECTS } from '../src/data/projects'
-import { SKILL_CATEGORIES } from '../src/data/skills'
+import { SKILL_CATEGORIES, SKILL_LOGOS } from '../src/data/skills'
 
 const SECTION_ORDER = ['hero', 'experience', 'education', 'projects', 'skills', 'contact']
 const PAGES = [
@@ -20,7 +20,7 @@ async function render(page: typeof Index) {
   return container.renderToString(page)
 }
 
-describe.each(PAGES)('one-page EVA-01 sections ($lang)', ({ lang, page }) => {
+describe.each(PAGES)('one-page sections ($lang)', ({ lang, page }) => {
   it('renders all six section anchors with the right <html lang>', async () => {
     const html = await render(page)
 
@@ -75,5 +75,10 @@ describe('i18n parity', () => {
       expect(shape(SKILL_CATEGORIES[l], r => [r.icon, r.color, r.skills.map((s: any) => s.id)]))
         .toEqual(shape(SKILL_CATEGORIES[base], r => [r.icon, r.color, r.skills.map((s: any) => s.id)]))
     }
+  })
+
+  it('only maps logos to skills that exist', () => {
+    const ids = new Set(SKILL_CATEGORIES.en.flatMap(c => c.skills.map(s => s.id)))
+    for (const id of Object.keys(SKILL_LOGOS)) expect(ids.has(id), `unknown skill id "${id}"`).toBe(true)
   })
 })

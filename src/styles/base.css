@@ -104,11 +104,6 @@
 @media (min-width: 1240px) {
   .lang-switch { margin-left: 16px; margin-right: auto; }
 }
-/* 960–1239px: the pill nav reaches into the right-hand controls, and "Get in touch" duplicates
-   the pill's Contact item, so drop the button here (it already hides below 960px). */
-@media (min-width: 960px) and (max-width: 1239px) {
-  .header-contact { display: none; }
-}
 /* 960–1139px: the pill's icons repeat its labels, so drop them here to keep the pill clear of
    the brand and the language/theme controls (Indonesian labels are wider than English). */
 @media (min-width: 960px) and (max-width: 1139px) {
@@ -117,13 +112,13 @@
 
 /* ── Audit fixes ─────────────────────────────────────────────── */
 
-/* Contrast (WCAG 1.4.3): lime text is dimmed to 45–70% only on dark surfaces. In light theme the
-   dark-lime `tertiary` at 70% measures 2.9–3.1:1; at full opacity it is 6.1:1. */
+/* Contrast (WCAG 1.4.3): accent text is never dimmed. In light theme the dark scarlet `tertiary`
+   at 70% would measure ~3:1 on the surface; at full opacity it is 5.4:1 on the background. */
 html[data-theme='light'] .exp-role-row h4,
 html[data-theme='light'] .edu-program,
 html[data-theme='light'] .heading-dot { opacity: 1; }
-/* Metric values sit on the darker tonal tile, where plain `tertiary` is only 4.3:1; the darker lime
-   container-on role gives ≥ 7:1. (The current Experience card overrides this with `on-surface`.) */
+/* Metric values sit on the darker tonal tile, where plain `tertiary` is only 4.6:1; the
+   container-on role gives 9.9:1. (The current Experience card overrides this with `on-surface`.) */
 html[data-theme='light'] .metric-tile .metric-value {
   color: rgb(var(--v-theme-on-tertiary-container));
   opacity: 1;
@@ -133,7 +128,6 @@ html[data-theme='light'] .metric-tile .metric-value {
 .hero-socials .btn--small { height: 44px; }
 .text-link { min-height: 44px; }
 .email-link { min-height: 44px; }
-.header-contact { min-height: 44px; }
 .brand-mark { padding-block: 5px; }
 
 /* Nothing smaller than 12px. */
@@ -161,16 +155,9 @@ html[data-theme='light'] .metric-tile .metric-value {
   border-radius: 8px;
 }
 .exp-more > summary::-webkit-details-marker { display: none; }
-.exp-more > summary::after {
-  content: '';
-  width: 7px;
-  height: 7px;
-  border-right: 2px solid currentColor;
-  border-bottom: 2px solid currentColor;
-  transform: rotate(45deg) translateY(-2px);
-  transition: transform 0.2s;
-}
-.exp-more[open] > summary::after { transform: rotate(-135deg) translateY(-2px); }
+/* Chevron is a Material Symbols icon (no stroked borders); it turns when the row opens. */
+.exp-more-chevron { transition: transform var(--m3-short) var(--m3-standard); }
+.exp-more[open] > summary .exp-more-chevron { transform: rotate(180deg); }
 .exp-more > summary .exp-more-open,
 .exp-more[open] > summary .exp-more-closed { display: none; }
 .exp-more[open] > summary .exp-more-open { display: inline; }
@@ -298,7 +285,7 @@ html[data-theme='light'] .metric-tile .metric-value {
 
 /* ── Visual identity: HUD labels, status chip, scroll progress ── */
 
-/* Section eyebrow: "// 01 · EXPERIENCE" + a short segmented bar (EVA-01 HUD feel, text-only). */
+/* Section eyebrow: "// 01 · EXPERIENCE" + a short segmented bar (HUD feel, text-only). */
 .eyebrow {
   display: flex;
   align-items: center;
@@ -338,7 +325,7 @@ html[data-theme='light'] .eyebrow > span { color: rgb(var(--v-theme-on-eva-orang
   width: 8px;
   height: 8px;
   border-radius: 50%;
-  background: rgb(var(--v-theme-tertiary));
+  background: rgb(var(--v-theme-primary));
   box-shadow: 0 0 0 0 rgb(var(--v-theme-tertiary));
   animation: status-pulse 2.4s ease-out infinite;
 }
@@ -347,13 +334,19 @@ html[data-theme='light'] .eyebrow > span { color: rgb(var(--v-theme-on-eva-orang
   70%, 100% { box-shadow: 0 0 0 8px rgba(var(--v-theme-tertiary), 0); }
 }
 .status-chip + .hero-actions { margin-top: 18px; }
+/* Phones: pull the CTA row up so it clears the bottom dock on the first screen. */
+@media (max-width: 767px) {
+  .status-chip + .hero-actions { margin-top: 6px; }
+  /* The dock already offers Projects on phones; the wrapped link sat under it on the first screen. */
+  .hero-actions .text-link { display: none; }
+}
 
 @media (max-width: 767px) {
   .eyebrow { margin-bottom: 6px; }
   .status-chip { margin-top: 14px; padding: 7px 12px; }
 }
 
-/* Thin lime scroll-progress bar inside the desktop pill nav (value set by nav.ts). */
+/* Thin scroll-progress bar inside the desktop pill nav (value set by nav.ts). */
 .floating-nav::after {
   content: '';
   position: absolute;
@@ -363,7 +356,9 @@ html[data-theme='light'] .eyebrow > span { color: rgb(var(--v-theme-on-eva-orang
   height: 2px;
   border-radius: 2px;
   pointer-events: none;
-  background: linear-gradient(90deg, rgb(var(--v-theme-tertiary)) calc(var(--scroll-progress, 0) * 100%), transparent 0);
+  background: rgb(var(--v-theme-tertiary));
+  transform: scaleX(var(--scroll-progress, 0));
+  transform-origin: left center;
   opacity: 0.85;
 }
 
@@ -377,62 +372,8 @@ html[data-theme='light'] .eyebrow > span { color: rgb(var(--v-theme-on-eva-orang
   to { opacity: 1; transform: none; }
 }
 
-/* Tool ticker: a slow NERV-console style strip of the tools used. Pauses on hover, static when
-   the visitor prefers reduced motion. */
-.tool-ticker {
-  position: relative;
-  overflow: hidden;
-  margin-block: 32px 8px;
-  padding-block: 14px;
-  background: rgb(var(--v-theme-surface-container-low));
-  -webkit-mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
-  mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
-}
-.tool-ticker-track { display: flex; width: max-content; animation: ticker-scroll 150s linear infinite; }
-.tool-ticker:hover .tool-ticker-track { animation-play-state: paused; }
-.tool-ticker ul { display: flex; margin: 0; padding: 0; list-style: none; }
-.tool-ticker li {
-  display: flex;
-  align-items: center;
-  padding-right: 16px;
-}
-/* Each logo sits in a tile tinted with its own brand colour (M3 "custom colour container" pattern).
-   The tiles are decorative and non-interactive, so they have no hover/pressed state. */
-.tool-chip {
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
-  height: 48px;
-  padding: 0 20px 0 14px;
-  border-radius: 12px;
-  background: color-mix(in srgb, var(--logo-color) 18%, rgb(var(--v-theme-surface-container-high)));
-  white-space: nowrap;
-}
-.tool-logo {
-  display: block;
-  flex: none;
-  font-size: 24px;
-  width: 24px;
-  height: 24px;
-  color: var(--logo-color);
-}
-/* Name next to the logo: label-large (14/500), so the strip is never icons alone. */
-.tool-name {
-  font-size: 14px;
-  font-weight: 500;
-  letter-spacing: 0.1px;
-  color: rgb(var(--v-theme-on-surface));
-}
-/* Brand colours are tuned for dark surfaces; darken them a touch on the light theme. */
-html[data-theme='light'] .tool-logo { filter: brightness(0.72) saturate(1.2); }
-@media (max-width: 767px) {
-  .tool-chip { height: 40px; padding: 0 16px 0 12px; gap: 8px; }
-  .tool-ticker li { padding-right: 12px; }
-  .tool-ticker { margin-block: 24px 4px; }
-}
-@keyframes ticker-scroll { to { transform: translateX(-50%); } }
 
-/* Skill chips: each card tints its chips (lime / violet / orange, same cycle as the card accents). */
+/* Skill chips: each card tints its chips (scarlet / blue / coral, same cycle as the card accents). */
 .skill-card[data-accent='0'] { --chip-accent: var(--v-theme-tertiary); }
 .skill-card[data-accent='1'] { --chip-accent: var(--v-theme-primary); }
 .skill-card[data-accent='2'] { --chip-accent: var(--v-theme-eva-orange); }
@@ -450,12 +391,13 @@ html[data-theme='light'] .tool-logo { filter: brightness(0.72) saturate(1.2); }
   border-radius: 50%;
   background: rgb(var(--chip-accent, var(--v-theme-primary)));
 }
+/* Tool chips swap the dot for the tool's logo, single-colour in the card's accent (no brand colours). */
+.skill-list li.has-logo::before { display: none; }
+.skill-logo { flex: none; color: rgb(var(--chip-accent, var(--v-theme-primary))); }
 
 @media (prefers-reduced-motion: reduce) {
-  .tool-ticker-track,
   .status-dot,
   .hero-headline .hl { animation: none; }
-  .tool-ticker { overflow-x: auto; }
 }
 
 /* ── Contact revamp: focal email + copy, labelled channel tiles (Material 3) ───── */
@@ -484,7 +426,7 @@ html[data-theme='light'] .tool-logo { filter: brightness(0.72) saturate(1.2); }
 .copy-btn[hidden] { display: none; }
 .copy-btn:hover { box-shadow: inset 0 0 0 999px color-mix(in srgb, currentColor 8%, transparent); }
 .copy-btn:focus-visible, .copy-btn:active { box-shadow: inset 0 0 0 999px color-mix(in srgb, currentColor 10%, transparent); }
-.copy-btn.copied { background: rgb(var(--v-theme-tertiary)); color: rgb(var(--v-theme-on-tertiary)); }
+.copy-btn.copied { background: rgb(var(--v-theme-primary)); color: rgb(var(--v-theme-on-primary)); }
 
 .contact-channels {
   grid-column: 1 / -1;
@@ -552,8 +494,6 @@ html[data-theme='light'] .tool-logo { filter: brightness(0.72) saturate(1.2); }
 .brand-whatsapp { color: #25d366; }
 html[data-theme='light'] .brand-linkedin { color: #0a66c2; }
 html[data-theme='light'] .brand-whatsapp { color: #128c4a; }
-/* The contact block's light theme has a pale surface, so keep the lime CV icon readable there. */
-html[data-theme='light'] .channel-icon .text-tertiary { color: rgb(var(--v-theme-on-tertiary-container)); }
 
 /* Skill-card icon tile: tinted with the icon's own colour (filled tonal container, no outline). */
 .skill-card-icon {
@@ -576,8 +516,8 @@ html[data-theme='light'] .channel-icon .text-tertiary { color: rgb(var(--v-theme
 .copy-btn::after { inset: -4px 0; }
 
 /* 48dp touch targets for the chrome controls (visual size unchanged; the extension is invisible). */
-.brand-mark, .lang-switch a, .theme-toggle, .header-contact, .floating-nav a, .mobile-dock-item { position: relative; }
-.brand-mark::after, .theme-toggle::after, .header-contact::after, .mobile-dock-item::after { content: ''; position: absolute; inset: -2px; }
+.brand-mark, .lang-switch a, .theme-toggle, .floating-nav a, .mobile-dock-item { position: relative; }
+.brand-mark::after, .theme-toggle::after, .mobile-dock-item::after { content: ''; position: absolute; inset: -2px; }
 .floating-nav a::after { content: ''; position: absolute; inset: -4px 0; }
 .lang-switch a::after { content: ''; position: absolute; inset: -5px; }
 .lang-switch a:first-child::after { right: 0; }

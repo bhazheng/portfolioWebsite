@@ -143,3 +143,18 @@ export const SKILL_CATEGORIES: Record<Locale, SkillCategoryWithColor[]> = {
     }
   ]
 }
+
+/**
+ * Real tool logos shown inside the matching skill chip, in place of the dot. Keyed by skill id, which is
+ * identical in every locale. Only tools with a genuine, legible mark get one: SQL, Matplotlib / Seaborn
+ * and IndoBERT have none, and IBM's striped wordmark is unreadable at chip size, so those keep the dot. Looker Studio uses the Looker mark (the closest
+ * available). These classes live only in this file, so they are safelisted in `uno.config.ts`.
+ */
+export const SKILL_LOGOS: Record<string, string> = {
+  powerbi: 'i-simple-icons:powerbi',
+  tableau: 'i-simple-icons:tableau',
+  looker: 'i-simple-icons:looker',
+  python: 'i-simple-icons:python',
+  excel: 'i-simple-icons:microsoftexcel',
+  tf: 'i-simple-icons:tensorflow'
+}

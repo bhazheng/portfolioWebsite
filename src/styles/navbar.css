@@ -66,22 +66,20 @@
   background: rgb(var(--v-theme-surface-container-high));
   box-shadow: 0 6px 28px rgba(0, 0, 0, 0.18);
   max-width: calc(100vw - 32px);
-  transition: gap var(--m3e-dur-default-spatial) var(--m3e-spring-default-spatial),
-              padding var(--m3e-dur-default-spatial) var(--m3e-spring-default-spatial),
+  transition: padding var(--m3e-dur-default-spatial) var(--m3e-spring-default-spatial),
               border-radius var(--m3e-dur-default-spatial) var(--m3e-spring-default-spatial),
               box-shadow var(--m3e-dur-default-effects) var(--m3e-spring-default-effects);
 }
 
-/* Shrunk: single round icon */
+/* Shrunk: single round icon. 5px padding + 48px item = 58px, the same height as the
+   expanded dock (7px + 44px), so the label above it does not hop on every toggle. */
 .mobile-nav-wrap.shrunk .mobile-dock {
-  gap: 0;
   padding: 5px;
   border-radius: 50%;
 }
 
 /* Expanded: all icons in a row */
 .mobile-nav-wrap:not(.shrunk) .mobile-dock {
-  gap: 3px;
   padding: 7px;
   border-radius: 34px;
 }
@@ -119,8 +117,6 @@
 /* ── Responsive ────────────────────────────────────────────── */
 @media (max-width: 767px) {
   .site-header-inner { height: 64px; gap: 10px; }
-
-  .header-actions .header-contact { display: none; }
 }
 
 /* ── Static-render adaptations ─────────────────────────────── */
@@ -130,6 +126,10 @@
     opacity var(--m3e-dur-fast-effects) var(--m3e-spring-fast-effects),
     transform var(--m3e-dur-fast-spatial) var(--m3e-spring-fast-spatial);
 }
+
+/* On the hero the label is redundant (Home is already highlighted) and would sit on the CTA row.
+   opacity keeps its space so the dock does not move. */
+.mobile-nav-wrap[data-active='hero'] .active-label { opacity: 0; pointer-events: none; }
 
 /* Keep .dock-full always rendered and smoothly collapse inactive items on .shrunk. */
 .dock-single { display: none; }
@@ -152,8 +152,8 @@
   display: none;
 }
 .mobile-nav-wrap.shrunk .dock-full .mobile-dock-item.current {
-  width: 52px;
-  height: 52px;
+  width: 48px;
+  height: 48px;
   border-radius: 50%;
   transform: scale(1);
 }
@@ -161,7 +161,6 @@
 /* Both navs render; md threshold (960px) picks one, as useDisplay().mdAndUp did. */
 @media (max-width: 959.98px) {
   .floating-nav.sticky-pill { display: none; }
-  .header-contact { display: none; }
 }
 @media (min-width: 960px) {
   .mobile-nav-wrap { display: none; }

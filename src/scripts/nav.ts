@@ -43,6 +43,8 @@ function setActive(id: string) {
     }
   }
   if (shrunkIcon) shrunkIcon.className = `${section.icon} icon`
+  // CSS hides the floating label on the hero (the dock already highlights Home there).
+  if (mobileWrap) mobileWrap.dataset.active = section.id
   positionIndicator()
 }
 
@@ -61,17 +63,32 @@ for (const s of NAV_SECTIONS) {
   if (el) observer.observe(el)
 }
 
+// Desktop (≥960px) shows the pill nav; below it, the mobile dock.
+const desktopMq = window.matchMedia('(min-width: 960px)')
+
+// Dock shrinks while scrolling and re-expands 500ms after scrolling stops.
+// Only touch the class when it actually changes, and skip it entirely on desktop
+// (the dock is display:none there).
 let timer: number | undefined
-window.addEventListener('scroll', () => {
-  mobileWrap?.classList.add('shrunk')
+let shrunk = false
+function expandDock() {
+  shrunk = false
+  mobileWrap?.classList.remove('shrunk')
+}
+function onDockScroll() {
+  if (!mobileWrap || desktopMq.matches) return
+  if (!shrunk) {
+    shrunk = true
+    mobileWrap.classList.add('shrunk')
+  }
   window.clearTimeout(timer)
-  timer = window.setTimeout(() => mobileWrap?.classList.remove('shrunk'), 500)
-}, { passive: true })
+  timer = window.setTimeout(expandDock, 500)
+}
 
 // Shrunk pill: tapping expands instead of navigating.
 shrunkItem?.addEventListener('click', (e) => {
   e.preventDefault()
-  mobileWrap?.classList.remove('shrunk')
+  expandDock()
 })
 
 // Dock tap: if shrunk, tapping the shrunk active pill expands it instead of jumping;
@@ -79,32 +96,46 @@ shrunkItem?.addEventListener('click', (e) => {
 dock?.addEventListener('click', (e) => {
   const item = (e.target as HTMLElement).closest('.mobile-dock-item:not([data-shrunk-item])')
   if (!item) return
-  if (mobileWrap?.classList.contains('shrunk')) {
+  if (shrunk) {
     e.preventDefault()
-    mobileWrap.classList.remove('shrunk')
+    expandDock()
   } else {
+    shrunk = true
     mobileWrap?.classList.add('shrunk')
   }
 })
 
-window.matchMedia('(min-width: 960px)').addEventListener('change', (e) => {
-  if (e.matches) mobileWrap?.classList.remove('shrunk')
-})
-
-// Scroll progress for the pill nav's thin lime bar (CSS reads --scroll-progress).
+// Scroll progress for the pill nav's thin scarlet bar (CSS reads --scroll-progress).
+// Written on the pill itself, not <html>: a custom property on the root inherits into
+// every element, so updating it there restyled the whole document on each scroll frame.
+// The pill is hidden below 960px, so mobile skips the work entirely.
 const root = document.documentElement
-let ticking = false
 function updateProgress() {
+  if (!floatingNav || !desktopMq.matches) return
   const max = root.scrollHeight - window.innerHeight
-  root.style.setProperty('--scroll-progress', String(max > 0 ? Math.min(1, Math.max(0, window.scrollY / max)) : 0))
-  ticking = false
+  floatingNav.style.setProperty('--scroll-progress', String(max > 0 ? Math.min(1, Math.max(0, window.scrollY / max)) : 0))
 }
+
+// One passive scroll listener, coalesced to one update per frame.
+let ticking = false
 window.addEventListener('scroll', () => {
+  onDockScroll()
   if (!ticking) {
     ticking = true
-    requestAnimationFrame(updateProgress)
+    requestAnimationFrame(() => {
+      ticking = false
+      updateProgress()
+    })
   }
 }, { passive: true })
+
+desktopMq.addEventListener('change', (e) => {
+  if (e.matches) {
+    window.clearTimeout(timer)
+    expandDock()
+    updateProgress()
+  }
+})
 updateProgress()
 
 setActive('hero')

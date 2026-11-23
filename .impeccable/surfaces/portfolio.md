@@ -1,4 +1,4 @@
-# Surface Brief — Portfolio (EVA-01 / Material Design 3)
+# Surface Brief — Portfolio (Material Design 3, Egyptian Blue / Stone Blue / Scarlet Red)
 
 ## Scope / Mode
 
@@ -22,7 +22,7 @@ Hero leads with the profile portrait in a blob frame and three floating stickers
 - Every visible string exists in both locales (`src/i18n/index.ts`, `src/data/*.ts`); facts and numbers are identical, only wording and number/date format differ (`8.000+`, `IPK 3,77`, `Agu`, `Sekarang`). The headline, project titles, tool names, and thesis title stay in English.
 - Keep `role` titles short; the division/department goes in the `team` line.
 - Every date, metric, percentage, and tech tag renders in the mono face (`.font-mono`).
-- Lime is never full-opacity text and never on `primary-container` purple (use `on-surface` there).
+- Accent text is never dimmed: scarlet/coral text on dark surfaces uses `tertiary-soft` at full opacity. On `primary-container` cards text is `on-surface` or `on-primary-container`, never an accent.
 
 ## Directions / States
 

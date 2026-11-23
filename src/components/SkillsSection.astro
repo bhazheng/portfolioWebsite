@@ -1,5 +1,5 @@
 ---
-import { SKILL_CATEGORIES } from '../data/skills'
+import { SKILL_CATEGORIES, SKILL_LOGOS } from '../data/skills'
 import { UI, type Locale } from '../i18n'
 
 interface Props { lang: Locale }
@@ -28,7 +28,10 @@ const ui = UI[lang]
         </div>
         <ul class="skill-list">
           {cat.skills.map((skill) => (
-            <li>
+            <li class:list={[{ 'has-logo': SKILL_LOGOS[skill.id] }]}>
+              {SKILL_LOGOS[skill.id] && (
+                <span class:list={[SKILL_LOGOS[skill.id], 'icon', 'skill-logo']} style="font-size:14px;width:14px;height:14px" aria-hidden="true"></span>
+              )}
               <span class="skill-name">{skill.name}</span>
               {skill.appliedIn && <span class="skill-applied font-mono">{skill.appliedIn}</span>}
             </li>

@@ -80,6 +80,7 @@ const ui = UI[lang]
                 <summary class="font-mono">
                   <span class="exp-more-closed">{ui.experience.more.replace('{n}', String(entry.bullets.length - 1))}</span>
                   <span class="exp-more-open">{ui.experience.less}</span>
+                  <span class="i-material-symbols:keyboard-arrow-down icon exp-more-chevron" style="font-size:18px;width:18px;height:18px" aria-hidden="true"></span>
                 </summary>
                 <ul class="experience-bullets">
                   {entry.bullets.slice(1).map((bullet) => <li>{bullet}</li>)}

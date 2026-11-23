@@ -4,7 +4,7 @@ export const NAV_SECTIONS = [
   { id: 'hero', icon: 'i-material-symbols:home' },
   { id: 'experience', icon: 'i-material-symbols:work' },
   { id: 'education', icon: 'i-material-symbols:school' },
-  { id: 'projects', icon: 'i-material-symbols:code' },
-  { id: 'skills', icon: 'i-material-symbols:build' },
+  { id: 'projects', icon: 'i-material-symbols:dashboard' },
+  { id: 'skills', icon: 'i-material-symbols:psychology' },
   { id: 'contact', icon: 'i-material-symbols:mail' }
 ] as const

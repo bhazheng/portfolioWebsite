@@ -1,5 +1,5 @@
 /* ═══════════════════════════════════════════════════════════════
-   EVA-01 Portfolio — rei.my.id-inspired design layer
+   Portfolio — rei.my.id-inspired design layer
    Built on Vuetify 4 (M3) — colors come from Vuetify's theme
    (--v-theme-*). These classes add the editorial/illustrated
    aesthetic of rei.my.id on top of the M3 surface system.
@@ -164,26 +164,6 @@ section[id] {
 .theme-toggle:hover {
   background: rgb(var(--v-theme-surface-container-highest));
   transform: rotate(12deg);
-}
-
-/* ── "Get in touch" header pill ─────────────────────────────── */
-
-.header-contact {
-  background: rgb(var(--v-theme-eva-orange-container));
-  color: rgb(var(--v-theme-on-eva-orange-container));
-  white-space: nowrap;
-  border-radius: 30px;
-  padding: 11px 18px;
-  font-size: 13px;
-  font-weight: 600;
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  text-decoration: none;
-  transition: transform 0.2s var(--ease);
-}
-.header-contact:hover {
-  transform: translateY(-1px);
 }
 
 /* ── Hero ──────────────────────────────────────────────────── */
@@ -702,8 +682,8 @@ section[id] {
   opacity: 0.7;
 }
 .current-badge {
-  background: rgb(var(--v-theme-tertiary));
-  color: rgb(var(--v-theme-on-tertiary));
+  background: rgb(var(--v-theme-primary));
+  color: rgb(var(--v-theme-on-primary));
   border-radius: 20px;
   padding: 4px 12px;
   font-size: 11px;
@@ -863,7 +843,7 @@ section[id] {
               transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
 }
 /* M3 state layer: tonal elevation on hover (not outline) */
-/* First entry (degree): primary tonal elevation (not stinging lime) */
+/* First entry (degree): primary tonal elevation (accent text stays neutral on this card) */
 .edu-entry:first-child .edu-card {
   background: rgb(var(--v-theme-primary-container));
 }
@@ -1268,7 +1248,7 @@ a:active, button:active {
 /* WCAG 1.4.11: Vuetify's default focus overlay is too low-contrast (1.2:1).
    Provide a visible outline on keyboard focus that meets the 3:1 minimum. */
 :focus-visible {
-  outline: 2px solid rgb(var(--v-theme-tertiary));
+  outline: 2px solid rgb(var(--v-theme-primary));
   outline-offset: 2px;
 }
 

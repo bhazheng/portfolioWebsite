@@ -11,7 +11,7 @@ const ui = UI[lang]
   <header class="site-header page-width">
     <div class="site-header-inner">
       <a href="#hero" class="brand-mark" aria-label={ui.header.brandAria}>
-        AL<span class="text-primary">B</span><span class="text-tertiary font-mono">.</span>
+        AL<span class="text-primary">B</span><span class="text-eva-orange font-mono">.</span>
       </a>
 
       <!-- Language switch: plain links to the two prerendered routes (no JS needed) -->
@@ -37,10 +37,6 @@ const ui = UI[lang]
         >
           <span class="i-material-symbols:light-mode icon" style="font-size:22px;width:22px;height:22px" aria-hidden="true"></span>
         </button>
-        <a href="#contact" class="header-contact">
-          {ui.header.cta}
-          <span class="i-material-symbols:arrow-outward icon" style="font-size:16px;width:16px;height:16px" aria-hidden="true"></span>
-        </a>
       </div>
     </div>
   </header>
@@ -62,7 +58,7 @@ const ui = UI[lang]
   </nav>
 
   <!-- Mobile bottom dock: shrinks to 1 icon on scroll, expands when stopped -->
-  <div class="mobile-nav-wrap">
+  <div class="mobile-nav-wrap" data-active="hero">
     <span class="active-label font-mono">{ui.nav.hero}</span>
     <nav class="mobile-dock" aria-label={ui.header.navLabel}>
       <!-- Shrunk: only active icon -->

@@ -21,7 +21,7 @@
     "@astrojs/check": "^0.9.11",
     "@iconify-json/material-symbols": "^1.2.95",
     "@iconify-json/mdi": "^1.2.3",
-    "@iconify-json/simple-icons": "^1.2.102",
+    "@iconify-json/simple-icons": "^1.2.103",
     "@unocss/astro": "^66.11.0",
     "typescript": "^5.9.3",
     "unocss": "^66.11.0",

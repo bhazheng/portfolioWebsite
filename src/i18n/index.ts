@@ -18,7 +18,6 @@ export interface UiStrings {
   nav: Record<'hero' | 'experience' | 'education' | 'projects' | 'skills' | 'contact', string>
   header: {
     brandAria: string
-    cta: string
     navLabel: string
     showNav: string
     toLight: string
@@ -52,7 +51,6 @@ export interface UiStrings {
   }
   skills: { heading: string; subtitle: string }
   contact: { heading: string; subtitle: string; copy: string; copied: string; whatsappHint: string; cvHint: string }
-  fab: { open: string; close: string; email: string; whatsapp: string; cv: string }
   footer: { rights: string }
 }
 
@@ -78,7 +76,6 @@ export const UI: Record<Locale, UiStrings> = {
     },
     header: {
       brandAria: 'Akbar Lucky Basuki — home',
-      cta: 'Get in touch',
       navLabel: 'Main navigation',
       showNav: 'Show navigation',
       toLight: 'Switch to light theme',
@@ -134,13 +131,6 @@ export const UI: Record<Locale, UiStrings> = {
       subtitle:
         "A project, a challenge, or just a hello. I'm open for data analytics and IT assurance roles (audit, governance, risk & compliance), BI work, and research."
     },
-    fab: {
-      open: 'Quick actions',
-      close: 'Close quick actions',
-      email: 'Email',
-      whatsapp: 'WhatsApp',
-      cv: 'View CV'
-    },
     footer: { rights: 'All rights reserved.' }
   },
   id: {
@@ -159,7 +149,6 @@ export const UI: Record<Locale, UiStrings> = {
     },
     header: {
       brandAria: 'Akbar Lucky Basuki — beranda',
-      cta: 'Hubungi saya',
       navLabel: 'Navigasi utama',
       showNav: 'Tampilkan navigasi',
       toLight: 'Ganti ke tema terang',
@@ -214,13 +203,6 @@ export const UI: Record<Locale, UiStrings> = {
       heading: 'Punya sesuatu di benak?',
       subtitle:
         'Sebuah proyek, tantangan, atau sekadar menyapa. Saya terbuka untuk peran data analytics dan IT assurance (audit, governance, risk & compliance), pekerjaan BI, dan riset.'
-    },
-    fab: {
-      open: 'Aksi cepat',
-      close: 'Tutup aksi cepat',
-      email: 'Email',
-      whatsapp: 'WhatsApp',
-      cv: 'Lihat CV'
     },
     footer: { rights: 'Hak cipta dilindungi.' }
   }

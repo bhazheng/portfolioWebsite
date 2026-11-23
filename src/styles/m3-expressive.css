@@ -62,13 +62,12 @@ html {
   font-optical-sizing: auto;
 }
 
-/* Focus indicator: M3 specifies a 3dp ring offset by 2dp (colour stays the theme's tertiary). */
+/* Focus indicator: M3 specifies a 3dp ring offset by 2dp (colour is the theme's primary). */
 :focus-visible {
   outline-width: 3px;
 }
 
-/* Refined EVA-01 Expressive: crisp full-opacity chartreuse (`tertiary-soft`: #a7e855 dark,
-   #3e6a00 light) for data/role text; `primary-container` cards keep `on-surface` untouched. */
+/* Expressive accent text: full-opacity `tertiary-soft` (#ff8a78 dark, #b81e10 light) for data/role text; `primary-container` cards keep `on-surface` untouched. */
 .hero-intro,
 .exp-entry:not(.current) .exp-role-row h4,
 .edu-entry:not(:first-child) .edu-program,
@@ -267,7 +266,6 @@ html[data-theme='light'] .exp-entry:not(.current) .metric-tile .metric-value {
 
 /* Shape-morphing buttons */
 .btn,
-.header-contact,
 .copy-btn {
   transition:
     border-radius var(--m3e-dur-fast-spatial) var(--m3e-spring-fast-spatial),
@@ -284,24 +282,12 @@ html[data-theme='light'] .exp-entry:not(.current) .metric-tile .metric-value {
   box-shadow: inset 0 0 0 999px color-mix(in srgb, currentColor 10%, transparent);
 }
 .btn--pill:active,
-.header-contact:active,
 .copy-btn:active {
   border-radius: var(--m3e-shape-md);
   transform: scale(0.97);
 }
-.header-contact {
-  border-radius: var(--m3e-shape-full);
-}
-.header-contact:hover {
-  transform: none;
-  box-shadow: inset 0 0 0 999px color-mix(in srgb, currentColor 8%, transparent);
-}
-.header-contact:focus-visible,
-.header-contact:active {
-  box-shadow: inset 0 0 0 999px color-mix(in srgb, currentColor 10%, transparent);
-}
 
-/* Hero stacking context above .tool-ticker (below floating-nav 100 & fab-menu 180) */
+/* Hero stacking context (below floating-nav 100) */
 .hero-section {
   z-index: 30;
 }
@@ -687,47 +673,6 @@ html[data-theme='light'] .hero-socials .btn--small:has([class*='i-mdi:github']) 
 .skill-list li + li {
   border-radius: var(--m3e-shape-md);
 }
-/* ToolTicker items: cardless neutral logo + name at rest; brand color + full-contrast label on hover. */
-.tool-ticker li {
-  padding-right: 28px;
-}
-.tool-chip {
-  background: transparent;
-  padding: 0 8px;
-  border-radius: 0;
-}
-.tool-logo,
-.tool-name {
-  color: rgb(var(--v-theme-on-surface-variant));
-  transition:
-    color var(--m3e-dur-default-effects) var(--m3e-spring-default-effects),
-    filter var(--m3e-dur-default-effects) var(--m3e-spring-default-effects);
-}
-html[data-theme='light'] .tool-logo {
-  filter: none;
-}
-@media (hover: hover) {
-  .tool-chip:hover {
-    background: transparent;
-  }
-  .tool-chip:hover .tool-logo,
-  .tool-chip:hover .tool-name {
-    color: var(--logo-color);
-  }
-  html[data-theme='light'] .tool-chip:hover .tool-logo,
-  html[data-theme='light'] .tool-chip:hover .tool-name {
-    filter: brightness(0.72) saturate(1.2);
-  }
-}
-@media (max-width: 767px) {
-  .tool-ticker li {
-    padding-right: 20px;
-  }
-  .tool-chip {
-    padding: 0 8px;
-  }
-}
-
 /* Featured timeline avatars use expressive squircle shape; standard entries stay circular. */
 .exp-avatar.ongoing,
 .edu-avatar.accent {
@@ -830,7 +775,7 @@ html[data-theme='light'] .tool-logo {
   background: rgb(var(--v-theme-eva-orange));
   color: rgb(var(--v-theme-on-eva-orange));
 }
-.edu-badge-icon.is-lime {
+.edu-badge-icon.is-scarlet {
   background: rgb(var(--v-theme-tertiary-container));
   color: rgb(var(--v-theme-on-tertiary-container));
 }
@@ -901,9 +846,6 @@ html[data-theme='light'] .tool-logo {
   content: '';
   position: absolute;
   inset: -4px 0;
-}
-.exp-more > summary::after {
-  transition: transform var(--m3e-dur-fast-spatial) var(--m3e-spring-fast-spatial);
 }
 .exp-more > summary:hover {
   text-decoration: none;
@@ -1256,8 +1198,7 @@ button.project-card {
   .portrait-frame,
   .hero-portrait,
   .contact-shape-bg,
-  .split-menu:not([hidden]),
-  .fab-menu-items:not([hidden]) .fab-action {
+  .split-menu:not([hidden]) {
     animation: none;
   }
   .reveal-init {
@@ -1269,129 +1210,6 @@ button.project-card {
   .project-dialog::backdrop,
   .accessory-morph {
     transition: none;
-  }
-}
-
-/* ── M3E Floating Action Button (FAB) Menu ─────────────────────────────────── */
-
-.fab-menu {
-  position: fixed;
-  right: 24px;
-  bottom: 24px;
-  z-index: 180;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-  gap: 10px;
-}
-@media (max-width: 959px) {
-  .fab-menu {
-    right: 16px;
-    bottom: 88px;
-  }
-}
-.fab-menu-items:not([hidden]) {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-  gap: 8px;
-}
-@keyframes m3e-fab-item-in {
-  from {
-    opacity: 0;
-    transform: translateY(10px) scale(0.92);
-  }
-  to {
-    opacity: 1;
-    transform: none;
-  }
-}
-.fab-action {
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
-  height: 48px;
-  padding: 0 18px;
-  border-radius: var(--m3e-shape-full);
-  background: rgb(var(--v-theme-secondary-container));
-  color: rgb(var(--v-theme-on-secondary-container));
-  text-decoration: none;
-  font-size: 14px;
-  font-weight: 500;
-  white-space: nowrap;
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.22);
-  transition:
-    border-radius var(--m3e-dur-fast-spatial) var(--m3e-spring-fast-spatial),
-    transform var(--m3e-dur-fast-spatial) var(--m3e-spring-fast-spatial),
-    box-shadow var(--m3e-dur-fast-effects) var(--m3e-spring-fast-effects);
-}
-.fab-menu-items:not([hidden]) .fab-action {
-  animation: m3e-fab-item-in var(--m3e-dur-fast-spatial) var(--m3e-spring-fast-spatial) both;
-}
-.fab-menu-items:not([hidden]) .fab-action:nth-child(1) { animation-delay: 80ms; }
-.fab-menu-items:not([hidden]) .fab-action:nth-child(2) { animation-delay: 40ms; }
-.fab-menu-items:not([hidden]) .fab-action:nth-child(3) { animation-delay: 0ms; }
-@media (hover: hover) {
-  .fab-action:hover {
-    box-shadow:
-      inset 0 0 0 999px color-mix(in srgb, currentColor 8%, transparent),
-      0 6px 20px rgba(0, 0, 0, 0.28);
-  }
-}
-.fab-action:active {
-  border-radius: var(--m3e-shape-md);
-  transform: scale(0.96);
-}
-.fab-trigger {
-  position: relative;
-  width: 56px;
-  height: 56px;
-  border: 0;
-  border-radius: 18px;
-  background: rgb(var(--v-theme-primary));
-  color: rgb(var(--v-theme-on-primary));
-  display: grid;
-  place-items: center;
-  cursor: pointer;
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.28);
-  transition:
-    border-radius var(--m3e-dur-fast-spatial) var(--m3e-spring-fast-spatial),
-    transform var(--m3e-dur-fast-spatial) var(--m3e-spring-fast-spatial),
-    box-shadow var(--m3e-dur-fast-effects) var(--m3e-spring-fast-effects);
-}
-.fab-trigger .icon {
-  transition: transform var(--m3e-dur-fast-spatial) var(--m3e-spring-fast-spatial);
-}
-@media (hover: hover) {
-  .fab-trigger:hover {
-    box-shadow:
-      inset 0 0 0 999px color-mix(in srgb, currentColor 8%, transparent),
-      0 8px 24px rgba(0, 0, 0, 0.34);
-  }
-}
-.fab-trigger:active {
-  border-radius: var(--m3e-shape-md);
-  transform: scale(0.94);
-}
-.fab-trigger[aria-expanded='true'] {
-  border-radius: 50%;
-}
-.fab-trigger[aria-expanded='true'] .icon {
-  transform: rotate(45deg);
-}
-
-/* ── CSS Scroll-Driven Organic Shape Motion ────────────────────────────────── */
-@supports (animation-timeline: view()) {
-  @media (prefers-reduced-motion: no-preference) {
-    @keyframes m3e-scroll-float {
-      from { rotate: -14deg; }
-      to { rotate: 24deg; }
-    }
-    .card-accessory {
-      animation: m3e-scroll-float linear both;
-      animation-timeline: view();
-      animation-range: entry 0% exit 100%;
-    }
   }
 }
 

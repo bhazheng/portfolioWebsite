@@ -7,7 +7,6 @@ import '../styles/navbar.css'
 import '../styles/m3-expressive.css'
 import Navbar from '../components/Navbar.astro'
 import Footer from '../components/Footer.astro'
-import FabMenu from '../components/FabMenu.astro'
 import { UI, LOCALES, localePath, type Locale } from '../i18n'
 
 interface Props { lang: Locale }
@@ -65,7 +64,6 @@ const canonicalUrl = Astro.site ? new URL(localePath(lang), Astro.site).href : u
       <Navbar lang={lang} />
       <main class="main"><slot /></main>
       <Footer lang={lang} />
-      <FabMenu lang={lang} />
     </div>
     <script>
       import '../scripts/theme'
@@ -75,7 +73,6 @@ const canonicalUrl = Astro.site ? new URL(localePath(lang), Astro.site).href : u
       import '../scripts/copy'
       import '../scripts/projects'
       import '../scripts/split-button'
-      import '../scripts/fab'
     </script>
   </body>
 </html>

@@ -8,7 +8,7 @@ web
 
 ## Stack
 
-Astro 7 (`output: 'static'`, two prerendered routes: `/` English and `/id/` Indonesian) + TypeScript + UnoCSS (icons only) + hand-written CSS design system (Material Design 3 color roles, EVA-01 palette). No client framework runtime; ~3 KB of inline client script (scroll-spy nav, theme toggle, scroll reveal). Deployed to Cloudflare as static assets via `wrangler`. Tests: vitest + Astro container smoke test. Package manager: pnpm. See `AGENTS.md` for architecture and commands.
+Astro 7 (`output: 'static'`, two prerendered routes: `/` English and `/id/` Indonesian) + TypeScript + UnoCSS (icons only) + hand-written CSS design system (Material Design 3 color roles, Egyptian Blue / Stone Blue / Scarlet Red palette). No client framework runtime; ~3 KB of inline client script (scroll-spy nav, theme toggle, scroll reveal). Deployed to Cloudflare as static assets via `wrangler`. Tests: vitest + Astro container smoke test. Package manager: pnpm. See `AGENTS.md` for architecture and commands.
 
 ## Users
 
@@ -39,7 +39,7 @@ Single-page scrolling site, available in **English (`/`) and Indonesian (`/id/`)
 
 ## Brand Commitments
 
-- Name: Akbar Lucky Basuki. Brand mark in the header: `ALB.` with a violet `B` and a lime dot.
+- Name: Akbar Lucky Basuki. Brand mark in the header: `ALB.` with a blue `B` and a scarlet dot.
 - Role title (binding): "Business Analyst & Data Storyteller" — kept in English on both language routes.
 - Degree: Bachelor of Information Systems, Universitas Brawijaya, GPA 3.77 / 4.00 (Aug 2020 — Jan 2025).
 - Voice: confident, precise, lightly editorial — the existing copy is the reference. The Indonesian voice is the same register (professional, first person, "saya"), keeping the English terms Indonesian professionals actually use (dashboard, stakeholder, Root Cause Analysis, BRD, machine learning).
@@ -53,11 +53,11 @@ Everything stated on the site comes from the CV. Figures the CV supports: 8,000+
 1. **Translation over tooling.** Lead with the act of making data legible; tools are evidence, not the headline.
 2. **One read, two depths.** A non-technical visitor understands it; a technical visitor sees the depth. Never trade one for the other.
 3. **Facts are binding.** Real projects, real degree, real title, real numbers from the CV. No invented proof.
-4. **The surface serves content.** Tonal Material surfaces and the EVA-01 palette frame the work; decoration never competes with it, and text stays readable (lime never at full opacity as text, nothing lime on purple).
+4. **The surface serves content.** Tonal Material surfaces and the blue/scarlet/coral palette frame the work; decoration never competes with it, and text stays readable (accent text is never dimmed, and text on `primary-container` cards is always neutral).
 
 ## Accessibility & Inclusion
 
-Skip-to-content link and landmark sections are present; icon-only controls carry `aria-label`s; decorative icons are `aria-hidden`; `prefers-reduced-motion` is honored; keyboard focus is visible (lime outline). Contrast ratios are tabulated in `DESIGN.md`. No formal conformance target (WCAG level) has been confirmed.
+Skip-to-content link and landmark sections are present; icon-only controls carry `aria-label`s; decorative icons are `aria-hidden`; `prefers-reduced-motion` is honored; keyboard focus is visible (scarlet outline). Contrast ratios are tabulated in `DESIGN.md`. No formal conformance target (WCAG level) has been confirmed.
 
 ## Open Decisions
 
@@ -66,4 +66,4 @@ Skip-to-content link and landmark sections are present; icon-only controls carry
 - **Language auto-detect / hreflang**: not added. `<link rel="alternate" hreflang>` needs absolute URLs and no `site` is configured; an automatic redirect from `navigator.language` was not requested.
 - **WhatsApp number**: the CV lists `+62 899 9655 808`, but the site's WhatsApp links use `6285172455808`. Unresolved — confirm which number is right before changing.
 - **Résumé**: resolved. The owner supplied a public Google Drive copy of the CV; the hero ("View CV") and the contact block link to it (`CV_URL` in `src/i18n/index.ts`, opens in a new tab). The repo-root PDF is still not served. If the Drive file is replaced, update `CV_URL` and keep the content-source rule above.
-- No explicit decision yet on: blog/writing sections, testimonials, a favicon (currently a 404), or a conformance target (WCAG level). Do not add these without an explicit request.
+- No explicit decision yet on: blog/writing sections, testimonials, or a conformance target (WCAG level). A favicon now exists (`public/favicon.svg`). Do not add these without an explicit request.

@@ -3,7 +3,6 @@
 // are thin wrappers around this so both routes always render the same six sections in order.
 import Layout from '../layouts/Layout.astro'
 import HeroSection from './HeroSection.astro'
-import ToolTicker from './ToolTicker.astro'
 import ExperienceSection from './ExperienceSection.astro'
 import EducationSection from './EducationSection.astro'
 import ProjectsSection from './ProjectsSection.astro'
@@ -16,7 +15,6 @@ const { lang } = Astro.props
 ---
 <Layout lang={lang}>
   <HeroSection lang={lang} />
-  <ToolTicker />
   <ExperienceSection lang={lang} />
   <EducationSection lang={lang} />
   <ProjectsSection lang={lang} />
